@@ -580,7 +580,7 @@ if __name__ == "__main__":
         "education_level": "undergraduate",
         "course_type": None,
         "institution_type": None,
-        "annual_income": 100000,
+        "annual_income": None,
         "social_category": "general",
         "gender": "male",
         "disability_status": False,

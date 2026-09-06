@@ -4,6 +4,7 @@ from typing import Optional
 
 from matcher import recommend_schemes, load_schemes
 from document_checker import check_document_readiness
+from rejection_recovery import recover_from_rejection
 
 app = FastAPI()
 
@@ -30,6 +31,9 @@ class UserProfile(BaseModel):
 
 class DocumentCheckRequest(BaseModel):
     available_documents: list[str] = []
+
+class RejectionRecoveryRequest(BaseModel):
+    rejection_message: str
 
 @app.get("/")
 def home():
@@ -145,3 +149,20 @@ def check_scheme_documents(
         status_code=404,
         detail="Scheme not found"
     )
+
+@app.post("/scheme/{scheme_id}/rejection-recovery")
+def scheme_rejection_recovery(
+    scheme_id: str,
+    request: RejectionRecoveryRequest
+):
+    try:
+        return recover_from_rejection(
+            scheme_id,
+            request.rejection_message
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=404,
+            detail=str(error)
+        )
