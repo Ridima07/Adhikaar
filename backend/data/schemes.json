@@ -1,0 +1,1448 @@
+[
+  {
+    "scheme_id": "MED001",
+    "scheme_name": "Chikitsa Pratipoorti Yojana",
+    "category": "Health / Social Welfare",
+    "target_beneficiary": [
+      "Registered Construction Workers in Jharkhand"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": null,
+        "original_text": "18 years and above"
+      },
+      "state": [
+        "Jharkhand"
+      ],
+      "district": [],
+      "residence_requirement": "Must be a domicile of Jharkhand",
+      "occupation": [
+        "Construction Worker",
+        "mason",
+        "carpenter",
+        "electrician",
+        "painter",
+        "porter"
+      ],
+      "user_type": [
+        "construction_worker"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Not specified (Must be registered construction worker)"
+      },
+      "employment_status": [
+        "employed",
+        "unorganized_worker"
+      ],
+      "other_conditions": [
+        "Must be registered under JBOCWWB",
+        "Open to all genders",
+        "Must suffer from specified serious illnesses (cancer, heart/kidney disease, AIDS, transplants, etc.)",
+        "Benefit applicable once per disease per beneficiary"
+      ],
+      "original_eligibility_text": "Age: 18 years and above; Income: Not specified (Must be registered construction worker); Education: No specific restriction; Occupation: Construction Worker (mason, carpenter, electrician, painter, porter, etc.); Gender/Category/Disability: Open to all genders; Must suffer from specified serious illnesses (cancer, heart/kidney disease, AIDS, transplants, etc.); Other: Must be a domicile of Jharkhand; Registered under JBOCWWB; Benefit applicable once per disease per beneficiary"
+    },
+    "benefit": {
+      "description": "Financial assistance / reimbursement for treatment of specified critical illnesses",
+      "amount": null,
+      "original_text": "Financial assistance / reimbursement for treatment of specified critical illnesses"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Domicile Certificate",
+      "Proof of Identity",
+      "eSHRAM Card",
+      "Proof of Registration as Construction Worker",
+      "Bank details",
+      "Income Certificate",
+      "Medical Proof",
+      "Photo"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Register on Shramadhan Portal.",
+      "2. Log in and go to Services > BOC Scheme Benefit > Application Form.",
+      "3. Fill Basic Details and select scheme.",
+      "4. Upload documents and submit."
+    ],
+    "official_portal": "https://shramadhan.jharkhand.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/cpy",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Requires proof of diagnosis for specified critical illnesses and verification of registration under JBOCWWB."
+  },
+  {
+    "scheme_id": "CUL001",
+    "scheme_name": "Scheme For Financial Assistance For Veteran Artists",
+    "category": "Culture / Pension",
+    "target_beneficiary": [
+      "Veteran artists and scholars in indigent circumstances"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 60,
+        "max": null,
+        "original_text": "Minimum 60 years (Does not apply to surviving spouse)"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": null,
+      "occupation": [
+        "Artist",
+        "Writer",
+        "Cultural Practitioner"
+      ],
+      "user_type": [
+        "artist",
+        "scholar",
+        "cultural_practitioner"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": 48000,
+        "original_text": "Personal/Spousal annual income <= ₹48,000 (₹4,000/month)"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Open to all genders",
+        "Significant contribution to art/letters",
+        "Must receive at least ₹500/mo pension from State/UT or recommended by ZCC",
+        "Not getting other MoC grants",
+        "Age limit does not apply to surviving spouse"
+      ],
+      "original_eligibility_text": "Age: Minimum 60 years (Does not apply to surviving spouse); Income: Personal/Spousal annual income <= ₹48,000 (₹4,000/month); Education: Not required (Traditional scholars without formal credentials eligible); Occupation: Artist / Writer / Cultural Practitioner; Other: Significant contribution to art/letters; Must receive at least ₹500/mo pension from State/UT or recommended by ZCC; Not getting other MoC grants"
+    },
+    "benefit": {
+      "description": "Financial allowance up to ₹6,000/month (Shared Centre-State or paid fully by Centre up to ₹5,500/mo)",
+      "amount": 6000,
+      "original_text": "Financial allowance up to ₹6,000/month (Shared Centre-State or paid fully by Centre up to ₹5,500/mo)"
+    },
+    "required_documents": [
+      "Passport photo",
+      "Address proof",
+      "DoB proof",
+      "Aadhaar Card",
+      "Income Certificate",
+      "Proof of contribution/awards",
+      "Bank Authorization letter",
+      "State/UT Recommendation"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Register/Log in to CSMS portal.",
+      "2. Fill online MOC Schemes application and upload documents.",
+      "3. Physical inspection by officials.",
+      "4. Expert Committee selection."
+    ],
+    "official_portal": "https://csms.nic.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/sfava",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Requires subjective assessment of significant contribution to art/letters by an Expert Committee and verification of State/UT/ZCC recommendation."
+  },
+  {
+    "scheme_id": "SOC001",
+    "scheme_name": "Indira Gandhi National Disability Pension Scheme (IGNDPS)",
+    "category": "Social Security / Pension",
+    "target_beneficiary": [
+      "Persons with severe or multiple disabilities belonging to BPL households"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": null,
+        "original_text": "18 years and above"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Resident of India",
+      "occupation": [],
+      "user_type": [
+        "person_with_disability"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [
+        "BPL"
+      ],
+      "gender": [],
+      "disability_status": true,
+      "disability_percentage": {
+        "min": 80,
+        "max": null,
+        "original_text": "Disability level must be 80% or above (covers physical, mental disability, and dwarfism)"
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Below Poverty Line (BPL)"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Disability level must be 80% or above (covers physical, mental disability, and dwarfism)",
+        "Resident of India",
+        "Cannot simultaneously claim another central social welfare pension"
+      ],
+      "original_eligibility_text": "Age: 18 years and above; Income: Below Poverty Line (BPL); Education: No restriction; Occupation: Unrestricted; Gender/Category/Disability: Disability level must be 80% or above (covers physical, mental disability, and dwarfism); Other: Resident of India; Cannot simultaneously claim another central social welfare pension"
+    },
+    "benefit": {
+      "description": "₹300/month for ages 18–79; ₹500/month for ages 80+",
+      "amount": "₹300 - ₹500 per month",
+      "original_text": "₹300/month for ages 18–79; ₹500/month for ages 80+"
+    },
+    "required_documents": [
+      "BPL Card",
+      "Aadhaar Card",
+      "Age Proof",
+      "Disability Certificate (80%+ from CMO/PHC)",
+      "Passport photo",
+      "Bank Account details"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Log in via UMANG Portal/App or NSAP Portal.",
+      "2. Search 'NSAP' / 'IGNDPS' and click Apply Online.",
+      "3. Fill details, upload documents and submit.",
+      "(Offline submission available at Block/Panchayat)."
+    ],
+    "official_portal": "https://nsap.nic.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/igndps",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": false,
+    "manual_verification_reason": null
+  },
+  {
+    "scheme_id": "HOU001",
+    "scheme_name": "Garima Greh Shelter Homes For Transgender Persons",
+    "category": "Housing / LGBTQ+ Welfare",
+    "target_beneficiary": [
+      "Destitute and abandoned Transgender persons"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": 60,
+        "original_text": "18 to 60 years"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": null,
+      "occupation": [],
+      "user_type": [
+        "transgender_person"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [
+        "transgender"
+      ],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Preferably Below Poverty Line (BPL)"
+      },
+      "employment_status": [
+        "unemployed"
+      ],
+      "other_conditions": [
+        "Transgender persons",
+        "Unemployed / Not in commercial activity",
+        "Must NOT be engaged in sex work or beggary",
+        "Must possess Transgender Certificate/ID card issued via National Portal for Transgender Persons"
+      ],
+      "original_eligibility_text": "Age: 18 to 60 years; Income: Preferably Below Poverty Line (BPL); Education: No requirement; Occupation: Unemployed / Not in commercial activity; Must NOT be engaged in sex work or beggary; Gender/Category/Disability: Transgender persons; Other: Must possess Transgender Certificate/ID card issued via National Portal for Transgender Persons"
+    },
+    "benefit": {
+      "description": "Free shelter, food, medical assistance, legal care, psychological counseling, skill training, and document assistance",
+      "amount": null,
+      "original_text": "Free shelter, food, medical assistance, legal care, psychological counseling, skill training, and document assistance"
+    },
+    "required_documents": [
+      "Transgender Certificate & ID Card (issued by DM)",
+      "Admission Form (Annexure 2)",
+      "Personal Affidavit (Annexure 3)"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Locate nearby Garima Greh via National Portal for Transgender Persons.",
+      "2. Visit shelter home offline.",
+      "3. Fill Admission Form and Personal Affidavit."
+    ],
+    "official_portal": "https://transgender.dosje.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/smile",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Destitute/abandonment status and non-engagement in sex work or beggary require physical verification and DM-issued ID authentication."
+  },
+  {
+    "scheme_id": "EXT001",
+    "scheme_name": "Indian Community Welfare Fund (ICWF)",
+    "category": "External Affairs / Overseas Welfare",
+    "target_beneficiary": [
+      "Overseas Indian citizens in distress / emergency situations"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": null,
+        "original_text": "No specific age limit"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Overseas / International (Indian citizen residing abroad facing distress)",
+      "occupation": [
+        "Overseas Workers",
+        "Students",
+        "NRIs",
+        "Emigrants"
+      ],
+      "user_type": [
+        "overseas_citizen",
+        "nri",
+        "emigrant_worker",
+        "international_student"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Destitute / Indigent circumstances abroad"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Open to all",
+        "Indian citizen residing abroad facing distress (evacuation, legal, medical emergency, stranded without funds, death abroad)"
+      ],
+      "original_eligibility_text": "Age: No specific age limit; Income: Destitute / Indigent circumstances abroad; Education: No requirement; Occupation: Overseas Workers, Students, NRIs, Emigrants; Other: Indian citizen residing abroad facing distress (evacuation, legal, medical emergency, stranded without funds, death abroad)"
+    },
+    "benefit": {
+      "description": "Financial assistance for boarding/lodging, medical care, legal assistance, evacuation, air passage, transport of mortal remains",
+      "amount": null,
+      "original_text": "Financial assistance for boarding/lodging, medical care, legal assistance, evacuation, air passage, transport of mortal remains"
+    },
+    "required_documents": [
+      "Indian Passport copy",
+      "Visa details",
+      "Proof of distress / emergency circumstances",
+      "Application form to Mission"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Contact nearest Indian Embassy / High Commission / Consulate.",
+      "2. Submit emergency assistance application with passport details.",
+      "3. Request processed directly by Mission ICWF committee."
+    ],
+    "official_portal": "https://www.mea.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/icwf",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Distress/emergency circumstances abroad must be evaluated and approved on a case-by-case basis by the Indian Mission ICWF Committee."
+  },
+  {
+    "scheme_id": "RUR001",
+    "scheme_name": "Akshay Gram Yojana (AGY)",
+    "category": "Rural Infrastructure / Energy",
+    "target_beneficiary": [
+      "Rural households and village communities"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": null,
+        "original_text": "Not applicable"
+      },
+      "state": [
+        "Gujarat",
+        "Madhya Pradesh"
+      ],
+      "district": [],
+      "residence_requirement": "Rural households in participating state villages",
+      "occupation": [
+        "General rural residents"
+      ],
+      "user_type": [
+        "rural_resident",
+        "village_community"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Not restricted"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Open to all",
+        "Village must be selected under rural electrification and infrastructure modernization guidelines"
+      ],
+      "original_eligibility_text": "State / Region: State Specific (e.g. Gujarat / MP); Age: Not applicable; Income: Not restricted; Education: Not applicable; Occupation: General rural residents; Other: Village must be selected under rural electrification and infrastructure modernization guidelines"
+    },
+    "benefit": {
+      "description": "Upgraded 24x7 rural power supply infrastructure, solar lighting, grid strengthening",
+      "amount": null,
+      "original_text": "Upgraded 24x7 rural power supply infrastructure, solar lighting, grid strengthening"
+    },
+    "required_documents": [
+      "Residence proof",
+      "Village Panchayat nomination / Household ID",
+      "Electricity Connection details"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "Executed via Village Panchayats and State DISCOMs; Individual connection requests filled at local DISCOM office."
+    ],
+    "official_portal": "State DISCOM Portal",
+    "source_url": "https://www.myscheme.gov.in/schemes/agy",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Community-level infrastructure scheme; individual benefit depends on village selection under rural electrification guidelines and local DISCOM execution."
+  },
+  {
+    "scheme_id": "EDU001",
+    "scheme_name": "Higher Education For Persons With Special Needs (HEPSN)",
+    "category": "Education / Disability",
+    "target_beneficiary": [
+      "Differently-abled students enrolled in Higher Education Institutions"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": null,
+        "original_text": "As per college course guidelines"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": null,
+      "occupation": [
+        "Student"
+      ],
+      "user_type": [
+        "student",
+        "person_with_disability"
+      ],
+      "education_level": [
+        "higher_education",
+        "post_secondary",
+        "college",
+        "university"
+      ],
+      "course_type": [],
+      "institution_type": [
+        "UGC-approved under 2(f) & 12B"
+      ],
+      "social_category": [],
+      "gender": [],
+      "disability_status": true,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": "Differently-abled students (Visual, Hearing, Locomotor, etc., as per PwD Act)"
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "None specified"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Differently-abled students (Visual, Hearing, Locomotor, etc., as per PwD Act)",
+        "Institution must be UGC-approved under 2(f) & 12B and have enrolled PwD students"
+      ],
+      "original_eligibility_text": "Age: As per college course guidelines; Income: None specified; Education: Post-Secondary / Higher Education (College/University); Occupation: Student; Gender/Category/Disability: Differently-abled students (Visual, Hearing, Locomotor, etc., as per PwD Act); Other: Institution must be UGC-approved under 2(f) & 12B and have enrolled PwD students"
+    },
+    "benefit": {
+      "description": "Financial grant to colleges (up to ₹5 Lakh) for accessible infrastructure and Enabling Units with reader/scribe allowances (up to ₹4,000/pm)",
+      "amount": "Grant to colleges up to ₹5,00,000; reader/scribe allowance up to ₹4,000/month",
+      "original_text": "Financial grant to colleges (up to ₹5 Lakh) for accessible infrastructure and Enabling Units with reader/scribe allowances (up to ₹4,000/pm)"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Passport photo",
+      "Disability Certificate",
+      "Educational Marksheets",
+      "Bonafide Student Certificate",
+      "Bank details"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. College/University applies to UGC for HEPSN grant.",
+      "2. Enrolled disabled students apply through institutional Enabling Unit."
+    ],
+    "official_portal": "https://www.ugc.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/hepsn",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Institutional level scheme requiring college UGC 2(f)/12B recognition and internal Enabling Unit enrollment."
+  },
+  {
+    "scheme_id": "EDU002",
+    "scheme_name": "Post-Matric Scholarship To VJNT Students - Maharashtra",
+    "category": "Scholarship / Education",
+    "target_beneficiary": [
+      "Students belonging to Vimukta Jatis and Nomadic Tribes (VJNT)"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": null,
+        "original_text": "No specific age cap"
+      },
+      "state": [
+        "Maharashtra"
+      ],
+      "district": [],
+      "residence_requirement": "Resident of Maharashtra",
+      "occupation": [
+        "Student"
+      ],
+      "user_type": [
+        "student"
+      ],
+      "education_level": [
+        "post_matric",
+        "class_11",
+        "class_12",
+        "degree",
+        "diploma",
+        "postgraduate",
+        "phd"
+      ],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [
+        "VJNT"
+      ],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Family income threshold as per MahaDBT guidelines"
+      },
+      "employment_status": [
+        "unemployed",
+        "not_full_time_employed"
+      ],
+      "other_conditions": [
+        "Student (Must NOT be in full-time employment)",
+        "VJNT Category",
+        "Resident of Maharashtra",
+        "Applicable for 1 course stream",
+        "Repeaters in same standard ineligible until promoted"
+      ],
+      "original_eligibility_text": "State: Maharashtra; Age: No specific age cap; Income: Family income threshold as per MahaDBT guidelines; Education: Post-Matric (Class 11, 12, Degree, Diploma, PG, PhD); Occupation: Student (Must NOT be in full-time employment); Category: VJNT Category; Other: Resident of Maharashtra; Applicable for 1 course stream; Repeaters in same standard ineligible until promoted"
+    },
+    "benefit": {
+      "description": "100% Tuition Fees, Exam Fees, and Maintenance Allowance (₹90 to ₹425/month)",
+      "amount": "100% Tuition & Exam fees + Maintenance allowance ₹90 to ₹425/month",
+      "original_text": "100% Tuition Fees, Exam Fees, and Maintenance Allowance (₹90 to ₹425/month)"
+    },
+    "required_documents": [
+      "Caste Certificate (Govt of MH)",
+      "Income Certificate/Declaration",
+      "Caste Validity Certificate",
+      "Marksheets",
+      "Leaving Certificate",
+      "Ration Card",
+      "Bank details"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Visit MahaDBT portal.",
+      "2. Register as New Applicant.",
+      "3. Fill profile and select VJNT Welfare Dept.",
+      "4. Select scheme, upload documents, and submit."
+    ],
+    "official_portal": "https://mahadbt.maharashtra.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/pmsvs-maharashtra",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": false,
+    "manual_verification_reason": null
+  },
+  {
+    "scheme_id": "RES001",
+    "scheme_name": "Research Grant For In-Service Faculty Members (RGISFM)",
+    "category": "Research & Development",
+    "target_beneficiary": [
+      "Regularly appointed faculty members in Indian Universities / Colleges"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": 50,
+        "original_text": "Upper age limit 50 years at application time"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": null,
+      "occupation": [
+        "Regular/In-Service Faculty",
+        "Assistant Professor",
+        "Associate Professor",
+        "Professor"
+      ],
+      "user_type": [
+        "faculty",
+        "researcher"
+      ],
+      "education_level": [
+        "phd"
+      ],
+      "course_type": [],
+      "institution_type": [
+        "Indian Universities / Colleges"
+      ],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Not applicable"
+      },
+      "employment_status": [
+        "regular_employed",
+        "in_service_faculty"
+      ],
+      "other_conditions": [
+        "Open to all",
+        "Minimum 10 years service remaining",
+        "Supervised at least 5 PhD candidates",
+        "Completed 2 sponsored research projects"
+      ],
+      "original_eligibility_text": "Age: Upper age limit 50 years at application time; Income: Not applicable; Education: PhD (with supervision experience); Occupation: Regular/In-Service Faculty (Assistant/Associate Professor/Professor); Other: Minimum 10 years service remaining; Supervised at least 5 PhD candidates; Completed 2 sponsored research projects"
+    },
+    "benefit": {
+      "description": "Research grant tenure of 2 years released in 3 installments (50%, 25%, 25%) for research equipment and operations",
+      "amount": null,
+      "original_text": "Research grant tenure of 2 years released in 3 installments (50%, 25%, 25%) for research equipment and operations"
+    },
+    "required_documents": [
+      "Joining report",
+      "Proposal write-up",
+      "PhD supervision proof",
+      "Project completion certificates",
+      "Institutional Endorsement letter"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Register on UGC scheme portal.",
+      "2. Complete profile and submit research proposal.",
+      "3. Upload institutional verification documents."
+    ],
+    "official_portal": "https://www.ugc.ac.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/rgisfm",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Requires manual verification of research track record (supervision of 5 PhD candidates and completion of 2 sponsored projects) and institutional endorsement."
+  },
+  {
+    "scheme_id": "FIN001",
+    "scheme_name": "Pradhan Mantri Suraksha Bima Yojana (PMSBY)",
+    "category": "Financial Inclusion / Insurance",
+    "target_beneficiary": [
+      "Savings bank account holders"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": 70,
+        "original_text": "18 to 70 years"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": null,
+      "occupation": [
+        "Open to all occupations"
+      ],
+      "user_type": [
+        "bank_account_holder",
+        "citizen"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Open to all",
+        "Must hold individual savings account in participating bank/post office and authorize auto-debit"
+      ],
+      "original_eligibility_text": "Age: 18 to 70 years; Income: None; Education: No requirement; Occupation: Open to all occupations; Other: Must hold individual savings account in participating bank/post office and authorize auto-debit"
+    },
+    "benefit": {
+      "description": "₹2,00,000 for accidental death/total permanent disability; ₹1,00,000 for partial permanent disability (Premium: ₹20/year)",
+      "amount": 200000,
+      "original_text": "₹2,00,000 for accidental death/total permanent disability; ₹1,00,000 for partial permanent disability (Premium: ₹20/year)"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Bank Account details",
+      "Nominee details",
+      "Auto-debit consent form"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Apply via net banking / mobile app or download form from jansuraksha.gov.in.",
+      "2. Submit form to home bank branch with auto-debit consent."
+    ],
+    "official_portal": "https://jansuraksha.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/pmsby",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": false,
+    "manual_verification_reason": null
+  },
+  {
+    "scheme_id": "AGR001",
+    "scheme_name": "National Scheme Of Welfare Of Fishermen (NSWF)",
+    "category": "Fisheries / Social Security",
+    "target_beneficiary": [
+      "Active full-time traditional and small-scale fisherfolk"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": 60,
+        "original_text": "18 to 60 years"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": null,
+      "occupation": [
+        "Full-time Marine/Inland Fishermen"
+      ],
+      "user_type": [
+        "fisherman"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Lower income / indigent active fishermen"
+      },
+      "employment_status": [
+        "active_full_time"
+      ],
+      "other_conditions": [
+        "Open to all active fisherfolk",
+        "Officially licensed/registered with State/UT Fisheries Dept",
+        "Family members in non-fisheries commercial work ineligible"
+      ],
+      "original_eligibility_text": "Age: 18 to 60 years; Income: Lower income / indigent active fishermen; Education: No restriction; Occupation: Full-time Marine/Inland Fishermen; Other: Officially licensed/registered with State/UT Fisheries Dept; Family members in non-fisheries commercial work ineligible"
+    },
+    "benefit": {
+      "description": "Housing assistance (up to ₹75k), Community hall, Saving-cum-Relief financial aid during ban periods, Insurance (₹50k)",
+      "amount": "Housing assistance up to ₹75,000; Insurance up to ₹50,000; Saving-cum-Relief financial aid",
+      "original_text": "Housing assistance (up to ₹75k), Community hall, Saving-cum-Relief financial aid during ban periods, Insurance (₹50k)"
+    },
+    "required_documents": [
+      "Application form",
+      "Photo with spouse",
+      "Vessel registration",
+      "Net license receipt",
+      "Residential certificate",
+      "Ration card",
+      "Income certificate",
+      "Bank details"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "Apply offline/online through District Fisheries Officer / State Fisheries Directorate."
+    ],
+    "official_portal": "https://dof.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/nswf",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Requires verification of vessel registration, net license, and active fisherfolk certification by State/UT Fisheries Department."
+  },
+  {
+    "scheme_id": "MED002",
+    "scheme_name": "Financial Assistance to Persons Suffering from Rare Diseases (FAPSRD)",
+    "category": "Health / Financial Assistance",
+    "target_beneficiary": [
+      "Patients suffering from specified rare medical conditions"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": null,
+        "original_text": "No age limit"
+      },
+      "state": [
+        "Haryana"
+      ],
+      "district": [],
+      "residence_requirement": "Bona fide resident and domicile of Haryana with valid Parivar Pehchan Patra (Family ID)",
+      "occupation": [
+        "Open to all"
+      ],
+      "user_type": [
+        "patient"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Subject to Haryana Social Justice & Empowerment norms / PPP limits"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Diagnosed with rare diseases recognized under National Policy for Rare Diseases",
+        "Bona fide resident and domicile of Haryana with valid Parivar Pehchan Patra (Family ID)"
+      ],
+      "original_eligibility_text": "State: Haryana; Age: No age limit; Income: Subject to Haryana Social Justice & Empowerment norms / PPP limits; Education: No requirement; Occupation: Open to all; Disease: Diagnosed with rare diseases recognized under National Policy for Rare Diseases; Other: Bona fide resident and domicile of Haryana with valid Parivar Pehchan Patra (Family ID)"
+    },
+    "benefit": {
+      "description": "Monthly financial stipend/assistance for ongoing medical expenses and care",
+      "amount": null,
+      "original_text": "Monthly financial stipend/assistance for ongoing medical expenses and care"
+    },
+    "required_documents": [
+      "Parivar Pehchan Patra (PPP)",
+      "Aadhaar Card",
+      "Domicile Certificate",
+      "Medical Certificate from tertiary institute",
+      "Bank details"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Apply online via SARAL Portal Haryana.",
+      "2. Enter PPP ID and select patient name.",
+      "3. Upload medical diagnosis documents and submit to DSWO."
+    ],
+    "official_portal": "https://saralharyana.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/fapsrd",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Requires specialized medical certificate from tertiary medical institute confirming specified rare disease under National Policy for Rare Diseases."
+  },
+  {
+    "scheme_id": "SOC002",
+    "scheme_name": "West Bengal Transport Workers' Social Security Scheme: Assistance on Hospitalization",
+    "category": "Social Security / Healthcare",
+    "target_beneficiary": [
+      "Unorganized commercial transport workers"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": 60,
+        "original_text": "18 to 60 years"
+      },
+      "state": [
+        "West Bengal"
+      ],
+      "district": [],
+      "residence_requirement": "Unorganized commercial transport worker in West Bengal",
+      "occupation": [
+        "Commercial vehicle drivers",
+        "conductors",
+        "helpers",
+        "mechanics"
+      ],
+      "user_type": [
+        "transport_worker",
+        "unorganized_worker"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Unorganized sector worker"
+      },
+      "employment_status": [
+        "unorganized_worker"
+      ],
+      "other_conditions": [
+        "Open to all commercial transport workers",
+        "Vehicle must be used for commercial purposes (Taxi, Bus, Truck, Auto, Tempo)",
+        "Hospitalization must be for 5+ days due to accident"
+      ],
+      "original_eligibility_text": "State: West Bengal; Age: 18 to 60 years; Income: Unorganized sector worker; Education: No restriction; Occupation: Commercial vehicle drivers, conductors, helpers, mechanics (Taxi, Bus, Truck, Auto, Tempo); Other: Vehicle must be used for commercial purposes; Hospitalization must be for 5+ days due to accident"
+    },
+    "benefit": {
+      "description": "₹400/day for first 5 days of hospitalization; ₹200/day for remaining period (Max cap: ₹10,000 total) via DBT",
+      "amount": "₹400/day first 5 days; ₹200/day remaining; Max cap ₹10,000",
+      "original_text": "₹400/day for first 5 days of hospitalization; ₹200/day for remaining period (Max cap: ₹10,000 total) via DBT"
+    },
+    "required_documents": [
+      "Driving License",
+      "EPIC/Aadhaar Card",
+      "Age proof",
+      "Prescribed Authority certification",
+      "Medical/Hospitalization Certificate",
+      "Bank passbook"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Register on West Bengal eDistrict 2.0 portal.",
+      "2. Select Transport Workers' Social Security Scheme.",
+      "3. Fill claim details, upload proof, and submit."
+    ],
+    "official_portal": "https://edistrict.wb.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/wbtwssah",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Claim-based assistance requiring verification of 5+ days accidental hospitalization proof and Prescribed Authority transport worker certification."
+  },
+  {
+    "scheme_id": "EMP001",
+    "scheme_name": "Mukhyamantri Alpasankhyak Udyami Yojana (MMUY)",
+    "category": "Entrepreneurship / Minority Welfare",
+    "target_beneficiary": [
+      "Minority community entrepreneurs starting micro/small enterprises"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": 50,
+        "original_text": "18 to 50 years"
+      },
+      "state": [
+        "Bihar"
+      ],
+      "district": [],
+      "residence_requirement": "Permanent resident/domicile of Bihar",
+      "occupation": [
+        "Unemployed",
+        "Aspiring Entrepreneur"
+      ],
+      "user_type": [
+        "entrepreneur",
+        "aspiring_entrepreneur"
+      ],
+      "education_level": [
+        "intermediate",
+        "10+2",
+        "iti",
+        "polytechnic_diploma"
+      ],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [
+        "Minority"
+      ],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "No upper personal income limit (Must set up new unit)"
+      },
+      "employment_status": [
+        "unemployed"
+      ],
+      "other_conditions": [
+        "Belongs to notified Minority communities (Muslim, Christian, Sikh, Buddhist, Jain, Parsi)",
+        "Permanent resident/domicile of Bihar",
+        "Firm must be registered as Proprietorship/Partnership",
+        "Must set up new micro/small enterprise unit"
+      ],
+      "original_eligibility_text": "State: Bihar; Age: 18 to 50 years; Income: No upper personal income limit (Must set up new unit); Education: Minimum 10+2 / Intermediate / ITI / Polytechnic Diploma; Occupation: Unemployed / Aspiring Entrepreneur; Category: Belongs to notified Minority communities (Muslim, Christian, Sikh, Buddhist, Jain, Parsi); Other: Permanent resident/domicile of Bihar; Firm must be registered as Proprietorship/Partnership"
+    },
+    "benefit": {
+      "description": "Financial assistance up to ₹10 Lakh (50% grant up to ₹5 Lakh + 50% interest-free loan) + Mandatory skill training",
+      "amount": 1000000,
+      "original_text": "Financial assistance up to ₹10 Lakh (50% grant up to ₹5 Lakh + 50% interest-free loan) + Mandatory skill training"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Domicile Certificate",
+      "Intermediate/Diploma Certificate",
+      "Caste/Minority Certificate",
+      "Cancelled Cheque",
+      "Photo"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Visit Bihar Udyami Portal.",
+      "2. Register under Mukhyamantri Udyami Yojana -> MMUY.",
+      "3. Fill profile, submit project plan, upload documents and submit."
+    ],
+    "official_portal": "https://udyami.bihar.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/mauyb",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": false,
+    "manual_verification_reason": null
+  },
+  {
+    "scheme_id": "SKL001",
+    "scheme_name": "Community Canning & Training On Fruit Preservation (CCTOFP)",
+    "category": "Skill Development / Agriculture",
+    "target_beneficiary": [
+      "Women, housewives, SHG members, and rural youth"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": null,
+        "original_text": "18 years and above"
+      },
+      "state": [
+        "Assam"
+      ],
+      "district": [],
+      "residence_requirement": "Resident of Assam",
+      "occupation": [
+        "Housewives",
+        "SHG members",
+        "Mahila Samiti members",
+        "micro-entrepreneurs"
+      ],
+      "user_type": [
+        "women",
+        "housewife",
+        "shg_member",
+        "rural_youth"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [
+        "female"
+      ],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Primarily targets female applicants / women groups",
+        "Resident of Assam",
+        "Interest in food/fruit preservation and cottage-level processing"
+      ],
+      "original_eligibility_text": "State: Assam; Age: 18 years and above; Income: None; Education: No minimum qualification; Occupation: Housewives, SHG members, Mahila Samiti members, micro-entrepreneurs; Gender: Primarily targets female applicants / women groups; Other: Resident of Assam; Interest in food/fruit preservation and cottage-level processing"
+    },
+    "benefit": {
+      "description": "Free/subsidized training (1 to 15 days) on preservation techniques (Jams, Pickles, Juices), certificates, and canning facility usage",
+      "amount": null,
+      "original_text": "Free/subsidized training (1 to 15 days) on preservation techniques (Jams, Pickles, Juices), certificates, and canning facility usage"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Voter Card",
+      "PAN Card",
+      "Bank Account details"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "Apply directly through local District Community Canning and Training Centers under Directorate of Horticulture, Assam."
+    ],
+    "official_portal": "https://dirhorti.assam.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/cctofp",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": false,
+    "manual_verification_reason": null
+  },
+  {
+    "scheme_id": "AGR002",
+    "scheme_name": "Integrated Scheme for Export Promotion: Post-Harvest Polisher (ISFEPQISARADOCPHIPFSCLCTW)",
+    "category": "Agriculture / Export Promotion",
+    "target_beneficiary": [
+      "Spice growers, Farmer Producer Organizations (FPOs), SHGs"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": null,
+        "original_text": "18 years and above"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": null,
+      "occupation": [
+        "Spice Farmer",
+        "Cardamom & Turmeric Planter"
+      ],
+      "user_type": [
+        "farmer",
+        "spice_grower",
+        "fpo_member",
+        "shg_member"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Open to all spice farmers",
+        "Equipment must be purchased from empanelled manufacturers by Spices Board",
+        "Inspection conducted by board officials"
+      ],
+      "original_eligibility_text": "Age: 18 years and above; Income: None; Education: No restriction; Occupation: Spice Farmer / Cardamom & Turmeric Planter; Other: Equipment must be purchased from empanelled manufacturers by Spices Board; Inspection conducted by board officials"
+    },
+    "benefit": {
+      "description": "Subsidy support up to ₹94,000 for purchasing spice polishing equipment",
+      "amount": 94000,
+      "original_text": "Subsidy support up to ₹94,000 for purchasing spice polishing equipment"
+    },
+    "required_documents": [
+      "Current year land tax receipt / Possession Certificate",
+      "Aadhaar Card",
+      "Bank passbook",
+      "Valid tax invoice from empanelled manufacturer"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Register on ServicePlus portal.",
+      "2. Search Spices Board services and fill application form.",
+      "3. Upload land tax receipt and purchase quotation.",
+      "4. Submit for inspection and subsidy."
+    ],
+    "official_portal": "https://serviceonline.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/isfepqisaradocphipfsclctw",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Requires Spices Board official field inspection and verification of purchase invoice from board-empanelled manufacturers."
+  },
+  {
+    "scheme_id": "AGR003",
+    "scheme_name": "Mukhya Mantri Krishi Sa Sajuli Yozana (MMKSSY-ASSAM)",
+    "category": "Agriculture / Farm Mechanization",
+    "target_beneficiary": [
+      "Small, marginal, and Kisan Credit Card holder farmers"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": null,
+        "original_text": "18 years and above"
+      },
+      "state": [
+        "Assam"
+      ],
+      "district": [],
+      "residence_requirement": "Permanent resident of Assam",
+      "occupation": [
+        "Farmer"
+      ],
+      "user_type": [
+        "farmer",
+        "small_marginal_farmer"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Small/marginal farming background"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Open to all farmers",
+        "Permanent resident of Assam",
+        "Must hold Kisan Credit Card (KCC)",
+        "Maximum 1 beneficiary per family"
+      ],
+      "original_eligibility_text": "State: Assam; Age: 18 years and above; Income: Small/marginal farming background; Education: No minimum restriction; Occupation: Farmer; Other: Permanent resident of Assam; Must hold Kisan Credit Card (KCC); Maximum 1 beneficiary per family"
+    },
+    "benefit": {
+      "description": "Direct cash transfer of ₹5,000 into bank account to purchase scientific farm tools/implements",
+      "amount": 5000,
+      "original_text": "Direct cash transfer of ₹5,000 into bank account to purchase scientific farm tools/implements"
+    },
+    "required_documents": [
+      "KCC Card copy",
+      "Land Holding document",
+      "Aadhaar Card",
+      "Active Bank Account details (DBT enabled)",
+      "Photo"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Applications collected via District Level Committee (DLC) / Agriculture Officers at Block level.",
+      "2. Beneficiary selection approved by DLC.",
+      "3. Fund disbursed directly via DBT."
+    ],
+    "official_portal": "https://diragri.assam.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/mmkssy-assam",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": false,
+    "manual_verification_reason": null
+  },
+  {
+    "scheme_id": "RUR002",
+    "scheme_name": "Pradhan Mantri SVAMITVA Scheme (PMSY)",
+    "category": "Rural Development / Land Ownership",
+    "target_beneficiary": [
+      "Rural property/house owners in Abadi (inhabited) areas"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": null,
+        "original_text": "18 years and above"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Rural property owner in Abadi (inhabited) area within participating Panchayats",
+      "occupation": [
+        "General rural citizens"
+      ],
+      "user_type": [
+        "rural_resident",
+        "property_owner"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Open to all income groups"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Open to all property owners",
+        "Property must be located in rural Abadi (inhabited) area within participating Panchayats"
+      ],
+      "original_eligibility_text": "Age: 18 years and above; Income: Open to all income groups; Education: No requirement; Occupation: General rural citizens; Other: Property must be located in rural Abadi (inhabited) area within participating Panchayats"
+    },
+    "benefit": {
+      "description": "Issuance of official Property Cards ('SVAMITVA Property Card') enabling financial loans and resolving property disputes",
+      "amount": null,
+      "original_text": "Issuance of official Property Cards ('SVAMITVA Property Card') enabling financial loans and resolving property disputes"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Local Property ID / Gram Panchayat tax record",
+      "Identity proof"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Drone mapping survey carried out by Survey of India with Panchayati Raj.",
+      "2. Local verification by Gram Panchayat.",
+      "3. Property cards distributed digitally/physically."
+    ],
+    "official_portal": "https://svamitva.nic.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/pmsy",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Survey-driven government rollout scheme (requires drone mapping of Abadi village land by Survey of India and Panchayat ground-truthing)."
+  },
+  {
+    "scheme_id": "DIS001",
+    "scheme_name": "Grant of Transport Allowance to Differently Abled Persons (GTADAP)",
+    "category": "Disability Welfare / Transport Aid",
+    "target_beneficiary": [
+      "Differently-abled individuals"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 5,
+        "max": null,
+        "original_text": "5 years and above"
+      },
+      "state": [
+        "Puducherry"
+      ],
+      "district": [],
+      "residence_requirement": "Resident/Native of UT of Puducherry for at least 5 years",
+      "occupation": [
+        "Unrestricted"
+      ],
+      "user_type": [
+        "person_with_disability"
+      ],
+      "education_level": [
+        "no_formal_education"
+      ],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": true,
+      "disability_percentage": {
+        "min": 40,
+        "max": null,
+        "original_text": "Orthopedic disability of 40% or above"
+      },
+      "annual_income": {
+        "min": null,
+        "max": 75000,
+        "original_text": "Annual family income <= ₹75,000"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Orthopedic disability of 40% or above",
+        "Must NOT have a formal educational qualification",
+        "Resident/Native of UT of Puducherry for at least 5 years",
+        "Must NOT receive other conveyance assistance",
+        "Free bus pass must be surrendered"
+      ],
+      "original_eligibility_text": "State: Puducherry; Age: 5 years and above; Income: Annual family income <= ₹75,000; Education: Must NOT have a formal educational qualification; Occupation: Unrestricted; Disability: Orthopedic disability of 40% or above; Other: Resident/Native of UT of Puducherry for at least 5 years; Must NOT receive other conveyance assistance; Free bus pass must be surrendered"
+    },
+    "benefit": {
+      "description": "Monthly fixed transport allowance of ₹300 disbursed through Anganwadi Centres",
+      "amount": 300,
+      "original_text": "Monthly fixed transport allowance of ₹300 disbursed through Anganwadi Centres"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Residence-cum-Nativity Certificate (min 5 yrs)",
+      "Photo",
+      "Bank Passbook",
+      "Disability Certificate (40%+)",
+      "Voter ID",
+      "Self-declaration"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "Submit physical application form along with disability and nativity proofs to local Anganwadi Centre / Directorate of Social Welfare."
+    ],
+    "official_portal": "https://socwelf.py.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/gtadap",
+    "last_verified": "2026-08-20",
+    "manual_verification_required": false,
+    "manual_verification_reason": null
+  }
+]

@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Python tools
+.pytest_cache/
+.mypy_cache/
+
+# Generated files
+*.tmp
+*.temp
+
+# Vector databases and local indexes
+faiss_index/
+vectorstore/
+chroma_db/
+
+# Uploaded/private documents
+uploads/
+private_documents/
+
+# Frontend
+node_modules/
+dist/
+build/
+
+# Secrets
+*.pem
+*.key
