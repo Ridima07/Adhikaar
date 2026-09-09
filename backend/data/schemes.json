@@ -83,7 +83,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/cpy",
     "last_verified": "2026-08-20",
     "manual_verification_required": true,
-    "manual_verification_reason": "Requires proof of diagnosis for specified critical illnesses and verification of registration under JBOCWWB."
+    "manual_verification_reason": "Requires proof of diagnosis for specified critical illnesses and verification of registration under JBOCWWB.",
+    "beneficiary_level": "individual"
   },
   {
     "scheme_id": "CUL001",
@@ -163,7 +164,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/sfava",
     "last_verified": "2026-08-20",
     "manual_verification_required": true,
-    "manual_verification_reason": "Requires subjective assessment of significant contribution to art/letters by an Expert Committee and verification of State/UT/ZCC recommendation."
+    "manual_verification_reason": "Requires subjective assessment of significant contribution to art/letters by an Expert Committee and verification of State/UT/ZCC recommendation.",
+    "beneficiary_level": "individual"
   },
   {
     "scheme_id": "SOC001",
@@ -213,7 +215,7 @@
     },
     "benefit": {
       "description": "₹300/month for ages 18–79; ₹500/month for ages 80+",
-      "amount": "₹300 - ₹500 per month",
+      "amount": null,
       "original_text": "₹300/month for ages 18–79; ₹500/month for ages 80+"
     },
     "required_documents": [
@@ -235,7 +237,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/igndps",
     "last_verified": "2026-08-20",
     "manual_verification_required": false,
-    "manual_verification_reason": null
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
   },
   {
     "scheme_id": "HOU001",
@@ -306,7 +309,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/smile",
     "last_verified": "2026-08-20",
     "manual_verification_required": true,
-    "manual_verification_reason": "Destitute/abandonment status and non-engagement in sex work or beggary require physical verification and DM-issued ID authentication."
+    "manual_verification_reason": "Destitute/abandonment status and non-engagement in sex work or beggary require physical verification and DM-issued ID authentication.",
+    "beneficiary_level": "individual"
   },
   {
     "scheme_id": "EXT001",
@@ -380,7 +384,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/icwf",
     "last_verified": "2026-08-20",
     "manual_verification_required": true,
-    "manual_verification_reason": "Distress/emergency circumstances abroad must be evaluated and approved on a case-by-case basis by the Indian Mission ICWF Committee."
+    "manual_verification_reason": "Distress/emergency circumstances abroad must be evaluated and approved on a case-by-case basis by the Indian Mission ICWF Committee.",
+    "beneficiary_level": "individual"
   },
   {
     "scheme_id": "RUR001",
@@ -445,11 +450,12 @@
     "application_steps": [
       "Executed via Village Panchayats and State DISCOMs; Individual connection requests filled at local DISCOM office."
     ],
-    "official_portal": "State DISCOM Portal",
+    "official_portal": "https://powermin.gov.in",
     "source_url": "https://www.myscheme.gov.in/schemes/agy",
     "last_verified": "2026-08-20",
     "manual_verification_required": true,
-    "manual_verification_reason": "Community-level infrastructure scheme; individual benefit depends on village selection under rural electrification guidelines and local DISCOM execution."
+    "manual_verification_reason": "Community-level infrastructure scheme; individual benefit depends on village selection under rural electrification guidelines and local DISCOM execution.",
+    "beneficiary_level": "community"
   },
   {
     "scheme_id": "EDU001",
@@ -506,7 +512,7 @@
     },
     "benefit": {
       "description": "Financial grant to colleges (up to ₹5 Lakh) for accessible infrastructure and Enabling Units with reader/scribe allowances (up to ₹4,000/pm)",
-      "amount": "Grant to colleges up to ₹5,00,000; reader/scribe allowance up to ₹4,000/month",
+      "amount": 500000,
       "original_text": "Financial grant to colleges (up to ₹5 Lakh) for accessible infrastructure and Enabling Units with reader/scribe allowances (up to ₹4,000/pm)"
     },
     "required_documents": [
@@ -526,7 +532,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/hepsn",
     "last_verified": "2026-08-20",
     "manual_verification_required": true,
-    "manual_verification_reason": "Institutional level scheme requiring college UGC 2(f)/12B recognition and internal Enabling Unit enrollment."
+    "manual_verification_reason": "Institutional level scheme requiring college UGC 2(f)/12B recognition and internal Enabling Unit enrollment.",
+    "beneficiary_level": "institution"
   },
   {
     "scheme_id": "EDU002",
@@ -593,7 +600,7 @@
     },
     "benefit": {
       "description": "100% Tuition Fees, Exam Fees, and Maintenance Allowance (₹90 to ₹425/month)",
-      "amount": "100% Tuition & Exam fees + Maintenance allowance ₹90 to ₹425/month",
+      "amount": null,
       "original_text": "100% Tuition Fees, Exam Fees, and Maintenance Allowance (₹90 to ₹425/month)"
     },
     "required_documents": [
@@ -616,7 +623,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/pmsvs-maharashtra",
     "last_verified": "2026-08-20",
     "manual_verification_required": false,
-    "manual_verification_reason": null
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
   },
   {
     "scheme_id": "RES001",
@@ -698,7 +706,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/rgisfm",
     "last_verified": "2026-08-20",
     "manual_verification_required": true,
-    "manual_verification_reason": "Requires manual verification of research track record (supervision of 5 PhD candidates and completion of 2 sponsored projects) and institutional endorsement."
+    "manual_verification_reason": "Requires manual verification of research track record (supervision of 5 PhD candidates and completion of 2 sponsored projects) and institutional endorsement.",
+    "beneficiary_level": "institution"
   },
   {
     "scheme_id": "FIN001",
@@ -716,9 +725,7 @@
       "state": [],
       "district": [],
       "residence_requirement": null,
-      "occupation": [
-        "Open to all occupations"
-      ],
+      "occupation": [],
       "user_type": [
         "bank_account_holder",
         "citizen"
@@ -737,7 +744,7 @@
       "annual_income": {
         "min": null,
         "max": null,
-        "original_text": null
+        "original_text": "None"
       },
       "employment_status": [],
       "other_conditions": [
@@ -766,7 +773,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/pmsby",
     "last_verified": "2026-08-20",
     "manual_verification_required": false,
-    "manual_verification_reason": null
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
   },
   {
     "scheme_id": "AGR001",
@@ -818,7 +826,7 @@
     },
     "benefit": {
       "description": "Housing assistance (up to ₹75k), Community hall, Saving-cum-Relief financial aid during ban periods, Insurance (₹50k)",
-      "amount": "Housing assistance up to ₹75,000; Insurance up to ₹50,000; Saving-cum-Relief financial aid",
+      "amount": 75000,
       "original_text": "Housing assistance (up to ₹75k), Community hall, Saving-cum-Relief financial aid during ban periods, Insurance (₹50k)"
     },
     "required_documents": [
@@ -839,7 +847,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/nswf",
     "last_verified": "2026-08-20",
     "manual_verification_required": true,
-    "manual_verification_reason": "Requires verification of vessel registration, net license, and active fisherfolk certification by State/UT Fisheries Department."
+    "manual_verification_reason": "Requires verification of vessel registration, net license, and active fisherfolk certification by State/UT Fisheries Department.",
+    "beneficiary_level": "individual"
   },
   {
     "scheme_id": "MED002",
@@ -859,9 +868,7 @@
       ],
       "district": [],
       "residence_requirement": "Bona fide resident and domicile of Haryana with valid Parivar Pehchan Patra (Family ID)",
-      "occupation": [
-        "Open to all"
-      ],
+      "occupation": [],
       "user_type": [
         "patient"
       ],
@@ -910,7 +917,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/fapsrd",
     "last_verified": "2026-08-20",
     "manual_verification_required": true,
-    "manual_verification_reason": "Requires specialized medical certificate from tertiary medical institute confirming specified rare disease under National Policy for Rare Diseases."
+    "manual_verification_reason": "Requires specialized medical certificate from tertiary medical institute confirming specified rare disease under National Policy for Rare Diseases.",
+    "beneficiary_level": "individual"
   },
   {
     "scheme_id": "SOC002",
@@ -968,7 +976,7 @@
     },
     "benefit": {
       "description": "₹400/day for first 5 days of hospitalization; ₹200/day for remaining period (Max cap: ₹10,000 total) via DBT",
-      "amount": "₹400/day first 5 days; ₹200/day remaining; Max cap ₹10,000",
+      "amount": 10000,
       "original_text": "₹400/day for first 5 days of hospitalization; ₹200/day for remaining period (Max cap: ₹10,000 total) via DBT"
     },
     "required_documents": [
@@ -989,7 +997,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/wbtwssah",
     "last_verified": "2026-08-20",
     "manual_verification_required": true,
-    "manual_verification_reason": "Claim-based assistance requiring verification of 5+ days accidental hospitalization proof and Prescribed Authority transport worker certification."
+    "manual_verification_reason": "Claim-based assistance requiring verification of 5+ days accidental hospitalization proof and Prescribed Authority transport worker certification.",
+    "beneficiary_level": "individual"
   },
   {
     "scheme_id": "EMP001",
@@ -1074,7 +1083,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/mauyb",
     "last_verified": "2026-08-20",
     "manual_verification_required": false,
-    "manual_verification_reason": null
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
   },
   {
     "scheme_id": "SKL001",
@@ -1122,7 +1132,7 @@
       "annual_income": {
         "min": null,
         "max": null,
-        "original_text": null
+        "original_text": "None"
       },
       "employment_status": [],
       "other_conditions": [
@@ -1151,7 +1161,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/cctofp",
     "last_verified": "2026-08-20",
     "manual_verification_required": false,
-    "manual_verification_reason": null
+    "manual_verification_reason": null,
+    "beneficiary_level": "organization"
   },
   {
     "scheme_id": "AGR002",
@@ -1193,7 +1204,7 @@
       "annual_income": {
         "min": null,
         "max": null,
-        "original_text": null
+        "original_text": "None"
       },
       "employment_status": [],
       "other_conditions": [
@@ -1225,7 +1236,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/isfepqisaradocphipfsclctw",
     "last_verified": "2026-08-20",
     "manual_verification_required": true,
-    "manual_verification_reason": "Requires Spices Board official field inspection and verification of purchase invoice from board-empanelled manufacturers."
+    "manual_verification_reason": "Requires Spices Board official field inspection and verification of purchase invoice from board-empanelled manufacturers.",
+    "beneficiary_level": "organization"
   },
   {
     "scheme_id": "AGR003",
@@ -1299,7 +1311,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/mmkssy-assam",
     "last_verified": "2026-08-20",
     "manual_verification_required": false,
-    "manual_verification_reason": null
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
   },
   {
     "scheme_id": "RUR002",
@@ -1317,9 +1330,7 @@
       "state": [],
       "district": [],
       "residence_requirement": "Rural property owner in Abadi (inhabited) area within participating Panchayats",
-      "occupation": [
-        "General rural citizens"
-      ],
+      "occupation": [],
       "user_type": [
         "rural_resident",
         "property_owner"
@@ -1367,7 +1378,8 @@
     "source_url": "https://www.myscheme.gov.in/schemes/pmsy",
     "last_verified": "2026-08-20",
     "manual_verification_required": true,
-    "manual_verification_reason": "Survey-driven government rollout scheme (requires drone mapping of Abadi village land by Survey of India and Panchayat ground-truthing)."
+    "manual_verification_reason": "Survey-driven government rollout scheme (requires drone mapping of Abadi village land by Survey of India and Panchayat ground-truthing).",
+    "beneficiary_level": "individual"
   },
   {
     "scheme_id": "DIS001",
@@ -1387,9 +1399,7 @@
       ],
       "district": [],
       "residence_requirement": "Resident/Native of UT of Puducherry for at least 5 years",
-      "occupation": [
-        "Unrestricted"
-      ],
+      "occupation": [],
       "user_type": [
         "person_with_disability"
       ],
@@ -1443,6 +1453,1919 @@
     "source_url": "https://www.myscheme.gov.in/schemes/gtadap",
     "last_verified": "2026-08-20",
     "manual_verification_required": false,
-    "manual_verification_reason": null
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "SKL002",
+    "scheme_name": "Skilled Youth Startup Scheme",
+    "category": "Skill Development / Entrepreneurship",
+    "target_beneficiary": [
+      "Skilled and educated rural and urban youth"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": 40,
+        "original_text": "18 to 40 years"
+      },
+      "state": [
+        "Arunachal Pradesh"
+      ],
+      "district": [],
+      "residence_requirement": "Permanent resident of Arunachal Pradesh",
+      "occupation": [
+        "Unemployed skilled youth",
+        "entrepreneur"
+      ],
+      "user_type": [
+        "youth",
+        "entrepreneur"
+      ],
+      "education_level": [
+        "class_10",
+        "class_12",
+        "iti",
+        "polytechnic",
+        "degree"
+      ],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Not specified"
+      },
+      "employment_status": [
+        "unemployed"
+      ],
+      "other_conditions": [
+        "Must possess relevant technical qualification / certified skill training",
+        "Permanent resident certificate of Arunachal Pradesh required",
+        "Project cost between ₹10 Lakh and ₹50 Lakh"
+      ],
+      "original_eligibility_text": "Age: 18 to 40 years; State: Arunachal Pradesh; Education: Minimum Class 10 / ITI / Polytechnic / Graduate; Other: Must possess recognized skill qualification"
+    },
+    "benefit": {
+      "description": "Up to 50% capital subsidy on project cost for eligible business ventures",
+      "amount": 2000000,
+      "original_text": "Up to 50% capital subsidy (maximum ₹20,00,000) for project costs between ₹10 to ₹50 Lakhs"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Permanent Resident Certificate (PRC)",
+      "Detailed Project Report (DPR)",
+      "Educational / Skill Certificate",
+      "Bank Account details"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Apply online via state startup portal or submit DPR to District Industries Centre (DIC).",
+      "2. Committee screening and bank linkage."
+    ],
+    "official_portal": "https://arunachalpradesh.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/syss",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Requires review and approval of Detailed Project Report (DPR) and skill certification by District Industries Centre.",
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "SOC003",
+    "scheme_name": "Shrama Shakthi Scheme",
+    "category": "Minority Welfare / Financial Assistance",
+    "target_beneficiary": [
+      "Artisans and traditional craftspersons belonging to religious minorities"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": 55,
+        "original_text": "18 to 55 years"
+      },
+      "state": [
+        "Karnataka"
+      ],
+      "district": [],
+      "residence_requirement": "Permanent resident of Karnataka",
+      "occupation": [
+        "Artisan",
+        "Traditional craftsman"
+      ],
+      "user_type": [
+        "artisan",
+        "traditional_worker"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [
+        "Minority"
+      ],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": 350000,
+        "original_text": "Family annual income below ₹3.5 Lakhs"
+      },
+      "employment_status": [
+        "self_employed"
+      ],
+      "other_conditions": [
+        "Must belong to notified religious minority community",
+        "Must have experience in traditional craft or artisanal occupation"
+      ],
+      "original_eligibility_text": "Age: 18 to 55 years; State: Karnataka; Income: Family annual income below ₹3.5 Lakhs; Category: Religious minorities; Occupation: Artisans/craftspersons"
+    },
+    "benefit": {
+      "description": "Financial assistance of ₹50,000 (50% subsidy of ₹25,000 and 50% soft loan of ₹25,000 at 4% interest)",
+      "amount": 50000,
+      "original_text": "₹50,000 financial support (₹25,000 subsidy + ₹25,000 soft loan)"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Caste / Minority Certificate",
+      "Income Certificate",
+      "Domicile Certificate",
+      "Bank passbook copy",
+      "Passport photograph"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Apply online via KMDCL Portal or Seva Sindhu.",
+      "2. Select Shrama Shakthi Scheme and submit required proofs."
+    ],
+    "official_portal": "https://kmdc.karnataka.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/sss",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": false,
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "MIN001",
+    "scheme_name": "Pradhan Mantri Virasat Ka Samvardhan (PM VIKAS)",
+    "category": "Minority Welfare / Skill & Livelihood",
+    "target_beneficiary": [
+      "Artisans, craftspersons, women, and youth from minority communities"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": 45,
+        "original_text": "18 to 45 years"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Citizen of India",
+      "occupation": [
+        "Artisan",
+        "Weaver",
+        "Traditional craftsman"
+      ],
+      "user_type": [
+        "artisan",
+        "craftsman",
+        "women"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [
+        "Minority"
+      ],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Economically weaker minority households"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Belongs to 6 notified minority communities (Muslim, Christian, Sikh, Buddhist, Parsi, Jain)",
+        "Must be engaged in traditional arts/crafts or seeking skill development"
+      ],
+      "original_eligibility_text": "Age: 18 to 45 years; Category: Notified minority communities; Target: Artisans, craftsmen, women, and youth"
+    },
+    "benefit": {
+      "description": "Skill training, leadership and entrepreneurship incubation, credit linkage, and market access",
+      "amount": null,
+      "original_text": "Stipend during training, tool kits, and institutional loan linkages"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Minority Certificate / Self-Declaration",
+      "Bank Account details",
+      "Artisan ID / Pehchan Card (if applicable)"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Register on PM VIKAS portal or through empanelled Project Implementing Agencies (PIAs).",
+      "2. Select skilling or craft incubation module."
+    ],
+    "official_portal": "https://pmvikas.minorityaffairs.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/pm-vikas",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": false,
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "COM001",
+    "scheme_name": "One District One Product (ODOP) Awards",
+    "category": "Commerce & Industry / Recognition",
+    "target_beneficiary": [
+      "Districts, States/UTs, and Indian Missions abroad promoting local ODOP products"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": null,
+        "original_text": "Not applicable (Institutional applicant)"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "State/UT Administration, District Administration, or Indian Mission",
+      "occupation": [
+        "Government Administration / Institutional Body"
+      ],
+      "user_type": [
+        "institutional_body",
+        "district_administration"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Not applicable"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Applicant must be an official District/State administration or Indian Mission abroad",
+        "Must have initiated demonstrable export, marketing, and packaging intervention for designated ODOP products"
+      ],
+      "original_eligibility_text": "Target: Districts, States/UTs, Indian Missions Abroad; Demonstrable promotion of ODOP products"
+    },
+    "benefit": {
+      "description": "National trophy, citation, and cash reward up to ₹50 Lakhs for district development activities",
+      "amount": 5000000,
+      "original_text": "Cash award of up to ₹50 Lakhs for winning districts to be used for ODOP promotion"
+    },
+    "required_documents": [
+      "Nomination form through official channel",
+      "ODOP intervention report and documentary evidence",
+      "Sales/Export impact statistics"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. District or State Admin submits nomination dossier via the National Awards Portal / DPIIT portal.",
+      "2. Screening by national jury."
+    ],
+    "official_portal": "https://awards.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/odopa",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Requires national committee evaluation of institutional project reports and impact statistics.",
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "SCI001",
+    "scheme_name": "PRISM Phase-II: Enterprise Incubation",
+    "category": "Science & Technology / Innovation",
+    "target_beneficiary": [
+      "Individual innovators, start-ups, and MSMEs"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": null,
+        "original_text": "18 years and above"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Indian citizen",
+      "occupation": [
+        "Innovator",
+        "Entrepreneur",
+        "Researcher"
+      ],
+      "user_type": [
+        "innovator",
+        "entrepreneur"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Not specified"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Must have a proof-of-concept / successful working prototype",
+        "Proposal must demonstrate technological innovation and commercial viability"
+      ],
+      "original_eligibility_text": "Citizen of India; Working prototype / proof-of-concept required; Seeking enterprise incubation"
+    },
+    "benefit": {
+      "description": "Financial support up to ₹50 Lakhs (up to 50% of total project cost) for technology development and commercialization",
+      "amount": 5000000,
+      "original_text": "Grant-in-aid up to ₹50,00,000 for enterprise incubation and prototype scaling"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Detailed project proposal and business plan",
+      "Proof of working prototype / lab results",
+      "PAN Card",
+      "Bank Account details"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Submit proposal in prescribed format to nearest DSIR-PRISM Centre (TOCIC).",
+      "2. Evaluation by Technical Advisory Committee."
+    ],
+    "official_portal": "https://www.dsir.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/prism-c2-fwmpkhttptt",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Requires technological appraisal and milestone assessment by DSIR technical committee.",
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "FIN002",
+    "scheme_name": "Stand-Up India (SUI)",
+    "category": "Financial Inclusion / Entrepreneurship",
+    "target_beneficiary": [
+      "SC, ST, and Women entrepreneurs setting up greenfield enterprises"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": null,
+        "original_text": "18 years and above"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Citizen of India",
+      "occupation": [
+        "Entrepreneur"
+      ],
+      "user_type": [
+        "entrepreneur",
+        "women_entrepreneur"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [
+        "SC",
+        "ST",
+        "General (Women only)"
+      ],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Not restricted"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Borrower must be SC, ST, or a Woman",
+        "Enterprise must be a greenfield project (first-time venture in manufacturing, services, agri-allied, or trading)",
+        "In non-individual enterprises, at least 51% shareholding and controlling stake must be held by SC/ST or woman"
+      ],
+      "original_eligibility_text": "Age: 18 years and above; Borrower: SC/ST and/or Woman; Venture: Greenfield enterprise; Non-individual enterprise requires 51%+ holding by SC/ST/Woman"
+    },
+    "benefit": {
+      "description": "Composite bank loan from ₹10 Lakh to ₹1 Crore covering up to 85% of project cost",
+      "amount": 10000000,
+      "original_text": "Composite bank loan between ₹10,00,000 and ₹1,00,00,000"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "PAN Card",
+      "Caste Certificate (if applying under SC/ST)",
+      "Detailed Project Report (DPR)",
+      "Bank statement of last 6 months",
+      "Proof of business address"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Register on the Stand-Up Mitra portal (standupmitra.in).",
+      "2. Fill loan application and select target lender bank.",
+      "3. Bank branch sanctions and disburses loan."
+    ],
+    "official_portal": "https://www.standupmitra.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/sui",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Bank branch evaluates creditworthiness, business plan viability, and greenfield project credentials.",
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "MED003",
+    "scheme_name": "Rajasthan Chief Minister's Relief Fund - Medical Help (RCMRF-MH)",
+    "category": "Health / Financial Assistance",
+    "target_beneficiary": [
+      "Needy patients suffering from severe illnesses in Rajasthan"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": null,
+        "original_text": "No age restriction"
+      },
+      "state": [
+        "Rajasthan"
+      ],
+      "district": [],
+      "residence_requirement": "Permanent resident of Rajasthan",
+      "occupation": [],
+      "user_type": [
+        "patient",
+        "citizen"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": 200000,
+        "original_text": "Annual family income less than or equal to ₹2,00,000"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Must be a resident of Rajasthan",
+        "Suffering from critical medical conditions requiring costly surgery or treatment",
+        "Treatment taken in recognized government or empaneled hospitals"
+      ],
+      "original_eligibility_text": "State: Rajasthan; Family Annual Income <= ₹2,00,000; Patient undergoing critical treatment"
+    },
+    "benefit": {
+      "description": "Financial reimbursement/aid for medical treatment up to ₹1,00,000 to ₹2,00,000 depending on disease severity",
+      "amount": 200000,
+      "original_text": "Direct medical relief grant sanctioned based on estimated medical expenses"
+    },
+    "required_documents": [
+      "Jan Aadhaar / Aadhaar Card",
+      "Income Certificate (issued by Tehsildar)",
+      "Rajasthan Domicile Proof",
+      "Medical bills, estimate certificate, and prescription from treating hospital",
+      "Bank passbook details"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Apply online via Rajasthan SSO Portal / CMRF portal or submit offline form to District Collector.",
+      "2. Verification by CM Relief Fund cell and fund release."
+    ],
+    "official_portal": "https://cmrf.rajasthan.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/rcmrf-mh",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Medical estimates and income proof require administrative verification by the District Collectorate / CMRF committee.",
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "MED004",
+    "scheme_name": "Delhi Arogya Kosh (DAK)",
+    "category": "Healthcare / Financial Assistance",
+    "target_beneficiary": [
+      "Needy residents of Delhi requiring specified specialized medical procedures"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": null,
+        "original_text": "No age restriction"
+      },
+      "state": [
+        "Delhi"
+      ],
+      "district": [],
+      "residence_requirement": "Resident of NCT of Delhi for at least 3 consecutive years",
+      "occupation": [],
+      "user_type": [
+        "patient",
+        "citizen"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": 300000,
+        "original_text": "Annual family income up to ₹3,00,000 (No income bar for road accident victims)"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Resident of Delhi holding valid Voter ID / Proof of residence for 3 years",
+        "Treatment or diagnostic test referred by a Delhi Govt hospital to empaneled private centres"
+      ],
+      "original_eligibility_text": "State: Delhi; Residence: Minimum 3 years; Annual Income: Up to ₹3,00,000; Referred by Delhi Govt Hospital"
+    },
+    "benefit": {
+      "description": "Financial assistance up to ₹5,00,000 for critical surgeries and free high-end diagnostic tests (MRI, PET-CT) at empaneled centres",
+      "amount": 500000,
+      "original_text": "Up to ₹5 Lakhs financial assistance for illness treatment and full subsidy on high-end diagnostics"
+    },
+    "required_documents": [
+      "Voter ID card showing 3 years residency in Delhi",
+      "Aadhaar Card",
+      "Income Certificate (SDM issued)",
+      "Referral letter & treatment estimate from Delhi Govt Hospital",
+      "Bank Account details"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Obtain treatment estimate and DAK application form from treating Delhi Govt Hospital.",
+      "2. Submit form to Medical Superintendent / DAK Cell at Directorate General of Health Services (DGHS).",
+      "3. Financial sanction issued directly to hospital."
+    ],
+    "official_portal": "https://dghs.delhi.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/dak",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Medical superintendent endorsement and income verification from revenue authorities are mandatory.",
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "MED005",
+    "scheme_name": "Chief Minister's Health Insurance Scheme - Nagaland (CMHISN)",
+    "category": "Healthcare / Insurance",
+    "target_beneficiary": [
+      "Indigenous and permanent residents of Nagaland"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": null,
+        "original_text": "Open to all family members"
+      },
+      "state": [
+        "Nagaland"
+      ],
+      "district": [],
+      "residence_requirement": "Indigenous inhabitant or permanent resident of Nagaland",
+      "occupation": [],
+      "user_type": [
+        "citizen",
+        "government_employee",
+        "pensioner"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "No income cap (Categorized into CMHIS GEN and CMHIS EP)"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Must be an Indigenous Inhabitant of Nagaland (IIC) or permanent resident holding valid documents",
+        "Excludes beneficiaries covered under central CGHS"
+      ],
+      "original_eligibility_text": "State: Nagaland; Resident: Indigenous inhabitant / Permanent resident; Covers General and Government Employee categories"
+    },
+    "benefit": {
+      "description": "Cashless hospitalization coverage of ₹5,00,000 per family per year on floater basis (up to ₹20,00,000 for government employee category)",
+      "amount": 500000,
+      "original_text": "₹5,00,000 per family per annum cashless health cover"
+    },
+    "required_documents": [
+      "Indigenous Inhabitant Certificate (IIC) or Permanent Resident Certificate (PRC)",
+      "Aadhaar Card",
+      "Ration Card / Household ID",
+      "Government Employee PPO/ID (for EP category)"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Register online on the CMHIS Nagaland portal or at common service centres.",
+      "2. Verification of indigenous documents and e-Card generation."
+    ],
+    "official_portal": "https://cmhis.nagaland.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/cmhisn",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": false,
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "WOM001",
+    "scheme_name": "Scheme for Adolescent Girls (SAG)",
+    "category": "Women & Child Development / Nutrition",
+    "target_beneficiary": [
+      "Out-of-school adolescent girls aged 11-14 years"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 11,
+        "max": 14,
+        "original_text": "11 to 14 years"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Citizen of India residing in project districts",
+      "occupation": [],
+      "user_type": [
+        "adolescent_girl",
+        "out_of_school_girl"
+      ],
+      "education_level": [
+        "out_of_school",
+        "drop_out"
+      ],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [
+        "female"
+      ],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Not restricted"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Must identify as female",
+        "Must be out of school (dropped out or never enrolled)",
+        "Must attend local Anganwadi Centre activities"
+      ],
+      "original_eligibility_text": "Gender: Female; Age: 11 to 14 years; Schooling status: Out-of-school girl"
+    },
+    "benefit": {
+      "description": "Supplementary Nutrition (take-home ration / hot cooked meals), iron-folic acid supplementation, health checkups, and life-skill counselling to facilitate mainstream schooling",
+      "amount": null,
+      "original_text": "Supplementary nutrition (600 calories & 18-20g protein/day) and non-nutrition health/skill support"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Birth Certificate / Age proof",
+      "Anganwadi registration record"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Enroll directly at the local Anganwadi Centre under Poshan 2.0 / ICDS project.",
+      "2. Anganwadi Worker verifies age and out-of-school status."
+    ],
+    "official_portal": "https://wcd.nic.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/sag",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": false,
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "HEA001",
+    "scheme_name": "Pradhan Mantri Bhartiya Janaushadhi Pariyojana (PMBJP)",
+    "category": "Healthcare / Pharmaceuticals",
+    "target_beneficiary": [
+      "All Indian citizens, patients, individual pharmacists, and NGOs"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": null,
+        "original_text": "Open to all consumers"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Citizen of India",
+      "occupation": [
+        "Citizen",
+        "Pharmacist",
+        "Entrepreneur"
+      ],
+      "user_type": [
+        "citizen",
+        "patient",
+        "entrepreneur"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "No restriction"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Medicines available to any citizen presenting a valid prescription",
+        "For opening a Kendra: applicant must hold D.Pharm/B.Pharm or employ a registered pharmacist and have 120 sq ft commercial space"
+      ],
+      "original_eligibility_text": "Beneficiary: All citizens. Kendra Opening: D.Pharm/B.Pharm holder or organization employing one with suitable shop premise"
+    },
+    "benefit": {
+      "description": "Access to high-quality generic medicines and surgical products at 50% to 90% lower prices; Kendras receive up to ₹5 Lakh financial incentive",
+      "amount": null,
+      "original_text": "50% to 90% savings on medicines compared to branded market alternatives"
+    },
+    "required_documents": [
+      "Prescription (for purchasing medicines)",
+      "Aadhaar Card",
+      "PAN Card",
+      "Pharmacist Registration Certificate",
+      "Premise ownership/lease proof"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. To purchase: Walk in to any PMBJP Kendra with prescription.",
+      "2. To establish Kendra: Apply online on janaushadhi.gov.in portal."
+    ],
+    "official_portal": "https://janaushadhi.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/pmbjp",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": false,
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "EDU003",
+    "scheme_name": "PM POSHAN (Pradhan Mantri Poshan Shakti Nirman)",
+    "category": "Education / Nutrition",
+    "target_beneficiary": [
+      "Children studying in Balvatika and Classes 1 to 8 in Government and Government-aided schools"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 5,
+        "max": 14,
+        "original_text": "Primary and Upper Primary school-age children"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Enrolled in participating school in India",
+      "occupation": [
+        "Student"
+      ],
+      "user_type": [
+        "student",
+        "school_student"
+      ],
+      "education_level": [
+        "primary",
+        "upper_primary",
+        "class_1_to_8"
+      ],
+      "course_type": [],
+      "institution_type": [
+        "Government",
+        "Government-aided",
+        "Local body"
+      ],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "No income ceiling"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Must be regularly enrolled and attending classes 1 to 8 in eligible government/aided school"
+      ],
+      "original_eligibility_text": "Children enrolled in Balvatika and Classes 1 to 8 in Government, Government-aided, and local body schools"
+    },
+    "benefit": {
+      "description": "Free hot cooked mid-day meal on all school working days providing prescribed nutrition (450 calories/12g protein for primary, 700 calories/20g protein for upper primary)",
+      "amount": null,
+      "original_text": "Free nutritious hot cooked meal every school day"
+    },
+    "required_documents": [
+      "School Enrollment / Admission number",
+      "Aadhaar Card (voluntary / as per school norms)"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "Automatic benefit upon school enrollment; no separate application required."
+    ],
+    "official_portal": "https://pmposhan.education.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/pm-poshan",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": false,
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "EDU004",
+    "scheme_name": "Post Matric Scholarship for Students with Disabilities",
+    "category": "Scholarship / Disability Welfare",
+    "target_beneficiary": [
+      "Students with disabilities studying in post-matriculation courses"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": null,
+        "original_text": "No age restriction"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Citizen of India",
+      "occupation": [
+        "Student"
+      ],
+      "user_type": [
+        "student",
+        "person_with_disability"
+      ],
+      "education_level": [
+        "post_matric",
+        "class_11",
+        "class_12",
+        "graduate",
+        "post_graduate",
+        "diploma"
+      ],
+      "course_type": [],
+      "institution_type": [
+        "Recognized educational institution"
+      ],
+      "social_category": [],
+      "gender": [],
+      "disability_status": true,
+      "disability_percentage": {
+        "min": 40,
+        "max": null,
+        "original_text": "40% or more disability certified by competent medical authority"
+      },
+      "annual_income": {
+        "min": null,
+        "max": 250000,
+        "original_text": "Parental/Family annual income from all sources does not exceed ₹2,50,000"
+      },
+      "employment_status": [
+        "unemployed",
+        "student"
+      ],
+      "other_conditions": [
+        "Holds a valid Disability Certificate with 40%+ disability",
+        "Studying in a recognized post-matric course",
+        "Not holding any other central scholarship"
+      ],
+      "original_eligibility_text": "Disability: 40% and above; Education: Class 11 up to Post Graduation; Income: Family income <= ₹2,50,000 per annum"
+    },
+    "benefit": {
+      "description": "Maintenance allowance, disability allowance, book grant, and reimbursement of compulsory non-refundable fees",
+      "amount": null,
+      "original_text": "Monthly maintenance allowance up to ₹1,600 + disability allowance up to ₹4,000/annum + tuition fee reimbursement"
+    },
+    "required_documents": [
+      "Disability Certificate (40% or above)",
+      "Aadhaar Card",
+      "Income Certificate",
+      "Previous year marksheet",
+      "Fee receipt and bonafide student certificate",
+      "Bank passbook copy"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Register on the National Scholarship Portal (scholarships.gov.in).",
+      "2. Select Department of Empowerment of Persons with Disabilities.",
+      "3. Submit application for institutional and state verification."
+    ],
+    "official_portal": "https://scholarships.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/post-dis",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": false,
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "EDU005",
+    "scheme_name": "Pre-Matric Scholarship for Scheduled Caste Students",
+    "category": "Scholarship / Social Justice",
+    "target_beneficiary": [
+      "Scheduled Caste students studying in classes 9 and 10"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": null,
+        "original_text": "Appropriate school age for classes 9-10"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Citizen of India",
+      "occupation": [
+        "Student"
+      ],
+      "user_type": [
+        "student",
+        "sc_student"
+      ],
+      "education_level": [
+        "class_9",
+        "class_10"
+      ],
+      "course_type": [],
+      "institution_type": [
+        "Government or recognized private school"
+      ],
+      "social_category": [
+        "SC"
+      ],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": 250000,
+        "original_text": "Parental annual income from all sources does not exceed ₹2,50,000"
+      },
+      "employment_status": [
+        "student"
+      ],
+      "other_conditions": [
+        "Belongs to Scheduled Caste (SC) community",
+        "Regular student of Class 9 or 10 in a recognized school",
+        "Only two children of the same parents are eligible"
+      ],
+      "original_eligibility_text": "Category: Scheduled Caste (SC); Education: Classes 9 and 10; Family annual income: Up to ₹2,50,000"
+    },
+    "benefit": {
+      "description": "Academic allowance of ₹3,500 per annum for day scholars and ₹7,000 per annum for hostellers paid via DBT",
+      "amount": 7000,
+      "original_text": "₹3,500/annum for day scholars, ₹7,000/annum for hostellers"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "SC Caste Certificate",
+      "Income Certificate",
+      "Previous class marksheet",
+      "Bank Account details",
+      "School enrollment certificate"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Apply via State scholarship portal or National Scholarship Portal (NSP).",
+      "2. Verification by school principal and district welfare officer."
+    ],
+    "official_portal": "https://scholarships.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/pre-sc",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": false,
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "EDU006",
+    "scheme_name": "Post Graduate Indira Gandhi Scholarship For Single Girl Child",
+    "category": "Scholarship / Women Education",
+    "target_beneficiary": [
+      "Single girl children pursuing regular non-professional master's degree"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": 30,
+        "original_text": "Up to 30 years at the time of admission in PG first year"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Citizen of India",
+      "occupation": [
+        "Student"
+      ],
+      "user_type": [
+        "student",
+        "single_girl_child"
+      ],
+      "education_level": [
+        "postgraduate",
+        "master_degree"
+      ],
+      "course_type": [
+        "regular",
+        "non_professional"
+      ],
+      "institution_type": [
+        "UGC recognized university or college"
+      ],
+      "social_category": [],
+      "gender": [
+        "female"
+      ],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "No income limit"
+      },
+      "employment_status": [
+        "student"
+      ],
+      "other_conditions": [
+        "Must be the only child in the family (girl without brother/sister, or twin/fraternal daughters)",
+        "Admitted to regular, full-time 1st year Master’s program in a recognized university",
+        "Distance education mode is not eligible"
+      ],
+      "original_eligibility_text": "Gender: Female; Status: Single girl child (only child); Age <= 30; Enrolled in 1st year regular PG course"
+    },
+    "benefit": {
+      "description": "₹36,200 per annum for a period of two years (full duration of PG course)",
+      "amount": 36200,
+      "original_text": "₹36,200 per annum for 2 years"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Proof of admission to regular PG 1st year",
+      "Affidavit on ₹50 stamp paper from SDM/First Class Magistrate verifying single girl child status",
+      "Undergraduate degree marksheet",
+      "Bank passbook"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Register on the National Scholarship Portal (NSP).",
+      "2. Select UGC schemes -> PG Indira Gandhi Scholarship for Single Girl Child.",
+      "3. Upload magistrate affidavit and get verified by university nodal officer."
+    ],
+    "official_portal": "https://scholarships.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/pg-igssgc",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Requires validation of judicial stamp affidavit authenticating single child status.",
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "RES002",
+    "scheme_name": "Fellowship Scheme for Minority/SC/ST/Women Pursuing Higher Education",
+    "category": "Higher Education / Research Fellowship",
+    "target_beneficiary": [
+      "SC, ST, Minority, and Women scholars pursuing full-time Ph.D. or M.Phil."
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": 35,
+        "original_text": "Up to 35 years (relaxation for reserved categories as per UGC norms)"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Citizen of India",
+      "occupation": [
+        "Research Scholar"
+      ],
+      "user_type": [
+        "research_scholar",
+        "phd_student"
+      ],
+      "education_level": [
+        "postgraduate",
+        "mphil",
+        "phd"
+      ],
+      "course_type": [
+        "full_time_research"
+      ],
+      "institution_type": [
+        "UGC recognized universities / institutes"
+      ],
+      "social_category": [
+        "SC",
+        "ST",
+        "Minority",
+        "General (Women only)"
+      ],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": 600000,
+        "original_text": "Annual family income not exceeding ₹6,00,000 (where applicable)"
+      },
+      "employment_status": [
+        "unemployed",
+        "research_fellow"
+      ],
+      "other_conditions": [
+        "Must be registered for regular and full-time M.Phil/Ph.D.",
+        "Candidate must have qualified UGC-NET / CSIR-NET or institutional entrance exam",
+        "Must not receive any other parallel fellowship"
+      ],
+      "original_eligibility_text": "Scholars from SC/ST/Minority or Female researchers registered for regular Ph.D./M.Phil."
+    },
+    "benefit": {
+      "description": "Monthly fellowship of ₹31,000 (JRF equivalent) for first 2 years, ₹35,000 (SRF) for remaining period plus contingency grants and HRA",
+      "amount": 35000,
+      "original_text": "₹31,000 to ₹35,000 per month + HRA + contingency grant"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Ph.D./M.Phil. registration confirmation letter",
+      "Category certificate",
+      "Postgraduate degree certificate with 55%+ marks",
+      "Bank Account details",
+      "Guide / Supervisor recommendation letter"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Apply online via UGC / Ministry portal when notification is released.",
+      "2. Institutional verification by university registrar."
+    ],
+    "official_portal": "https://www.ugc.ac.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/fesmwpnie",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Requires verification of research registration, guide endorsement, and progress reports.",
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "SKI001",
+    "scheme_name": "Upgrading Skills and Training in Traditional Arts/Crafts for Development",
+    "category": "Skill Development / Minority Affairs",
+    "target_beneficiary": [
+      "Traditional master craftspersons, artisans, and minority youth"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 14,
+        "max": 45,
+        "original_text": "14 to 45 years"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Citizen of India",
+      "occupation": [
+        "Artisan",
+        "Craftsperson",
+        "Trainee"
+      ],
+      "user_type": [
+        "artisan",
+        "youth"
+      ],
+      "education_level": [
+        "no_formal_education",
+        "primary",
+        "middle"
+      ],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [
+        "Minority"
+      ],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "EWS / BPL preferred"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Belongs to 6 notified minority communities",
+        "Interested in learning or upgrading heritage craft skills"
+      ],
+      "original_eligibility_text": "Age: 14 to 45; Category: Minority communities; Focus on traditional crafts and heritage trades"
+    },
+    "benefit": {
+      "description": "Free skill training, master craftsman training, monthly stipend of ₹1,500 to ₹3,000, toolkit support, and certification",
+      "amount": null,
+      "original_text": "Free training + stipend + toolkit allowance"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Minority community self-declaration",
+      "Bank Account details",
+      "Passport photograph"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Apply via implementing partner agency or direct training centre registration.",
+      "2. Biometric attendance and training batch enrollment."
+    ],
+    "official_portal": "https://minorityaffairs.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/uhmmept",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": false,
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "WOM002",
+    "scheme_name": "Nari Adalat",
+    "category": "Women & Child Development / Justice",
+    "target_beneficiary": [
+      "Rural women seeking alternate dispute resolution for non-cognizable disputes"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": null,
+        "original_text": "18 years and above"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Resident of the implementing Gram Panchayat / Block",
+      "occupation": [],
+      "user_type": [
+        "women",
+        "citizen"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [
+        "female"
+      ],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "No income restriction"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Open to women facing family/domestic disputes, social ostracization, or civil denial of rights",
+        "Disputes must be non-cognizable and amenable to conciliation and mediation"
+      ],
+      "original_eligibility_text": "Women residents facing social or domestic grievances requiring mediation at the Panchayat level"
+    },
+    "benefit": {
+      "description": "Informal, community-based alternate dispute resolution, free legal counseling, emotional support, and awareness of legal rights",
+      "amount": null,
+      "original_text": "Free grievance resolution, mediation, and legal counseling"
+    },
+    "required_documents": [
+      "Aadhaar Card or local residence identity proof",
+      "Written or oral grievance application to Nyaya Sakhi"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Approach the local Gram Panchayat Nari Adalat / Nyaya Sakhis.",
+      "2. Register dispute for mediation and joint conciliation sessions."
+    ],
+    "official_portal": "https://missionshakti.wcd.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/nari-adalat",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": false,
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "EDU007",
+    "scheme_name": "National Means-cum-Merit Scholarship Scheme (NMMSS)",
+    "category": "Scholarship / Education",
+    "target_beneficiary": [
+      "Meritorious students from economically weaker sections studying in class 9 to 12"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 12,
+        "max": 18,
+        "original_text": "Class 8 pass-out students entering class 9"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Citizen of India",
+      "occupation": [
+        "Student"
+      ],
+      "user_type": [
+        "student"
+      ],
+      "education_level": [
+        "class_9",
+        "class_10",
+        "class_11",
+        "class_12"
+      ],
+      "course_type": [],
+      "institution_type": [
+        "Government",
+        "Government-aided",
+        "Local body"
+      ],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": 350000,
+        "original_text": "Parental income from all sources not exceeding ₹3,50,000 per annum"
+      },
+      "employment_status": [
+        "student"
+      ],
+      "other_conditions": [
+        "Minimum 55% marks or equivalent grade in Class 7 and 8 (50% for SC/ST)",
+        "Must qualify the state-level NMMSS selection test conducted for Class 8",
+        "Students of Kendriya Vidyalayas, Jawahar Navodaya Vidyalayas, and residential schools are ineligible"
+      ],
+      "original_eligibility_text": "Class 8 passed with min 55% marks; Qualified NMMSS exam; Parental income <= ₹3,50,000; Enrolled in govt/aided school"
+    },
+    "benefit": {
+      "description": "Scholarship of ₹12,000 per annum (₹1,000 per month) from Class 9 to Class 12 via DBT",
+      "amount": 12000,
+      "original_text": "₹12,000 per year (₹1,000 per month)"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Class 7 and 8 marksheets",
+      "Income Certificate (from competent authority)",
+      "Caste / Disability Certificate (if applicable)",
+      "Bank Account details",
+      "School verification certificate"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Qualify state-level Class 8 selection test.",
+      "2. Register and submit application on National Scholarship Portal (scholarships.gov.in).",
+      "3. School and district level verification."
+    ],
+    "official_portal": "https://scholarships.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/nms",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": false,
+    "manual_verification_reason": null,
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "RES003",
+    "scheme_name": "WIDUSHI (Women's Instinct for Developing and Ushering in Scientific Heights & Innovations)",
+    "category": "Science & Technology / Research Fellowship",
+    "target_beneficiary": [
+      "Senior women scientists and researchers nearing retirement or without permanent regular employment"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 57,
+        "max": 62,
+        "original_text": "57 to 62 years"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Citizen of India",
+      "occupation": [
+        "Scientist",
+        "Researcher",
+        "Professor"
+      ],
+      "user_type": [
+        "researcher",
+        "woman_scientist"
+      ],
+      "education_level": [
+        "phd"
+      ],
+      "course_type": [],
+      "institution_type": [
+        "Recognized R&D institution / University"
+      ],
+      "social_category": [],
+      "gender": [
+        "female"
+      ],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Not holding regular salaried position"
+      },
+      "employment_status": [
+        "retired",
+        "contractual",
+        "independent"
+      ],
+      "other_conditions": [
+        "Must hold a Ph.D. in Basic or Applied Sciences or equivalent degree",
+        "Excellent publication and research track record",
+        "Must be associated with an Indian host institution providing laboratory facilities"
+      ],
+      "original_eligibility_text": "Gender: Female; Age: 57 to 62 years; Qualification: Ph.D. in S&T; Must have host institution"
+    },
+    "benefit": {
+      "description": "Consolidated research fellowship of ₹75,000 to ₹85,000 per month, research grant of ₹5 Lakh per year, and institutional overhead",
+      "amount": 85000,
+      "original_text": "Monthly fellowship of ₹75,000–₹85,000 + research grant of ₹5,00,000/year for up to 3 years"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Ph.D. degree certificate",
+      "Detailed research proposal",
+      "Endorsement certificate from Head of Host Institution",
+      "Curriculum Vitae with list of publications"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Submit research proposal through DST’s ePMS portal (onlinedst.gov.in).",
+      "2. Presentation and evaluation before DST Expert Committee."
+    ],
+    "official_portal": "https://onlinedst.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/widushi",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Scientific merit and project deliverables evaluated by DST Subject Expert Committee.",
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "EDU008",
+    "scheme_name": "Visvesvaraya Ph.D. Scheme for Electronics and IT",
+    "category": "Higher Education / Electronics & IT Research",
+    "target_beneficiary": [
+      "Full-time and Part-time Ph.D. candidates in ESDM and IT/ITES sectors"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": null,
+        "original_text": "As per institutional Ph.D. admission guidelines"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Citizen of India",
+      "occupation": [
+        "Research Scholar"
+      ],
+      "user_type": [
+        "research_scholar",
+        "phd_student"
+      ],
+      "education_level": [
+        "postgraduate",
+        "mtech",
+        "me",
+        "msc"
+      ],
+      "course_type": [
+        "full_time_phd",
+        "part_time_phd"
+      ],
+      "institution_type": [
+        "Empaneled premier institutions (IITs, NITs, Central/State Universities)"
+      ],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Not restricted"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Enrolled in Ph.D. in Electronics System Design & Manufacturing (ESDM) or IT/ITES",
+        "Admitted through institutional screening into an empaneled Visvesvaraya Scheme institution"
+      ],
+      "original_eligibility_text": "Enrolled in Ph.D. in ESDM / IT-ITES at empaneled academic institution"
+    },
+    "benefit": {
+      "description": "Fellowship of ₹38,750 per month (years 1-2) and ₹43,750 per month (years 3-5), annual contingency grant of ₹30,00, and reimbursement of rent",
+      "amount": 43750,
+      "original_text": "Fellowship up to ₹43,750/month + contingency grant + international conference support up to ₹50,000"
+    },
+    "required_documents": [
+      "Aadhaar Card",
+      "Postgraduate transcripts (M.Tech/M.E./M.Sc.)",
+      "Ph.D. admission offer letter from empaneled institute",
+      "Bank details"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Secure Ph.D. admission in an empaneled institution.",
+      "2. Institute recommends candidate through Digital India Corporation / MeitY portal."
+    ],
+    "official_portal": "https://phd.digitalindiacorporation.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/vphdseitptphdc",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Administered directly via participating premier universities and academic institutions.",
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "RES004",
+    "scheme_name": "Abdul Kalam Technology Innovation National Fellowship",
+    "category": "Science & Technology / Engineering Fellowship",
+    "target_beneficiary": [
+      "Distinguished Indian engineers and translational research innovators"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": null,
+        "original_text": "No formal age ceiling (active service)"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Citizen of India",
+      "occupation": [
+        "Engineer",
+        "Innovator",
+        "Faculty",
+        "Scientist"
+      ],
+      "user_type": [
+        "researcher",
+        "faculty"
+      ],
+      "education_level": [
+        "phd",
+        "master_degree"
+      ],
+      "course_type": [],
+      "institution_type": [
+        "Publicly funded institutions, universities, national labs"
+      ],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Not applicable"
+      },
+      "employment_status": [
+        "regular_employed"
+      ],
+      "other_conditions": [
+        "Must hold a regular salaried position in an Indian academic institution or research lab",
+        "Track record of translating research into commercial technology, patents, or industry solutions",
+        "Must be nominated by heads of recognized institutions or INAE fellows"
+      ],
+      "original_eligibility_text": "Indian engineer/scientist with verified translational research and commercialized technology track record"
+    },
+    "benefit": {
+      "description": "Fellowship incentive of ₹25,000 per month (in addition to salary), research grant of ₹15 Lakh per year, and overhead allowance of ₹1 Lakh per year for up to 5 years",
+      "amount": 25000,
+      "original_text": "₹25,000/month fellowship incentive + ₹15 Lakh/year research grant"
+    },
+    "required_documents": [
+      "Official institutional nomination letter",
+      "Aadhaar Card",
+      "Curriculum Vitae detailing commercialized patents, technology transfers, and engineering achievements",
+      "Detailed 5-year translational research proposal"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Submit nomination through Indian National Academy of Engineering (INAE) / SERB portal.",
+      "2. Scrutiny and selection by INAE-SERB joint search-cum-selection committee."
+    ],
+    "official_portal": "https://www.inae.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/aktinf",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Nomination-based fellowship evaluating technological impact, industry transfers, and commercialized patents.",
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "CUL002",
+    "scheme_name": "Scheme of Encouragement to Young Artists (SEYA)",
+    "category": "Culture / Arts & Performing Arts",
+    "target_beneficiary": [
+      "Young practicing artists in classical, folk, and traditional performing arts"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 18,
+        "max": 25,
+        "original_text": "18 to 25 years"
+      },
+      "state": [
+        "Goa"
+      ],
+      "district": [],
+      "residence_requirement": "Resident of Goa for minimum 15 years",
+      "occupation": [
+        "Artist",
+        "Musician",
+        "Dancer",
+        "Theatre practitioner"
+      ],
+      "user_type": [
+        "young_artist"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Not specified"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "15 years continuous residence certificate in Goa",
+        "Demonstrated outstanding talent in music, dance, theatre, visual arts, or traditional Goan art forms",
+        "Undergoing formal training under a recognized Guru or institution"
+      ],
+      "original_eligibility_text": "State: Goa; Age: 18 to 25 years; Residence: Minimum 15 years; Active practitioner in fine or performing arts"
+    },
+    "benefit": {
+      "description": "Monthly scholarship of ₹3,000 to ₹5,000 for advanced artistic training and guru shishya mentorship",
+      "amount": 5000,
+      "original_text": "Monthly scholarship allowance for arts training"
+    },
+    "required_documents": [
+      "15-year Domicile/Residence Certificate issued by Mamlatdar",
+      "Birth Certificate",
+      "Aadhaar Card",
+      "Recommendation / Certificate from recognized Guru or music/dance academy",
+      "Performance / participation certificates and photographs"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Obtain application form from Directorate of Art and Culture, Govt of Goa.",
+      "2. Submit form with guru endorsement and audition portfolio.",
+      "3. Audition interview before selection committee."
+    ],
+    "official_portal": "https://artandculture.goa.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/soetya",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Audition and performance assessment by expert cultural panel.",
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "CUL003",
+    "scheme_name": "Yuva Srujan Puraskar (Navsarjan Chetana Puraskar)",
+    "category": "Culture / State Recognition",
+    "target_beneficiary": [
+      "Young Goan achievers in art, culture, literature, and social contribution"
+    ],
+    "eligibility": {
+      "age": {
+        "min": 25,
+        "max": 40,
+        "original_text": "25 to 40 years"
+      },
+      "state": [
+        "Goa"
+      ],
+      "district": [],
+      "residence_requirement": "Goan origin or resident of Goa for minimum 15 years",
+      "occupation": [
+        "Artist",
+        "Writer",
+        "Performer",
+        "Folklorist"
+      ],
+      "user_type": [
+        "artist",
+        "achiever"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Not restricted"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Resident of Goa for at least 15 years",
+        "Substantial independent contributions and awards in performing arts, visual arts, literature, folk art, or cinema"
+      ],
+      "original_eligibility_text": "State: Goa; Age: 25 to 40 years; 15 years residence; Recognized artistic contribution"
+    },
+    "benefit": {
+      "description": "State honour comprising a cash award of ₹25,000, memento, certificate, and public felicitation on Goa Liberation Day",
+      "amount": 25000,
+      "original_text": "₹25,000 cash purse + citation + memento"
+    },
+    "required_documents": [
+      "Birth Certificate",
+      "15-year Residence Certificate",
+      "Aadhaar Card",
+      "Detailed resume of cultural accomplishments, press clippings, and awards",
+      "Passport photograph"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Nominations invited by Directorate of Art & Culture, Panaji, Goa.",
+      "2. Scrutiny by expert advisory committee."
+    ],
+    "official_portal": "https://artandculture.goa.gov.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/yspncp",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": true,
+    "manual_verification_reason": "State honours awarded on the evaluation of lifetime artistic impact and jury selection.",
+    "beneficiary_level": "individual"
+  },
+  {
+    "scheme_id": "CUL004",
+    "scheme_name": "Assistance for Maintenance and Operational Cost of Cultural Spaces (SHRDS-AMOCSP)",
+    "category": "Culture / Infrastructure Support",
+    "target_beneficiary": [
+      "Non-profit cultural organizations, registered trusts, and societies operating performance spaces"
+    ],
+    "eligibility": {
+      "age": {
+        "min": null,
+        "max": null,
+        "original_text": "Not applicable (Organizational)"
+      },
+      "state": [],
+      "district": [],
+      "residence_requirement": "Registered organization operating in India",
+      "occupation": [
+        "Cultural Society / Trust"
+      ],
+      "user_type": [
+        "cultural_organization",
+        "ngo"
+      ],
+      "education_level": [],
+      "course_type": [],
+      "institution_type": [
+        "Registered Society / Trust under Societies Registration Act"
+      ],
+      "social_category": [],
+      "gender": [],
+      "disability_status": null,
+      "disability_percentage": {
+        "min": null,
+        "max": null,
+        "original_text": null
+      },
+      "annual_income": {
+        "min": null,
+        "max": null,
+        "original_text": "Non-profit organization with audited statements"
+      },
+      "employment_status": [],
+      "other_conditions": [
+        "Organization registered for minimum 3 years under Societies Registration Act or relevant statute",
+        "Operating an active cultural studio, rehearsal space, or auditorium dedicated to arts promotion"
+      ],
+      "original_eligibility_text": "Registered non-profit cultural organization with at least 3 years active cultural performances and physical space operations"
+    },
+    "benefit": {
+      "description": "Annual financial grant up to ₹5 Lakhs to meet maintenance, electricity, rental, and operational expenditures of cultural spaces",
+      "amount": 500000,
+      "original_text": "Grant-in-aid up to ₹5,00,000 for maintenance and operational overheads"
+    },
+    "required_documents": [
+      "Registration Certificate of Society/Trust",
+      "3 years audited balance sheets and annual activity reports",
+      "Premise lease deed / ownership documents",
+      "PAN Card and NGO Darpan Unique ID",
+      "Bank Account details"
+    ],
+    "optional_documents": [],
+    "application_steps": [
+      "1. Apply through Ministry of Culture CSMS portal (csms.nic.in).",
+      "2. State Government / ZCC recommendation.",
+      "3. Review by Expert Advisory Committee on Cultural Spaces."
+    ],
+    "official_portal": "https://csms.nic.in",
+    "source_url": "https://www.myscheme.gov.in/schemes/shrds-amocsp",
+    "last_verified": "2026-09-09",
+    "manual_verification_required": true,
+    "manual_verification_reason": "Requires inspection of cultural hall/studio operations, NGO Darpan verification, and audited financial statements.",
+    "beneficiary_level": "individual"
   }
 ]

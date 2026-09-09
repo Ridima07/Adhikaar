@@ -233,9 +233,6 @@ def get_relevant_conditions(
             relevant_conditions.append(combined_text)
 
     return relevant_conditions
-    """
-    Find eligibility conditions related to the supplied rejection reason.
-    """
     relevant_conditions = []
 
     for field, value in eligibility.items():
