@@ -6,6 +6,9 @@ import pandas as pd
 
 from typing import Any, Dict, List, Optional
 
+from backend.personalization.condition_engine import (
+    evaluate_conditions,
+)
 
 # ==================================================
 # LOAD DATASET
@@ -557,6 +560,464 @@ def check_single_girl_child(
 
     return normalized_value
 
+    # ==================================================
+    # PERSONALIZATION CONDITIONS
+    # ==================================================
+
+    personalization_result = evaluate_conditions(
+        scheme,
+        user_profile
+    )
+
+    matched_conditions.extend(
+        personalization_result["matched"]
+    )
+
+    failed_conditions.extend(
+        personalization_result["failed"]
+    )
+
+    missing_information.extend(
+        personalization_result["missing"]
+    )
+
+def check_personalization_conditions(
+    scheme: Dict[str, Any],
+    profile: Dict[str, Any]
+):
+    """
+    Evaluate additional scheme-specific conditions collected
+    during the personalization stage.
+
+    These conditions are stored in schemes.json under
+    eligibility.other_conditions.
+
+    The function does NOT contain scheme-specific rules.
+    It only evaluates personalization fields that already
+    exist in the user profile.
+
+    Returns:
+        matched_conditions,
+        failed_conditions,
+        missing_information
+    """
+
+    eligibility = scheme.get("eligibility", {})
+
+    other_conditions = eligibility.get(
+        "other_conditions",
+        []
+    )
+
+    if not isinstance(other_conditions, list):
+        other_conditions = [other_conditions]
+
+    matched_conditions = []
+    failed_conditions = []
+    missing_information = []
+
+    # ---------------------------------------------------------
+    # Generic mapping between personalization answers and
+    # concepts that may appear in scheme conditions.
+    # ---------------------------------------------------------
+
+    condition_fields = {
+        "first_year": "is_first_year_pg",
+        "regular": "is_regular_full_time",
+        "full_time": "is_regular_full_time",
+        "full-time": "is_regular_full_time",
+        "non_professional": "is_non_professional",
+        "non-professional": "is_non_professional",
+        "distance": "is_distance_education",
+        "distance education": "is_distance_education",
+        "only child": "is_only_child",
+        "single girl child": "is_only_child",
+        "residing abroad": "residing_abroad",
+        "abroad": "residing_abroad",
+        "distress": "distress_situation",
+        "emergency": "distress_situation",
+        "stranded": "distress_situation",
+    }
+
+    for condition in other_conditions:
+
+        if not condition:
+            continue
+
+        condition_text = str(condition)
+        condition_lower = condition_text.lower()
+
+        matched_field = None
+
+        # -----------------------------------------------------
+        # Find whether this condition corresponds to one of
+        # the structured personalization answers.
+        # -----------------------------------------------------
+
+        for keyword, field in condition_fields.items():
+
+            if keyword in condition_lower:
+                matched_field = field
+                break
+
+        # -----------------------------------------------------
+        # This condition is not represented by a structured
+        # personalization field.
+        #
+        # Leave it for manual verification rather than
+        # incorrectly marking the user eligible/ineligible.
+        # -----------------------------------------------------
+
+        if matched_field is None:
+
+            continue
+
+        # -----------------------------------------------------
+        # Check whether the required answer exists.
+        # -----------------------------------------------------
+
+        if matched_field not in profile:
+
+            missing_information.append(
+                condition_text
+            )
+
+            continue
+
+        value = profile.get(matched_field)
+
+        if value is None:
+
+            missing_information.append(
+                condition_text
+            )
+
+            continue
+
+        # -----------------------------------------------------
+        # Evaluate boolean personalization conditions.
+        # -----------------------------------------------------
+
+        if matched_field == "is_distance_education":
+
+            # The scheme says distance education is NOT eligible.
+            if value is False:
+
+                matched_conditions.append(
+                    condition_text
+                )
+
+            else:
+
+                failed_conditions.append(
+                    condition_text
+                )
+
+            continue
+
+        # -----------------------------------------------------
+        # Positive conditions:
+        # first year, regular, non-professional,
+        # only child, abroad, distress, etc.
+        # -----------------------------------------------------
+
+        if bool(value):
+
+            matched_conditions.append(
+                condition_text
+            )
+
+        else:
+
+            failed_conditions.append(
+                condition_text
+            )
+
+    return (
+        matched_conditions,
+        failed_conditions,
+        missing_information
+    )
+def check_personalization_conditions(
+    scheme: Dict[str, Any],
+    profile: Dict[str, Any]
+):
+    """
+    Generic evaluator for scheme-specific personalization conditions.
+
+    The function reads eligibility.other_conditions and evaluates
+    the personalization answers already present in the user profile.
+
+    It does NOT contain rules for individual schemes.
+
+    Returns:
+        matched_conditions,
+        failed_conditions,
+        missing_information
+    """
+
+    eligibility = scheme.get("eligibility", {})
+
+    if not isinstance(eligibility, dict):
+        return [], [], []
+
+    other_conditions = eligibility.get(
+        "other_conditions",
+        []
+    )
+
+    if not isinstance(other_conditions, list):
+        other_conditions = [other_conditions]
+
+    matched_conditions = []
+    failed_conditions = []
+    missing_information = []
+
+    # ---------------------------------------------------------
+    # Generic condition patterns
+    #
+    # These describe concepts, not individual schemes.
+    # ---------------------------------------------------------
+
+    condition_patterns = [
+
+        # Single / only child
+        {
+            "keywords": [
+                "only child",
+                "single girl child",
+                "without brother",
+                "without sister",
+            ],
+            "field": "is_single_girl_child",
+            "positive": True,
+        },
+
+        # First year PG / Master's
+        {
+            "keywords": [
+                "1st year",
+                "first year",
+            ],
+            "field": "is_first_year_pg",
+            "positive": True,
+        },
+
+        # Regular / full-time
+        {
+            "keywords": [
+                "regular",
+                "full-time",
+                "full time",
+            ],
+            "field": "is_regular_full_time",
+            "positive": True,
+        },
+
+        # Non-professional
+        {
+            "keywords": [
+                "non-professional",
+                "non professional",
+            ],
+            "field": "is_non_professional",
+            "positive": True,
+        },
+
+        # Distance education
+        {
+            "keywords": [
+                "distance education",
+                "distance learning",
+                "distance mode",
+            ],
+            "field": "is_distance_education",
+            "positive": False,
+        },
+
+        # Abroad
+        {
+            "keywords": [
+                "residing abroad",
+                "reside abroad",
+                "outside india",
+                "abroad",
+            ],
+            "field": "residing_abroad",
+            "positive": True,
+        },
+
+        # Distress / emergency
+        {
+            "keywords": [
+                "distress",
+                "emergency",
+                "stranded",
+            ],
+            "field": "distress_situation",
+            "positive": True,
+        },
+    ]
+
+    # ---------------------------------------------------------
+    # Find the personalization fields relevant to each
+    # condition.
+    # ---------------------------------------------------------
+
+    for condition in other_conditions:
+
+        if not condition:
+            continue
+
+        condition_text = str(condition).strip()
+        condition_lower = condition_text.lower()
+
+        matched_pattern = None
+
+        for pattern in condition_patterns:
+
+            if any(
+                keyword in condition_lower
+                for keyword in pattern["keywords"]
+            ):
+                matched_pattern = pattern
+                break
+
+        # -----------------------------------------------------
+        # No structured personalization field exists for this
+        # condition.
+        #
+        # Do NOT guess.
+        # Leave it for manual verification.
+        # -----------------------------------------------------
+
+        if matched_pattern is None:
+            continue
+
+        field = matched_pattern["field"]
+        positive = matched_pattern["positive"]
+
+        # -----------------------------------------------------
+        # Special handling for combined conditions.
+        #
+        # Example:
+        # "Admitted to regular, full-time 1st year Master's
+        # program..."
+        #
+        # This condition requires MULTIPLE answers.
+        # -----------------------------------------------------
+
+        required_fields = [field]
+
+        if (
+            "1st year" in condition_lower
+            or "first year" in condition_lower
+        ) and (
+            "master" in condition_lower
+            or "pg" in condition_lower
+        ):
+            required_fields.append(
+                "is_first_year_pg"
+            )
+
+        if (
+            "regular" in condition_lower
+            or "full-time" in condition_lower
+            or "full time" in condition_lower
+        ):
+            required_fields.append(
+                "is_regular_full_time"
+            )
+
+        if "non-professional" in condition_lower:
+            required_fields.append(
+                "is_non_professional"
+            )
+
+        # Remove duplicates while preserving order.
+        required_fields = list(
+            dict.fromkeys(required_fields)
+        )
+
+        # -----------------------------------------------------
+        # Evaluate every field required by this condition.
+        # -----------------------------------------------------
+
+        condition_failed = False
+        condition_missing = False
+
+        for required_field in required_fields:
+
+            if required_field not in profile:
+
+                condition_missing = True
+                continue
+
+            value = profile.get(
+                required_field
+            )
+
+            if value is None:
+
+                condition_missing = True
+                continue
+
+            # ---------------------------------------------
+            # Distance education is a NEGATIVE requirement.
+            # ---------------------------------------------
+
+            if required_field == "is_distance_education":
+
+                if value is True:
+                    condition_failed = True
+
+                continue
+
+            # ---------------------------------------------
+            # All other personalization conditions are
+            # positive requirements.
+            # ---------------------------------------------
+
+            if not bool(value):
+                condition_failed = True
+
+        # -----------------------------------------------------
+        # Final result for this condition
+        # -----------------------------------------------------
+
+        if condition_failed:
+
+            failed_conditions.append(
+                condition_text
+            )
+
+        elif condition_missing:
+
+            missing_information.append(
+                condition_text
+            )
+
+        else:
+
+            matched_conditions.append(
+                condition_text
+            )
+
+    # ---------------------------------------------------------
+    # Remove duplicates
+    # ---------------------------------------------------------
+
+    def remove_duplicates(items):
+
+        return list(
+            dict.fromkeys(items)
+        )
+
+    return (
+        remove_duplicates(matched_conditions),
+        remove_duplicates(failed_conditions),
+        remove_duplicates(missing_information),
+    )
 
 # ==================================================
 # MAIN ELIGIBILITY CHECK
@@ -908,6 +1369,30 @@ def check_eligibility(
             failed_conditions.append(
                 "Must be an Indian citizen residing abroad and facing distress/emergency"
             )
+    # ==================================================
+    # PERSONALIZATION CONDITIONS
+    # ==================================================
+
+    (
+        personalization_matched,
+        personalization_failed,
+        personalization_missing
+    ) = check_personalization_conditions(
+        scheme,
+        user_profile
+    )
+
+    matched_conditions.extend(
+        personalization_matched
+    )
+
+    failed_conditions.extend(
+        personalization_failed
+    )
+
+    missing_information.extend(
+        personalization_missing
+    )
 
     # ==================================================
     # DETERMINE STATUS
@@ -1193,6 +1678,46 @@ def create_ml_features(
                 "beneficiary_level",
                 "individual"
             )
+        ),
+
+        # ==================================================
+        # PERSONALIZATION FEATURES
+        # ==================================================
+
+        "is_first_year_pg": int(
+            bool(profile.get("is_first_year_pg", False))
+        ),
+
+        "is_regular_full_time": int(
+            bool(profile.get("is_regular_full_time", False))
+        ),
+
+        "is_non_professional": int(
+            bool(profile.get("is_non_professional", False))
+        ),
+
+        "is_distance_education": int(
+            bool(profile.get("is_distance_education", False))
+        ),
+
+        "is_only_child": int(
+            bool(
+                profile.get(
+                    "is_only_child",
+                    profile.get(
+                        "is_single_girl_child",
+                        False
+                    )
+                )
+            )
+        ),
+
+        "residing_abroad": int(
+            bool(profile.get("residing_abroad", False))
+        ),
+
+        "distress_situation": int(
+            bool(profile.get("distress_situation", False))
         ),
     }
 
