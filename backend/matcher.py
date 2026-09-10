@@ -1,5 +1,9 @@
 import json
 import os
+import joblib
+
+import pandas as pd
+
 from typing import Any, Dict, List, Optional
 
 
@@ -10,6 +14,59 @@ from typing import Any, Dict, List, Optional
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATASET_PATH = os.path.join(BASE_DIR, "data", "schemes.json")
 
+MODEL_PATH = os.path.join(
+    BASE_DIR,
+    "ml",
+    "saved_models",
+    "scheme_relevance_model.pkl"
+)
+
+_ml_model = None
+
+
+def load_ml_model():
+    """
+    Loads the trained ML model only once.
+
+    Returns:
+        The trained pipeline, or None if the model
+        is unavailable.
+    """
+
+    global _ml_model
+
+    if _ml_model is not None:
+        return _ml_model
+
+    if not os.path.exists(MODEL_PATH):
+        print(
+            "ML model not found. "
+            "Continuing with rule-based recommendations."
+        )
+        return None
+
+    try:
+        saved_model = joblib.load(MODEL_PATH)
+
+        # New train_model.py saves a dictionary.
+        if isinstance(saved_model, dict):
+            _ml_model = saved_model["pipeline"]
+
+        else:
+            # Backward compatibility with an older saved pipeline.
+            _ml_model = saved_model
+
+        print("ML model loaded successfully.")
+
+        return _ml_model
+
+    except Exception as error:
+        print(
+            "Could not load ML model:",
+            error
+        )
+
+        return None
 
 def load_schemes() -> List[Dict[str, Any]]:
     """
@@ -842,6 +899,16 @@ def check_eligibility(
             )
         )
 
+    # Special condition for ICWF
+    if scheme.get("scheme_id") == "EXT001":
+        residing_abroad = user_profile.get("residing_abroad", False)
+        distress = user_profile.get("distress_situation", False)
+
+        if residing_abroad is False or distress is False:
+            failed_conditions.append(
+                "Must be an Indian citizen residing abroad and facing distress/emergency"
+            )
+
     # ==================================================
     # DETERMINE STATUS
     # ==================================================
@@ -983,6 +1050,151 @@ def calculate_document_readiness(
         "readiness_percentage": readiness_percentage,
     }
 
+def predict_ml_relevance(
+    user_profile: Dict[str, Any],
+    scheme: Dict[str, Any]
+) -> float:
+    """
+    Returns the ML probability that a scheme is relevant.
+
+    If the model is unavailable, returns 0.0.
+    """
+
+    model = load_ml_model()
+
+    if model is None:
+        return 0.0
+
+    try:
+        features = create_ml_features(
+            user_profile,
+            scheme
+        )
+
+        feature_df = pd.DataFrame(
+            [features]
+        )
+
+        probability = model.predict_proba(
+            feature_df
+        )[0][1]
+
+        return round(
+            float(probability),
+            4
+        )
+
+    except Exception as error:
+        print(
+            "ML prediction failed for scheme",
+            scheme.get("scheme_id"),
+            ":",
+            error
+        )
+
+        return 0.0
+
+def convert_to_ml_value(value: Any) -> Any:
+    """
+    Converts profile or scheme values into ML-compatible values.
+
+    Lists, tuples, and sets are converted into strings because
+    sklearn encoders cannot directly process nested list values.
+    """
+
+    if value is None:
+        return ""
+
+    if isinstance(value, (list, tuple, set)):
+        return ", ".join(
+            str(item).strip()
+            for item in value
+        )
+
+    if isinstance(value, bool):
+        return int(value)
+
+    return value
+
+# ==================================================
+# ML FEATURE CREATION
+# ==================================================
+
+def create_ml_features(
+    profile: Dict[str, Any],
+    scheme: Dict[str, Any]
+) -> Dict[str, Any]:
+
+    return {
+        # Numeric features
+        "age": profile.get("age"),
+
+        "annual_income": (
+            profile.get("annual_income")
+            if profile.get("annual_income") is not None
+            else 0
+        ),
+
+        "required_documents_count": len(
+            scheme.get("required_documents", [])
+        ),
+
+        "manual_verification_required": int(
+            bool(
+                scheme.get(
+                    "manual_verification_required",
+                    False
+                )
+            )
+        ),
+
+        "is_individual_scheme": int(
+            scheme.get(
+                "beneficiary_level",
+                "individual"
+            ) == "individual"
+        ),
+
+        # Categorical features
+        "state": convert_to_ml_value(
+            profile.get("state")
+        ),
+
+        "occupation": convert_to_ml_value(
+            profile.get("occupation")
+        ),
+
+        "education_level": convert_to_ml_value(
+            profile.get("education_level")
+        ),
+
+        "social_category": convert_to_ml_value(
+            profile.get("social_category")
+        ),
+
+        "gender": convert_to_ml_value(
+            profile.get("gender")
+        ),
+
+        "employment_status": convert_to_ml_value(
+            profile.get("employment_status")
+        ),
+
+        "user_type": convert_to_ml_value(
+            profile.get("user_type")
+        ),
+
+        "scheme_category": convert_to_ml_value(
+            scheme.get("category")
+        ),
+
+        "beneficiary_level": convert_to_ml_value(
+            scheme.get(
+                "beneficiary_level",
+                "individual"
+            )
+        ),
+    }
 
 # ==================================================
 # RECOMMENDATION ENGINE
@@ -992,32 +1204,51 @@ def recommend_schemes(
     user_profile: Dict[str, Any]
 ) -> List[Dict[str, Any]]:
     """
-    Returns all schemes for which the user is:
+    Returns schemes for which the user is:
+
     - eligible
     - possibly eligible
 
     Schemes with definite failed conditions
     are excluded.
+
+    The ML model ranks the remaining schemes.
+    It does not override the rule-based eligibility engine.
     """
 
     schemes = load_schemes()
+
     recommendations = []
 
     for scheme in schemes:
+
+        # --------------------------------------------------
+        # RULE-BASED ELIGIBILITY
+        # --------------------------------------------------
 
         eligibility_result = check_eligibility(
             scheme,
             user_profile
         )
 
-        # Do not recommend schemes where
-        # a mandatory condition definitely fails.
+        # Never recommend schemes where a mandatory
+        # eligibility condition definitely fails.
         if eligibility_result["status"] == "not_eligible":
             continue
 
+        # --------------------------------------------------
+        # DOCUMENT READINESS
+        # --------------------------------------------------
+
         document_readiness = calculate_document_readiness(
-            scheme.get("required_documents", []),
-            user_profile.get("available_documents", [])
+            scheme.get(
+                "required_documents",
+                []
+            ),
+            user_profile.get(
+                "available_documents",
+                []
+            )
         )
 
         eligibility_rules = scheme.get(
@@ -1025,14 +1256,36 @@ def recommend_schemes(
             {}
         )
 
+        # --------------------------------------------------
+        # ML RELEVANCE SCORE
+        # --------------------------------------------------
+
+        ml_relevance_score = predict_ml_relevance(
+            user_profile,
+            scheme
+        )
+
+        # --------------------------------------------------
+        # CREATE RECOMMENDATION
+        # --------------------------------------------------
+
         recommendation = {
-            "scheme_id": scheme.get("scheme_id"),
+            "scheme_id": scheme.get(
+                "scheme_id"
+            ),
 
-            "scheme_name": scheme.get("scheme_name"),
+            "scheme_name": scheme.get(
+                "scheme_name"
+            ),
 
-            "category": scheme.get("category"),
+            "category": scheme.get(
+                "category"
+            ),
 
-            "benefit": scheme.get("benefit", {}),
+            "benefit": scheme.get(
+                "benefit",
+                {}
+            ),
 
             "required_documents": scheme.get(
                 "required_documents",
@@ -1061,7 +1314,9 @@ def recommend_schemes(
                 "last_verified"
             ),
 
-            "status": eligibility_result["status"],
+            "status": eligibility_result[
+                "status"
+            ],
 
             "match_percentage": eligibility_result[
                 "match_percentage"
@@ -1104,22 +1359,36 @@ def recommend_schemes(
             ),
 
             "document_readiness": document_readiness,
+
+            # ML-generated score
+            "ml_relevance_score": ml_relevance_score,
         }
 
-        recommendations.append(recommendation)
+        recommendations.append(
+            recommendation
+        )
 
-    # Fully eligible schemes first.
-    # Then possibly eligible schemes.
+    # --------------------------------------------------
+    # SORT RECOMMENDATIONS
+    # --------------------------------------------------
+
     recommendations.sort(
         key=lambda scheme: (
+            # Fully eligible schemes first
             0 if scheme["status"] == "eligible" else 1,
+
+            # Higher ML score first
+            -scheme["ml_relevance_score"],
+
+            # Higher rule-based match percentage next
             -scheme["match_percentage"],
+
+            # Stable alphabetical ordering
             scheme["scheme_name"] or ""
         )
     )
 
     return recommendations
-
 
 # ==================================================
 # LOCAL TEST
@@ -1155,6 +1424,8 @@ if __name__ == "__main__":
         ],
         "is_single_girl_child": True,
         "available_documents": [],
+        "residing_abroad": False,
+        "distress_situation": False,
     }
 
     schemes = load_schemes()

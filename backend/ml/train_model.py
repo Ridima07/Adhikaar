@@ -47,6 +47,11 @@ MODEL_PATH = os.path.join(
 # LOAD DATA
 # --------------------------------------------------
 
+if not os.path.exists(DATASET_PATH):
+    raise FileNotFoundError(
+        f"Dataset not found at: {DATASET_PATH}"
+    )
+
 df = pd.read_csv(DATASET_PATH)
 
 print("Dataset loaded successfully.")
@@ -72,44 +77,20 @@ print(df[TARGET].value_counts())
 # REMOVE UNUSED AND LEAKAGE COLUMNS
 # --------------------------------------------------
 
-# These columns are not used as model input.
-#
-# profile_id:
-# Only an identifier.
-#
-# scheme_id:
-# Can cause the model to memorise individual schemes.
-#
-# status:
-# Directly reveals the rule-engine result.
-#
-# relevance_label:
-# Original label, not an input feature.
-#
-# is_relevant:
-# Target column.
-#
-# The following columns are also removed because they are
-# directly calculated by the eligibility matcher:
-#
-# matched_conditions
-# failed_conditions
-# missing_conditions
-# match_percentage
-# has_failed_condition
-# has_missing_information
-#
-# Keeping these columns would cause data leakage because
-# the model would learn the answer from the matcher output
-# instead of learning from the actual user and scheme data.
-
 DROP_COLUMNS = [
+    # Identifiers
     "profile_id",
     "scheme_id",
+
+    # Direct rule-engine outputs
     "status",
     "relevance_label",
+
+    # Target
     "is_relevant",
 
+    # Features calculated directly from eligibility results
+    # These must not be used because they reveal the answer.
     "matched_conditions",
     "failed_conditions",
     "missing_conditions",
@@ -134,11 +115,11 @@ y = df[TARGET]
 # --------------------------------------------------
 
 categorical_columns = X.select_dtypes(
-    include=["object"]
+    include=["object", "string"]
 ).columns.tolist()
 
 numeric_columns = X.select_dtypes(
-    exclude=["object"]
+    exclude=["object", "string"]
 ).columns.tolist()
 
 print("\nCategorical columns:")
@@ -156,7 +137,9 @@ numeric_pipeline = Pipeline(
     steps=[
         (
             "imputer",
-            SimpleImputer(strategy="median")
+            SimpleImputer(
+                strategy="median"
+            )
         )
     ]
 )
@@ -199,13 +182,13 @@ preprocessor = ColumnTransformer(
 # --------------------------------------------------
 
 model = RandomForestClassifier(
-    n_estimators=200,
-    max_depth=10,
+    n_estimators=300,
+    max_depth=12,
     min_samples_split=4,
     min_samples_leaf=2,
 
-    # Important because the dataset is imbalanced.
-    class_weight="balanced",
+    # Helps the model pay more attention to relevant schemes.
+    class_weight="balanced_subsample",
 
     random_state=42,
     n_jobs=-1
@@ -264,26 +247,64 @@ print("Model training completed.")
 # EVALUATION
 # --------------------------------------------------
 
-y_pred = pipeline.predict(X_test)
-y_probability = pipeline.predict_proba(X_test)[:, 1]
+y_probability = pipeline.predict_proba(
+    X_test
+)[:, 1]
+
+# Default classification threshold.
+# Lowering this increases recall but may reduce precision.
+THRESHOLD = 0.50
+
+y_pred = (
+    y_probability >= THRESHOLD
+).astype(int)
+
+
+print("\nClassification threshold:")
+print(THRESHOLD)
 
 print("\nAccuracy:")
-print(accuracy_score(y_test, y_pred))
+print(
+    accuracy_score(
+        y_test,
+        y_pred
+    )
+)
 
 print("\nROC-AUC:")
-print(roc_auc_score(y_test, y_probability))
+print(
+    roc_auc_score(
+        y_test,
+        y_probability
+    )
+)
 
 print("\nConfusion Matrix:")
-print(confusion_matrix(y_test, y_pred))
+cm = confusion_matrix(
+    y_test,
+    y_pred
+)
+
+print(cm)
 
 print("\nClassification Report:")
 print(
     classification_report(
         y_test,
         y_pred,
+        target_names=[
+            "Not Relevant",
+            "Relevant"
+        ],
         zero_division=0
     )
 )
+
+print("\nFalse positives:")
+print(cm[0][1])
+
+print("\nFalse negatives:")
+print(cm[1][0])
 
 
 # --------------------------------------------------
@@ -295,8 +316,17 @@ os.makedirs(
     exist_ok=True
 )
 
+model_data = {
+    "pipeline": pipeline,
+    "target": TARGET,
+    "threshold": THRESHOLD,
+    "categorical_columns": categorical_columns,
+    "numeric_columns": numeric_columns,
+    "drop_columns": DROP_COLUMNS
+}
+
 joblib.dump(
-    pipeline,
+    model_data,
     MODEL_PATH
 )
 

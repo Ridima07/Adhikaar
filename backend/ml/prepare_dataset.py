@@ -1,7 +1,9 @@
 import os
 import sys
 import random
+import copy
 import pandas as pd
+from typing import Dict, Any
 
 # Allow this script to import matcher.py from the backend folder
 BACKEND_DIR = os.path.dirname(
@@ -914,9 +916,144 @@ USER_PROFILES = [
     },
 ]
 
+# --------------------------------------------------
+# PROFILE VARIATION GENERATION
+# --------------------------------------------------
+
+def generate_profile_variations(
+    profiles,
+    variations_per_profile=5
+):
+    """
+    Creates realistic variations of the existing profiles
+    to reduce extreme class imbalance in the dataset.
+
+    The original profiles are preserved. Variations only
+    modify fields that can reasonably differ between users.
+    """
+
+    expanded_profiles = []
+
+    for profile in profiles:
+        expanded_profiles.append(copy.deepcopy(profile))
+
+        for variation_index in range(variations_per_profile):
+            new_profile = copy.deepcopy(profile)
+
+            # Vary age only when age is available
+            if new_profile.get("age") is not None:
+                age_change = random.choice([-2, -1, 0, 1, 2])
+                new_profile["age"] = max(
+                    1,
+                    new_profile["age"] + age_change
+                )
+
+            # Vary income only when income is available
+            if new_profile.get("annual_income") is not None:
+                income_change = random.choice([
+                    -0.20,
+                    -0.10,
+                    0,
+                    0.10,
+                    0.20
+                ])
+
+                new_profile["annual_income"] = max(
+                    0,
+                    int(
+                        new_profile["annual_income"]
+                        * (1 + income_change)
+                    )
+                )
+
+            # Vary district only when the original district exists
+            if new_profile.get("district") is not None:
+                new_profile["district"] = new_profile["district"]
+
+            # Preserve the original category unless it is missing
+            if new_profile.get("social_category") is None:
+                new_profile["social_category"] = None
+
+            # Preserve disability consistency
+            disability_status = new_profile.get(
+                "disability_status"
+            )
+
+            if isinstance(disability_status, str):
+                disability_status = (
+                    disability_status.strip().lower()
+                )
+
+                if disability_status in ["yes", "true", "1"]:
+                    new_profile["disability_status"] = True
+
+                elif disability_status in [
+                    "no",
+                    "false",
+                    "0"
+                ]:
+                    new_profile["disability_status"] = False
+
+            # IDs are assigned after all variations are created
+            new_profile["profile_id"] = None
+
+            expanded_profiles.append(new_profile)
+
+    return expanded_profiles
+
+
+USER_PROFILES = generate_profile_variations(
+    USER_PROFILES,
+    variations_per_profile=5
+)
+
 # Automatically assign stable profile IDs
 for index, profile in enumerate(USER_PROFILES, start=1):
-    profile["profile_id"] = f"P{index:02d}"
+    profile["profile_id"] = f"P{index:03d}"
+
+# --------------------------------------------------
+# VALUE NORMALIZATION
+# --------------------------------------------------
+
+def normalize_value(value):
+    """
+    Converts lists and missing values into stable values
+    that can safely be written to CSV and used by ML.
+    """
+
+    if value is None:
+        return ""
+
+    if isinstance(value, list):
+        return "|".join(
+            str(item).strip()
+            for item in value
+        )
+
+    if isinstance(value, bool):
+        return int(value)
+
+    return value
+
+
+def normalize_disability_status(value):
+    """
+    Correctly converts boolean and string disability values.
+    """
+
+    if value is None:
+        return 0
+
+    if isinstance(value, bool):
+        return int(value)
+
+    if isinstance(value, str):
+        return int(
+            value.strip().lower()
+            in ["yes", "true", "1"]
+        )
+
+    return int(bool(value))
 
 # --------------------------------------------------
 # FEATURE GENERATION
@@ -987,44 +1124,32 @@ def create_features(user_profile, scheme, eligibility_result):
         "annual_income": user_profile.get(
             "annual_income"
         ) or 0,
-
-        "state": user_profile.get(
-            "state",
-            ""
+        "state": normalize_value(
+            user_profile.get("state", "")
         ),
 
-        "occupation": user_profile.get(
-            "occupation",
-            ""
+        "occupation": normalize_value(
+            user_profile.get("occupation", "")
         ),
 
-        "education_level": user_profile.get(
-            "education_level",
-            ""
+        "education_level": normalize_value(
+            user_profile.get("education_level", "")
         ),
 
-        "social_category": user_profile.get(
-            "social_category",
-            ""
+        "social_category": normalize_value(
+            user_profile.get("social_category", "")
         ),
 
-        "gender": user_profile.get(
-            "gender",
-            ""
+        "gender": normalize_value(
+            user_profile.get("gender", "")
         ),
 
-        "disability_status": int(
-            bool(user_profile.get("disability_status"))
+        "employment_status": normalize_value(
+            user_profile.get("employment_status", "")
         ),
 
-        "employment_status": user_profile.get(
-            "employment_status",
-            ""
-        ),
-
-        "user_type": user_profile.get(
-            "user_type",
-            ""
+        "user_type": normalize_value(
+            user_profile.get("user_type", "")
         ),
 
         # Scheme features
@@ -1033,11 +1158,15 @@ def create_features(user_profile, scheme, eligibility_result):
             ""
         ),
 
-        "scheme_category": scheme_category,
+        "scheme_category": normalize_value(
+            scheme_category
+        ),
 
-        "beneficiary_level": scheme.get(
-            "beneficiary_level",
-            "individual"
+        "beneficiary_level": normalize_value(
+            scheme.get(
+                "beneficiary_level",
+                "individual"
+            )
         ),
 
         # Eligibility features
