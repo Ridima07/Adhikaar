@@ -30,7 +30,7 @@ def check_document_readiness(required_documents, available_documents):
     return {
         "available_documents": available,
         "missing_documents": missing,
-        "document_readiness_percentage": readiness_percentage,
+        "readiness_percentage": readiness_percentage,
         "total_required_documents": total_required,
         "total_available_documents": len(available),
         "total_missing_documents": len(missing)
