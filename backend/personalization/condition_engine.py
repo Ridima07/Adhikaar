@@ -348,10 +348,6 @@ def get_applicable_conditions(scheme):
     return applicable
 
 
-# ============================================================
-# QUESTION GENERATION
-# ============================================================
-
 def get_condition_questions(
     scheme,
     profile=None
@@ -365,6 +361,10 @@ def get_condition_questions(
         profile = {}
 
     questions = []
+
+    # --------------------------------------------------
+    # Existing personalization conditions
+    # --------------------------------------------------
 
     for condition_key in get_applicable_conditions(
         scheme
@@ -389,6 +389,41 @@ def get_condition_questions(
         )
 
         questions.append(question)
+
+    # --------------------------------------------------
+    # Scheme-specific user_type condition
+    # --------------------------------------------------
+
+    eligibility = scheme.get(
+        "eligibility",
+        {}
+    )
+
+    scheme_user_types = eligibility.get(
+        "user_type",
+        []
+    )
+
+    if (
+        isinstance(scheme_user_types, list)
+        and scheme_user_types
+    ):
+        user_type = profile.get(
+            "user_type"
+        )
+
+        # Ask only when the profile does not already
+        # contain a user type.
+        if user_type is None or user_type == "":
+            questions.append({
+                "id": "user_type",
+                "question": "Which of these best describes you?",
+                "options": [
+                    *scheme_user_types,
+                    "__none__"
+                ],
+                "type": "select",
+            })
 
     return questions
 

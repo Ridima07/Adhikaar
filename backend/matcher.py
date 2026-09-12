@@ -71,6 +71,7 @@ def load_ml_model():
 
         return None
 
+
 def load_schemes() -> List[Dict[str, Any]]:
     """
     Loads schemes from schemes.json.
@@ -80,13 +81,23 @@ def load_schemes() -> List[Dict[str, Any]]:
     2. Dictionary containing a 'schemes' list
     """
 
-    with open(DATASET_PATH, "r", encoding="utf-8") as file:
+    with open(
+        DATASET_PATH,
+        "r",
+        encoding="utf-8"
+    ) as file:
         data = json.load(file)
 
     if isinstance(data, list):
         return data
 
-    if isinstance(data, dict) and isinstance(data.get("schemes"), list):
+    if (
+        isinstance(data, dict)
+        and isinstance(
+            data.get("schemes"),
+            list
+        )
+    ):
         return data["schemes"]
 
     raise ValueError(
@@ -241,7 +252,9 @@ def value_matches(
     return False
 
 
-def normalize_boolean(value: Any) -> Optional[bool]:
+def normalize_boolean(
+    value: Any
+) -> Optional[bool]:
     """
     Converts common boolean representations into True/False.
 
@@ -259,10 +272,20 @@ def normalize_boolean(value: Any) -> Optional[bool]:
 
     value = normalize(value)
 
-    if value in ["true", "yes", "y", "1"]:
+    if value in [
+        "true",
+        "yes",
+        "y",
+        "1"
+    ]:
         return True
 
-    if value in ["false", "no", "n", "0"]:
+    if value in [
+        "false",
+        "no",
+        "n",
+        "0"
+    ]:
         return False
 
     return None
@@ -332,7 +355,10 @@ def check_age(
 
     try:
         user_age = float(user_age)
-    except (TypeError, ValueError):
+    except (
+        TypeError,
+        ValueError
+    ):
         return None
 
     if not isinstance(age_rule, dict):
@@ -404,7 +430,10 @@ def check_income(
 
     try:
         user_income = float(user_income)
-    except (TypeError, ValueError):
+    except (
+        TypeError,
+        ValueError
+    ):
         return None
 
     if minimum is not None:
@@ -441,8 +470,13 @@ def check_disability_status(
     if scheme_status is None:
         return True
 
-    user_status = normalize_boolean(user_status)
-    required_status = normalize_boolean(scheme_status)
+    user_status = normalize_boolean(
+        user_status
+    )
+
+    required_status = normalize_boolean(
+        scheme_status
+    )
 
     if required_status is None:
         return True
@@ -468,7 +502,10 @@ def check_disability_percentage(
     if not percentage_rule:
         return True
 
-    if not isinstance(percentage_rule, dict):
+    if not isinstance(
+        percentage_rule,
+        dict
+    ):
         return True
 
     minimum = percentage_rule.get("min")
@@ -481,8 +518,13 @@ def check_disability_percentage(
         return None
 
     try:
-        user_percentage = float(user_percentage)
-    except (TypeError, ValueError):
+        user_percentage = float(
+            user_percentage
+        )
+    except (
+        TypeError,
+        ValueError
+    ):
         return None
 
     if minimum is not None:
@@ -514,9 +556,15 @@ def check_single_girl_child(
     - other_conditions
     """
 
-    eligibility_rules = scheme.get("eligibility", {})
+    eligibility_rules = scheme.get(
+        "eligibility",
+        {}
+    )
 
-    scheme_user_types = eligibility_rules.get("user_type", [])
+    scheme_user_types = eligibility_rules.get(
+        "user_type",
+        []
+    )
 
     other_conditions = eligibility_rules.get(
         "other_conditions",
@@ -540,10 +588,16 @@ def check_single_girl_child(
     if not requires_single_girl:
         return True
 
-    user_value = user_profile.get("is_single_girl_child")
+    user_value = user_profile.get(
+        "is_single_girl_child"
+    )
 
     if is_missing(user_value):
-        user_types = user_profile.get("user_type", [])
+
+        user_types = user_profile.get(
+            "user_type",
+            []
+        )
 
         if value_matches(
             "single_girl_child",
@@ -553,191 +607,20 @@ def check_single_girl_child(
 
         return None
 
-    normalized_value = normalize_boolean(user_value)
+    normalized_value = normalize_boolean(
+        user_value
+    )
 
     if normalized_value is None:
         return None
 
     return normalized_value
 
-    # ==================================================
-    # PERSONALIZATION CONDITIONS
-    # ==================================================
 
-    personalization_result = evaluate_conditions(
-        scheme,
-        user_profile
-    )
+# ==================================================
+# PERSONALIZATION CONDITIONS
+# ==================================================
 
-    matched_conditions.extend(
-        personalization_result["matched"]
-    )
-
-    failed_conditions.extend(
-        personalization_result["failed"]
-    )
-
-    missing_information.extend(
-        personalization_result["missing"]
-    )
-
-def check_personalization_conditions(
-    scheme: Dict[str, Any],
-    profile: Dict[str, Any]
-):
-    """
-    Evaluate additional scheme-specific conditions collected
-    during the personalization stage.
-
-    These conditions are stored in schemes.json under
-    eligibility.other_conditions.
-
-    The function does NOT contain scheme-specific rules.
-    It only evaluates personalization fields that already
-    exist in the user profile.
-
-    Returns:
-        matched_conditions,
-        failed_conditions,
-        missing_information
-    """
-
-    eligibility = scheme.get("eligibility", {})
-
-    other_conditions = eligibility.get(
-        "other_conditions",
-        []
-    )
-
-    if not isinstance(other_conditions, list):
-        other_conditions = [other_conditions]
-
-    matched_conditions = []
-    failed_conditions = []
-    missing_information = []
-
-    # ---------------------------------------------------------
-    # Generic mapping between personalization answers and
-    # concepts that may appear in scheme conditions.
-    # ---------------------------------------------------------
-
-    condition_fields = {
-        "first_year": "is_first_year_pg",
-        "regular": "is_regular_full_time",
-        "full_time": "is_regular_full_time",
-        "full-time": "is_regular_full_time",
-        "non_professional": "is_non_professional",
-        "non-professional": "is_non_professional",
-        "distance": "is_distance_education",
-        "distance education": "is_distance_education",
-        "only child": "is_only_child",
-        "single girl child": "is_only_child",
-        "residing abroad": "residing_abroad",
-        "abroad": "residing_abroad",
-        "distress": "distress_situation",
-        "emergency": "distress_situation",
-        "stranded": "distress_situation",
-    }
-
-    for condition in other_conditions:
-
-        if not condition:
-            continue
-
-        condition_text = str(condition)
-        condition_lower = condition_text.lower()
-
-        matched_field = None
-
-        # -----------------------------------------------------
-        # Find whether this condition corresponds to one of
-        # the structured personalization answers.
-        # -----------------------------------------------------
-
-        for keyword, field in condition_fields.items():
-
-            if keyword in condition_lower:
-                matched_field = field
-                break
-
-        # -----------------------------------------------------
-        # This condition is not represented by a structured
-        # personalization field.
-        #
-        # Leave it for manual verification rather than
-        # incorrectly marking the user eligible/ineligible.
-        # -----------------------------------------------------
-
-        if matched_field is None:
-
-            continue
-
-        # -----------------------------------------------------
-        # Check whether the required answer exists.
-        # -----------------------------------------------------
-
-        if matched_field not in profile:
-
-            missing_information.append(
-                condition_text
-            )
-
-            continue
-
-        value = profile.get(matched_field)
-
-        if value is None:
-
-            missing_information.append(
-                condition_text
-            )
-
-            continue
-
-        # -----------------------------------------------------
-        # Evaluate boolean personalization conditions.
-        # -----------------------------------------------------
-
-        if matched_field == "is_distance_education":
-
-            # The scheme says distance education is NOT eligible.
-            if value is False:
-
-                matched_conditions.append(
-                    condition_text
-                )
-
-            else:
-
-                failed_conditions.append(
-                    condition_text
-                )
-
-            continue
-
-        # -----------------------------------------------------
-        # Positive conditions:
-        # first year, regular, non-professional,
-        # only child, abroad, distress, etc.
-        # -----------------------------------------------------
-
-        if bool(value):
-
-            matched_conditions.append(
-                condition_text
-            )
-
-        else:
-
-            failed_conditions.append(
-                condition_text
-            )
-
-    return (
-        matched_conditions,
-        failed_conditions,
-        missing_information
-    )
 def check_personalization_conditions(
     scheme: Dict[str, Any],
     profile: Dict[str, Any]
@@ -756,9 +639,15 @@ def check_personalization_conditions(
         missing_information
     """
 
-    eligibility = scheme.get("eligibility", {})
+    eligibility = scheme.get(
+        "eligibility",
+        {}
+    )
 
-    if not isinstance(eligibility, dict):
+    if not isinstance(
+        eligibility,
+        dict
+    ):
         return [], [], []
 
     other_conditions = eligibility.get(
@@ -766,8 +655,13 @@ def check_personalization_conditions(
         []
     )
 
-    if not isinstance(other_conditions, list):
-        other_conditions = [other_conditions]
+    if not isinstance(
+        other_conditions,
+        list
+    ):
+        other_conditions = [
+            other_conditions
+        ]
 
     matched_conditions = []
     failed_conditions = []
@@ -869,8 +763,13 @@ def check_personalization_conditions(
         if not condition:
             continue
 
-        condition_text = str(condition).strip()
-        condition_lower = condition_text.lower()
+        condition_text = str(
+            condition
+        ).strip()
+
+        condition_lower = (
+            condition_text.lower()
+        )
 
         matched_pattern = None
 
@@ -895,7 +794,6 @@ def check_personalization_conditions(
             continue
 
         field = matched_pattern["field"]
-        positive = matched_pattern["positive"]
 
         # -----------------------------------------------------
         # Special handling for combined conditions.
@@ -907,7 +805,9 @@ def check_personalization_conditions(
         # This condition requires MULTIPLE answers.
         # -----------------------------------------------------
 
-        required_fields = [field]
+        required_fields = [
+            field
+        ]
 
         if (
             "1st year" in condition_lower
@@ -936,7 +836,9 @@ def check_personalization_conditions(
 
         # Remove duplicates while preserving order.
         required_fields = list(
-            dict.fromkeys(required_fields)
+            dict.fromkeys(
+                required_fields
+            )
         )
 
         # -----------------------------------------------------
@@ -949,7 +851,6 @@ def check_personalization_conditions(
         for required_field in required_fields:
 
             if required_field not in profile:
-
                 condition_missing = True
                 continue
 
@@ -958,7 +859,6 @@ def check_personalization_conditions(
             )
 
             if value is None:
-
                 condition_missing = True
                 continue
 
@@ -1014,10 +914,17 @@ def check_personalization_conditions(
         )
 
     return (
-        remove_duplicates(matched_conditions),
-        remove_duplicates(failed_conditions),
-        remove_duplicates(missing_information),
+        remove_duplicates(
+            matched_conditions
+        ),
+        remove_duplicates(
+            failed_conditions
+        ),
+        remove_duplicates(
+            missing_information
+        ),
     )
+
 
 # ==================================================
 # MAIN ELIGIBILITY CHECK
@@ -1110,8 +1017,12 @@ def check_eligibility(
     if "annual_income" in eligibility_rules:
 
         income_result = check_income(
-            user_profile.get("annual_income"),
-            eligibility_rules.get("annual_income")
+            user_profile.get(
+                "annual_income"
+            ),
+            eligibility_rules.get(
+                "annual_income"
+            )
         )
 
         if income_result is True:
@@ -1152,7 +1063,9 @@ def check_eligibility(
         )
 
         disability_result = check_disability_status(
-            user_profile.get("disability_status"),
+            user_profile.get(
+                "disability_status"
+            ),
             disability_rule
         )
 
@@ -1190,8 +1103,12 @@ def check_eligibility(
     if "disability_percentage" in eligibility_rules:
 
         percentage_result = check_disability_percentage(
-            user_profile.get("disability_percentage"),
-            eligibility_rules.get("disability_percentage")
+            user_profile.get(
+                "disability_percentage"
+            ),
+            eligibility_rules.get(
+                "disability_percentage"
+            )
         )
 
         if percentage_result is True:
@@ -1230,11 +1147,19 @@ def check_eligibility(
         if field not in eligibility_rules:
             continue
 
-        allowed_values = eligibility_rules.get(field)
-        user_value = user_profile.get(field)
+        allowed_values = eligibility_rules.get(
+            field
+        )
+
+        user_value = user_profile.get(
+            field
+        )
 
         # Empty list or null means no restriction
-        if allowed_values == [] or allowed_values is None:
+        if (
+            allowed_values == []
+            or allowed_values is None
+        ):
 
             matched_conditions.append(
                 format_condition(
@@ -1246,7 +1171,9 @@ def check_eligibility(
             continue
 
         # Explicit wildcard means no restriction
-        if contains_wildcard(allowed_values):
+        if contains_wildcard(
+            allowed_values
+        ):
 
             matched_conditions.append(
                 format_condition(
@@ -1258,12 +1185,30 @@ def check_eligibility(
             continue
 
         # User has not supplied this field
-        if is_missing(user_value):
+        if is_missing(
+            user_value
+        ):
 
             missing_information.append(
                 format_condition(
                     field,
                     "required"
+                )
+            )
+
+            continue
+
+        # User explicitly said none of the scheme's
+        # user types apply.
+        if (
+            field == "user_type"
+            and user_value == "__none__"
+        ):
+
+            failed_conditions.append(
+                format_condition(
+                    field,
+                    "requirement not satisfied"
                 )
             )
 
@@ -1311,11 +1256,17 @@ def check_eligibility(
                     []
                 )
                 if isinstance(
-                    eligibility_rules.get("user_type", []),
+                    eligibility_rules.get(
+                        "user_type",
+                        []
+                    ),
                     list
                 )
                 else [
-                    eligibility_rules.get("user_type", "")
+                    eligibility_rules.get(
+                        "user_type",
+                        ""
+                    )
                 ]
             )
         )
@@ -1360,15 +1311,33 @@ def check_eligibility(
             )
         )
 
-    # Special condition for ICWF
-    if scheme.get("scheme_id") == "EXT001":
-        residing_abroad = user_profile.get("residing_abroad", False)
-        distress = user_profile.get("distress_situation", False)
+    # ==================================================
+    # SPECIAL CONDITION FOR ICWF
+    # ==================================================
 
-        if residing_abroad is False or distress is False:
+    if scheme.get(
+        "scheme_id"
+    ) == "EXT001":
+
+        residing_abroad = user_profile.get(
+            "residing_abroad",
+            False
+        )
+
+        distress = user_profile.get(
+            "distress_situation",
+            False
+        )
+
+        if (
+            residing_abroad is False
+            or distress is False
+        ):
+
             failed_conditions.append(
                 "Must be an Indian citizen residing abroad and facing distress/emergency"
             )
+
     # ==================================================
     # PERSONALIZATION CONDITIONS
     # ==================================================
@@ -1443,7 +1412,10 @@ def check_eligibility(
             "for this scheme."
         )
 
-        if scheme.get("manual_verification_required", False):
+        if scheme.get(
+            "manual_verification_required",
+            False
+        ):
 
             eligibility_summary += (
                 " Some conditions may still require "
@@ -1508,13 +1480,19 @@ def calculate_document_readiness(
 
         if normalize(document) in available_normalized:
 
-            matched_documents.append(document)
+            matched_documents.append(
+                document
+            )
 
         else:
 
-            missing_documents.append(document)
+            missing_documents.append(
+                document
+            )
 
-    total_documents = len(required_documents)
+    total_documents = len(
+        required_documents
+    )
 
     if total_documents == 0:
 
@@ -1535,6 +1513,7 @@ def calculate_document_readiness(
         "readiness_percentage": readiness_percentage,
     }
 
+
 def predict_ml_relevance(
     user_profile: Dict[str, Any],
     scheme: Dict[str, Any]
@@ -1551,6 +1530,7 @@ def predict_ml_relevance(
         return 0.0
 
     try:
+
         features = create_ml_features(
             user_profile,
             scheme
@@ -1570,6 +1550,7 @@ def predict_ml_relevance(
         )
 
     except Exception as error:
+
         print(
             "ML prediction failed for scheme",
             scheme.get("scheme_id"),
@@ -1579,7 +1560,10 @@ def predict_ml_relevance(
 
         return 0.0
 
-def convert_to_ml_value(value: Any) -> Any:
+
+def convert_to_ml_value(
+    value: Any
+) -> Any:
     """
     Converts profile or scheme values into ML-compatible values.
 
@@ -1590,16 +1574,29 @@ def convert_to_ml_value(value: Any) -> Any:
     if value is None:
         return ""
 
-    if isinstance(value, (list, tuple, set)):
+    if isinstance(
+        value,
+        (
+            list,
+            tuple,
+            set
+        )
+    ):
+
         return ", ".join(
             str(item).strip()
             for item in value
         )
 
-    if isinstance(value, bool):
+    if isinstance(
+        value,
+        bool
+    ):
+
         return int(value)
 
     return value
+
 
 # ==================================================
 # ML FEATURE CREATION
@@ -1612,16 +1609,25 @@ def create_ml_features(
 
     return {
         # Numeric features
-        "age": profile.get("age"),
+        "age": profile.get(
+            "age"
+        ),
 
         "annual_income": (
-            profile.get("annual_income")
-            if profile.get("annual_income") is not None
+            profile.get(
+                "annual_income"
+            )
+            if profile.get(
+                "annual_income"
+            ) is not None
             else 0
         ),
 
         "required_documents_count": len(
-            scheme.get("required_documents", [])
+            scheme.get(
+                "required_documents",
+                []
+            )
         ),
 
         "manual_verification_required": int(
@@ -1642,35 +1648,51 @@ def create_ml_features(
 
         # Categorical features
         "state": convert_to_ml_value(
-            profile.get("state")
+            profile.get(
+                "state"
+            )
         ),
 
         "occupation": convert_to_ml_value(
-            profile.get("occupation")
+            profile.get(
+                "occupation"
+            )
         ),
 
         "education_level": convert_to_ml_value(
-            profile.get("education_level")
+            profile.get(
+                "education_level"
+            )
         ),
 
         "social_category": convert_to_ml_value(
-            profile.get("social_category")
+            profile.get(
+                "social_category"
+            )
         ),
 
         "gender": convert_to_ml_value(
-            profile.get("gender")
+            profile.get(
+                "gender"
+            )
         ),
 
         "employment_status": convert_to_ml_value(
-            profile.get("employment_status")
+            profile.get(
+                "employment_status"
+            )
         ),
 
         "user_type": convert_to_ml_value(
-            profile.get("user_type")
+            profile.get(
+                "user_type"
+            )
         ),
 
         "scheme_category": convert_to_ml_value(
-            scheme.get("category")
+            scheme.get(
+                "category"
+            )
         ),
 
         "beneficiary_level": convert_to_ml_value(
@@ -1685,19 +1707,39 @@ def create_ml_features(
         # ==================================================
 
         "is_first_year_pg": int(
-            bool(profile.get("is_first_year_pg", False))
+            bool(
+                profile.get(
+                    "is_first_year_pg",
+                    False
+                )
+            )
         ),
 
         "is_regular_full_time": int(
-            bool(profile.get("is_regular_full_time", False))
+            bool(
+                profile.get(
+                    "is_regular_full_time",
+                    False
+                )
+            )
         ),
 
         "is_non_professional": int(
-            bool(profile.get("is_non_professional", False))
+            bool(
+                profile.get(
+                    "is_non_professional",
+                    False
+                )
+            )
         ),
 
         "is_distance_education": int(
-            bool(profile.get("is_distance_education", False))
+            bool(
+                profile.get(
+                    "is_distance_education",
+                    False
+                )
+            )
         ),
 
         "is_only_child": int(
@@ -1713,13 +1755,24 @@ def create_ml_features(
         ),
 
         "residing_abroad": int(
-            bool(profile.get("residing_abroad", False))
+            bool(
+                profile.get(
+                    "residing_abroad",
+                    False
+                )
+            )
         ),
 
         "distress_situation": int(
-            bool(profile.get("distress_situation", False))
+            bool(
+                profile.get(
+                    "distress_situation",
+                    False
+                )
+            )
         ),
     }
+
 
 # ==================================================
 # RECOMMENDATION ENGINE
@@ -1758,21 +1811,26 @@ def recommend_schemes(
 
         # Never recommend schemes where a mandatory
         # eligibility condition definitely fails.
-        if eligibility_result["status"] == "not_eligible":
+        if (
+            eligibility_result["status"]
+            == "not_eligible"
+        ):
             continue
 
         # --------------------------------------------------
         # DOCUMENT READINESS
         # --------------------------------------------------
 
-        document_readiness = calculate_document_readiness(
-            scheme.get(
-                "required_documents",
-                []
-            ),
-            user_profile.get(
-                "available_documents",
-                []
+        document_readiness = (
+            calculate_document_readiness(
+                scheme.get(
+                    "required_documents",
+                    []
+                ),
+                user_profile.get(
+                    "available_documents",
+                    []
+                )
             )
         )
 
@@ -1785,9 +1843,11 @@ def recommend_schemes(
         # ML RELEVANCE SCORE
         # --------------------------------------------------
 
-        ml_relevance_score = predict_ml_relevance(
-            user_profile,
-            scheme
+        ml_relevance_score = (
+            predict_ml_relevance(
+                user_profile,
+                scheme
+            )
         )
 
         # --------------------------------------------------
@@ -1900,7 +1960,9 @@ def recommend_schemes(
     recommendations.sort(
         key=lambda scheme: (
             # Fully eligible schemes first
-            0 if scheme["status"] == "eligible" else 1,
+            0
+            if scheme["status"] == "eligible"
+            else 1,
 
             # Higher ML score first
             -scheme["ml_relevance_score"],
@@ -1914,6 +1976,7 @@ def recommend_schemes(
     )
 
     return recommendations
+
 
 # ==================================================
 # LOCAL TEST
@@ -1958,7 +2021,9 @@ if __name__ == "__main__":
     target_scheme = next(
         scheme
         for scheme in schemes
-        if scheme.get("scheme_id") == "EDU006"
+        if scheme.get(
+            "scheme_id"
+        ) == "EDU006"
     )
 
     result = check_eligibility(
@@ -1967,25 +2032,34 @@ if __name__ == "__main__":
     )
 
     print("\nPROFILE")
-    print(json.dumps(
-        sample_user,
-        indent=2,
-        ensure_ascii=False
-    ))
+
+    print(
+        json.dumps(
+            sample_user,
+            indent=2,
+            ensure_ascii=False
+        )
+    )
 
     print("\nSCHEME")
-    print(json.dumps(
-        target_scheme,
-        indent=2,
-        ensure_ascii=False
-    ))
+
+    print(
+        json.dumps(
+            target_scheme,
+            indent=2,
+            ensure_ascii=False
+        )
+    )
 
     print("\nRESULT")
-    print(json.dumps(
-        result,
-        indent=2,
-        ensure_ascii=False
-    ))
+
+    print(
+        json.dumps(
+            result,
+            indent=2,
+            ensure_ascii=False
+        )
+    )
 
     print("\nRECOMMENDATIONS")
 
@@ -2000,7 +2074,9 @@ if __name__ == "__main__":
 
     for recommendation in recommendations:
 
-        print("\n-----------------------------------")
+        print(
+            "\n-----------------------------------"
+        )
 
         print(
             "Scheme:",
@@ -2027,37 +2103,57 @@ if __name__ == "__main__":
             recommendation["eligibility_summary"]
         )
 
-        print("Matched conditions:")
+        print(
+            "Matched conditions:"
+        )
 
         for condition in recommendation[
             "matched_conditions"
         ]:
 
-            print(" -", condition)
+            print(
+                " -",
+                condition
+            )
 
-        print("Missing information:")
+        print(
+            "Missing information:"
+        )
 
         for condition in recommendation[
             "missing_information"
         ]:
 
-            print(" -", condition)
+            print(
+                " -",
+                condition
+            )
 
-        print("Failed conditions:")
+        print(
+            "Failed conditions:"
+        )
 
         for condition in recommendation[
             "failed_conditions"
         ]:
 
-            print(" -", condition)
+            print(
+                " -",
+                condition
+            )
 
-        print("Additional conditions:")
+        print(
+            "Additional conditions:"
+        )
 
         for condition in recommendation[
             "additional_conditions"
         ]:
 
-            print(" -", condition)
+            print(
+                " -",
+                condition
+            )
 
         print(
             "Manual verification required:",

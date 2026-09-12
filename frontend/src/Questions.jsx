@@ -1,6 +1,16 @@
 import { useEffect, useState } from 'react'
 import './Questions.css'
 
+function formatOption(option) {
+  if (option === '__none__') {
+    return 'Neither / None of these'
+  }
+
+  return option
+    .replace(/_/g, ' ')
+    .replace(/\b\w/g, (letter) => letter.toUpperCase())
+}
+
 function Questions() {
   const [questionsByScheme, setQuestionsByScheme] = useState({})
   const [recommendations, setRecommendations] = useState([])
@@ -103,16 +113,83 @@ function Questions() {
   const handleChange = (
     schemeId,
     questionId,
-    value
+    value,
+    checked = false
   ) => {
+    const answerKey = `${schemeId}:${questionId}`
+
+    if (questionId === 'user_type') {
+      setAnswers((previousAnswers) => {
+        const currentValues =
+          previousAnswers[answerKey] || []
+
+        if (value === '__none__') {
+          return {
+            ...previousAnswers,
+            [answerKey]: checked
+              ? ['__none__']
+              : []
+          }
+        }
+
+        let updatedValues = currentValues.filter(
+          (item) => item !== '__none__'
+        )
+
+        if (checked) {
+          if (!updatedValues.includes(value)) {
+            updatedValues = [
+              ...updatedValues,
+              value
+            ]
+          }
+        } else {
+          updatedValues = updatedValues.filter(
+            (item) => item !== value
+          )
+        }
+
+        return {
+          ...previousAnswers,
+          [answerKey]: updatedValues
+        }
+      })
+
+      return
+    }
+
     setAnswers((previousAnswers) => ({
       ...previousAnswers,
-      [`${schemeId}:${questionId}`]: value
+      [answerKey]: value
     }))
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+
+    const schemeEntries =
+      Object.entries(questionsByScheme)
+
+    for (const [schemeId, schemeData] of schemeEntries) {
+      for (const question of schemeData.questions) {
+        const answerKey =
+          `${schemeId}:${question.id}`
+
+        const answer =
+          answers[answerKey]
+
+        if (
+          answer === undefined ||
+          answer === '' ||
+          (Array.isArray(answer) && answer.length === 0)
+        ) {
+          alert(
+            'Please answer all the questions before continuing.'
+          )
+          return
+        }
+      }
+    }
 
     setSubmitting(true)
 
@@ -124,9 +201,6 @@ function Questions() {
       const schemeIds = recommendations.map(
         (scheme) => scheme.scheme_id
       )
-
-      const schemeEntries =
-        Object.entries(questionsByScheme)
 
       if (schemeEntries.length === 0) {
         localStorage.setItem(
@@ -209,7 +283,6 @@ function Questions() {
   if (loading) {
     return (
       <div className="questions-page">
-
         <nav className="auth-navbar">
           <div className="logo">ADHIKAAR</div>
 
@@ -222,7 +295,6 @@ function Questions() {
         </nav>
 
         <main className="questions-container">
-
           <div className="questions-header">
             <p className="section-label">
               A FEW MORE QUESTIONS
@@ -235,9 +307,7 @@ function Questions() {
               for your recommended schemes.
             </p>
           </div>
-
         </main>
-
       </div>
     )
   }
@@ -245,7 +315,6 @@ function Questions() {
   if (error) {
     return (
       <div className="questions-page">
-
         <nav className="auth-navbar">
           <div className="logo">ADHIKAAR</div>
 
@@ -258,19 +327,18 @@ function Questions() {
         </nav>
 
         <main className="questions-container">
-
           <div className="questions-header">
             <p className="section-label">
               SOMETHING WENT WRONG
             </p>
 
-            <h1>We couldn't load your questions.</h1>
+            <h1>
+              We couldn't load your questions.
+            </h1>
 
             <p>{error}</p>
           </div>
-
         </main>
-
       </div>
     )
   }
@@ -280,7 +348,6 @@ function Questions() {
 
   return (
     <div className="questions-page">
-
       <nav className="auth-navbar">
         <div className="logo">ADHIKAAR</div>
 
@@ -293,9 +360,7 @@ function Questions() {
       </nav>
 
       <main className="questions-container">
-
         <div className="questions-header">
-
           <p className="section-label">
             A FEW MORE QUESTIONS
           </p>
@@ -307,49 +372,47 @@ function Questions() {
             determine which benefits are actually relevant
             to you.
           </p>
-
         </div>
 
         <form
           className="questions-form"
           onSubmit={handleSubmit}
         >
-
           {schemeEntries.length === 0 ? (
-
             <div className="question">
               <label>
                 We already have enough information to
                 assess your recommended schemes.
               </label>
             </div>
-
           ) : (
-
             schemeEntries.map(
               ([schemeId, schemeData]) => (
-
                 <div
                   className="scheme-question-group"
                   key={schemeId}
                 >
-
                   <h2>
                     {schemeData.scheme_name}
                   </h2>
 
                   {schemeData.questions.map(
                     (question, index) => {
-
                       const answerKey =
                         `${schemeId}:${question.id}`
+
+                      const selectedValues =
+                        Array.isArray(
+                          answers[answerKey]
+                        )
+                          ? answers[answerKey]
+                          : []
 
                       return (
                         <div
                           className="question"
                           key={question.id}
                         >
-
                           <span className="question-number">
                             {String(index + 1).padStart(2, '0')}
                           </span>
@@ -358,49 +421,81 @@ function Questions() {
                             {question.question}
                           </label>
 
-                          <select
-                            value={
-                              answers[answerKey] || ''
-                            }
-                            onChange={(event) =>
-                              handleChange(
-                                schemeId,
-                                question.id,
-                                event.target.value
-                              )
-                            }
-                            required
-                          >
+                          {question.id === 'user_type' ? (
+                            <div className="checkbox-options">
+                              {question.options?.map(
+                                (option) => {
+                                  const isSelected =
+                                    selectedValues.includes(
+                                      option
+                                    )
 
-                            <option value="">
-                              Select an option
-                            </option>
+                                  return (
+                                    <label
+                                      className="checkbox-option"
+                                      key={option}
+                                    >
+                                      <input
+                                        type="checkbox"
+                                        checked={isSelected}
+                                        onChange={(event) =>
+                                          handleChange(
+                                            schemeId,
+                                            question.id,
+                                            option,
+                                            event.target.checked
+                                          )
+                                        }
+                                      />
 
-                            {question.options?.map(
-                              (option) => (
-                                <option
-                                  key={option}
-                                  value={option}
-                                >
-                                  {option}
-                                </option>
-                              )
-                            )}
+                                      <span>
+                                        {formatOption(option)}
+                                      </span>
+                                    </label>
+                                  )
+                                }
+                              )}
+                            </div>
+                          ) : (
+                            <select
+                              value={
+                                answers[answerKey] || ''
+                              }
+                              onChange={(event) =>
+                                handleChange(
+                                  schemeId,
+                                  question.id,
+                                  event.target.value
+                                )
+                              }
+                              required
+                            >
+                              <option value="">
+                                Select an option
+                              </option>
 
-                          </select>
-
+                              {question.options?.map(
+                                (option) => (
+                                  <option
+                                    key={option}
+                                    value={option}
+                                  >
+                                    {formatOption(option)}
+                                  </option>
+                                )
+                              )}
+                            </select>
+                          )}
                         </div>
                       )
                     }
                   )}
-
                 </div>
               )
             )
           )}
 
           <div className="questions-actions">
-
             <a
               href="/find-schemes"
               className="back-button"
@@ -417,13 +512,9 @@ function Questions() {
                 ? 'Checking...'
                 : 'See My Results →'}
             </button>
-
           </div>
-
         </form>
-
       </main>
-
     </div>
   )
 }

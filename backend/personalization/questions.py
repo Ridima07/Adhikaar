@@ -64,18 +64,11 @@ def get_personalization_questions(
 # ============================================================
 
 def _convert_answer(value):
-    """
-    Convert UI answers into useful Python values.
-
-    Yes -> True
-    No  -> False
-
-    Other values are preserved.
-    """
-
     if isinstance(value, str):
-
         normalized = value.strip().lower()
+
+        if normalized == "__none__":
+            return "__none__"
 
         if normalized == "yes":
             return True
