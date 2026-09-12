@@ -1,141 +1,318 @@
+import { useEffect, useState } from 'react'
 import './BenefitsGap.css'
+import LanguageSelector from './LanguageSelector.jsx'
+import translations from './translations.js'
 
 function BenefitsGap() {
-  const data =
-    JSON.parse(
-      localStorage.getItem('adhikaarRecommendations')
-    ) || {
-      recommendations: []
+  const language =
+    localStorage.getItem('adhikaarLanguage') || 'en'
+
+  const t =
+    translations[language]?.benefitsGap ||
+    translations.en.benefitsGap
+
+  const common =
+    translations[language]?.common ||
+    translations.en.common
+
+  const [benefitGaps, setBenefitGaps] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    const loadBenefitGaps = async () => {
+      const profile = JSON.parse(
+        localStorage.getItem('adhikaarBackendProfile')
+      )
+
+      if (!profile) {
+        setError(
+          'Profile information not found.'
+        )
+        setLoading(false)
+        return
+      }
+
+      try {
+        const response = await fetch(
+          'http://127.0.0.1:8000/benefit-gaps?top_k=5',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(profile)
+          }
+        )
+
+        if (!response.ok) {
+          throw new Error(
+            `Benefit gap analysis failed (${response.status})`
+          )
+        }
+
+        const data = await response.json()
+
+        setBenefitGaps(
+          data.benefit_gaps || []
+        )
+      } catch (error) {
+        console.error(error)
+
+        setError(
+          'Could not load benefit gap analysis. Make sure the latest backend is running.'
+        )
+      } finally {
+        setLoading(false)
+      }
     }
 
-  const recommendations = data.recommendations || []
+    loadBenefitGaps()
+  }, [])
 
-  const categoryMap = {}
-
-  recommendations.forEach((scheme) => {
-    const category = scheme.category || 'Other'
-
-    if (!categoryMap[category]) {
-      categoryMap[category] = []
-    }
-
-    categoryMap[category].push(scheme)
-  })
-
-  const categories = Object.entries(categoryMap)
+  const formatField = (field) => {
+    return field
+      .replace(/_/g, ' ')
+      .replace(
+        /\b\w/g,
+        (letter) => letter.toUpperCase()
+      )
+  }
 
   return (
     <div className="benefits-gap-page">
 
       <nav className="auth-navbar">
-        <div className="logo">ADHIKAAR</div>
 
-        <a href="/results" className="back-link">
-          ← Back to results
-        </a>
+        <div className="logo">
+          ADHIKAAR
+        </div>
+
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '24px'
+          }}
+        >
+
+          <LanguageSelector />
+
+          <a
+            href="/results"
+            className="back-link"
+          >
+            {common.backToResults}
+          </a>
+
+        </div>
+
       </nav>
-
 
       <main className="benefits-gap-container">
 
         <div className="benefits-gap-header">
 
           <p className="section-label">
-            BENEFITS GAP
+            {t.sectionLabel}
           </p>
 
           <h1>
-            What benefits might you be missing?
+            {t.title}
           </h1>
 
           <p>
-            Based on your profile, Adhikaar found benefits across
-            different areas that may be worth exploring.
+            {t.description}
           </p>
 
         </div>
 
+        {loading ? (
 
-        <section className="category-section">
+          <section className="category-section">
 
-          <div className="section-heading">
+            <div className="section-heading">
 
-            <p className="section-label">
-              YOUR BENEFIT AREAS
-            </p>
+              <p className="section-label">
+                {t.analysing}
+              </p>
 
-            <h2>
-              Explore what we found.
-            </h2>
+              <h2>
+                {t.analysingTitle}
+              </h2>
 
-          </div>
+            </div>
 
+            <div className="category-card">
 
-          {categories.length === 0 ? (
+              <p>
+                {t.analysingText}
+              </p>
+
+            </div>
+
+          </section>
+
+        ) : error ? (
+
+          <section className="category-section">
+
+            <div className="section-heading">
+
+              <p className="section-label">
+                {t.errorLabel}
+              </p>
+
+              <h2>
+                {t.errorTitle}
+              </h2>
+
+              <p>
+                {error}
+              </p>
+
+            </div>
+
+          </section>
+
+        ) : benefitGaps.length === 0 ? (
+
+          <section className="category-section">
+
+            <div className="section-heading">
+
+              <p className="section-label">
+                {t.noGapsLabel}
+              </p>
+
+              <h2>
+                {t.noGapsTitle}
+              </h2>
+
+            </div>
 
             <div className="category-card">
 
               <h3>
-                No benefit categories found
+                {t.noGapsCardTitle}
               </h3>
 
               <p>
-                Complete your profile and find your schemes first
-                to see relevant benefit categories here.
+                {t.noGapsText}
               </p>
 
               <a href="/find-schemes">
-                Find my schemes →
+                {common.findMySchemes}
               </a>
 
             </div>
 
-          ) : (
+          </section>
+
+        ) : (
+
+          <section className="category-section">
+
+            <div className="section-heading">
+
+              <p className="section-label">
+                {t.opportunitiesLabel}
+              </p>
+
+              <h2>
+                {t.opportunitiesTitle}
+              </h2>
+
+            </div>
 
             <div className="category-grid">
 
-              {categories.map(
-                ([category, schemes]) => (
+              {benefitGaps.map(
+                (gap, index) => (
 
                   <div
                     className="category-card"
-                    key={category}
+                    key={gap.scheme_id}
                   >
 
                     <span className="category-number">
                       {String(
-                        categories.findIndex(
-                          ([name]) => name === category
-                        ) + 1
+                        index + 1
                       ).padStart(2, '0')}
                     </span>
 
+                    <p className="section-label">
+                      {gap.category || 'OTHER'}
+                    </p>
+
                     <h3>
-                      {category}
+                      {gap.scheme_name}
                     </h3>
 
-                    <p>
-                      {schemes.length}{' '}
-                      {schemes.length === 1
-                        ? 'benefit'
-                        : 'benefits'}{' '}
-                      identified in this area.
+                    <p className="gap-match">
+
+                      <strong>
+                        {gap.proximity_percentage}%
+                      </strong>
+
+                      <span>
+                        {' '}{t.profileMatch}
+                      </span>
+
                     </p>
 
                     <div className="category-schemes">
 
-                      {schemes.map((scheme) => (
+                      <div className="gap-blocker-section">
 
-                        <a
-                          href={`/scheme-details/${scheme.scheme_id}`}
-                          key={scheme.scheme_id}
-                        >
-                          {scheme.scheme_name}
-                        </a>
+                        <p className="gap-blocker-title">
+                          {t.whatsStoppingYou}
+                        </p>
 
-                      ))}
+                        {gap.blockers?.map(
+                          (blocker) => (
+
+                            <div
+                              className="gap-blocker"
+                              key={blocker.field}
+                            >
+
+                              <p className="gap-blocker-field">
+                                {formatField(
+                                  blocker.field
+                                )}
+                              </p>
+
+                              {blocker.requirement && (
+                                <p className="gap-requirement">
+
+                                  <strong>
+                                    {t.requirement}
+                                  </strong>{' '}
+
+                                  {blocker.requirement}
+
+                                </p>
+                              )}
+
+                              <p className="gap-unlock">
+                                {blocker.unlock_explanation}
+                              </p>
+
+                            </div>
+
+                          )
+                        )}
+
+                      </div>
 
                     </div>
+
+                    <a
+                      href={`/scheme-details/${gap.scheme_id}`}
+                    >
+                      {common.viewSchemeDetails}
+                    </a>
 
                   </div>
 
@@ -144,29 +321,25 @@ function BenefitsGap() {
 
             </div>
 
-          )}
+          </section>
 
-        </section>
-
+        )}
 
         <section className="gap-note">
 
           <p className="section-label">
-            WHAT THIS MEANS
+            {t.whatThisMeans}
           </p>
 
           <h2>
-            Your benefits shouldn't depend on what you already know.
+            {t.whatThisMeansTitle}
           </h2>
 
           <p>
-            Adhikaar looks beyond the schemes you might already
-            know about and surfaces potentially relevant benefits
-            across different areas.
+            {t.whatThisMeansText}
           </p>
 
         </section>
-
 
         <div className="benefits-gap-actions">
 
@@ -174,14 +347,14 @@ function BenefitsGap() {
             href="/results"
             className="back-button"
           >
-            ← Back to results
+            {common.backToResults}
           </a>
 
           <a
             href="/dashboard"
             className="continue-button"
           >
-            Back to dashboard →
+            {common.backToDashboard}
           </a>
 
         </div>

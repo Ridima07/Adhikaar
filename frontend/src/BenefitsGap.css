@@ -124,3 +124,43 @@
     padding: 30px;
   }
 }
+.gap-match {
+  margin: 0 0 1.25rem;
+  font-size: 1rem;
+}
+
+.gap-match strong {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.gap-blocker-section {
+  margin-top: 1.5rem;
+}
+
+.gap-blocker-title {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.gap-blocker {
+  margin-bottom: 1.25rem;
+}
+
+.gap-blocker-field {
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.gap-requirement {
+  margin: 0 0 0.5rem;
+}
+
+.gap-unlock {
+  margin: 0;
+  line-height: 1.6;
+}
+.category-schemes a,
+.category-card > a {
+  color: #000;
+}

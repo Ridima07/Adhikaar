@@ -1,156 +1,264 @@
 import './App.css'
+import LanguageSelector from './LanguageSelector.jsx'
+import translations from './translations.js'
 
 function App() {
+  const language =
+    localStorage.getItem('adhikaarLanguage') || 'en'
+
+  const t =
+    translations[language]?.app ||
+    translations.en.app
+
+  const common =
+    translations[language]?.common ||
+    translations.en.common
+
   return (
     <div className="landing-page">
 
       <nav className="navbar">
-        <div className="logo">ADHIKAAR</div>
 
-        <div className="nav-links">
-          <a href="#about">About</a>
-          <a href="#features">Features</a>
+        <div className="logo">
+          ADHIKAAR
         </div>
 
-        <a href="/login" className="nav-button">
-  Login / Sign Up
-</a>
+        <div className="nav-links">
+          <a href="#about">
+            {language === 'en'
+              ? 'About'
+              : language === 'hi'
+                ? 'हमारे बारे में'
+                : 'আমাদের সম্পর্কে'}
+          </a>
+
+          <a href="#features">
+            {language === 'en'
+              ? 'Features'
+              : language === 'hi'
+                ? 'विशेषताएँ'
+                : 'বৈশিষ্ট্য'}
+          </a>
+        </div>
+
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '20px'
+          }}
+        >
+
+          <LanguageSelector />
+
+          <a
+            href="/login"
+            className="nav-button"
+          >
+            {t.loginSignup}
+          </a>
+
+        </div>
+
       </nav>
 
 
       <main>
 
         <section className="hero">
+
           <div className="hero-content">
-            <p className="eyebrow">YOUR BENEFITS. YOUR RIGHTS. YOUR ADHIKAAR.</p>
+
+            <p className="eyebrow">
+              {t.eyebrow}
+            </p>
 
             <h1>
-              Government benefits,
-              <br />
-              made accessible.
+              {t.heroTitle
+                .split('|')
+                .map((line, index) => (
+                  <span key={index}>
+                    {line}
+                    {index === 0 && <br />}
+                  </span>
+                ))}
             </h1>
 
             <p className="hero-description">
-              Discover benefits relevant to you, understand your eligibility,
-              and know exactly what to do next.
+              {t.heroDescription}
             </p>
 
             <div className="hero-buttons">
-  <a href="#how-it-works" className="secondary-button">
-    How it works ↓
-  </a>
-</div>
+
+              <a
+                href="#how-it-works"
+                className="secondary-button"
+              >
+                {t.howItWorks}
+              </a>
+
+            </div>
+
           </div>
+
         </section>
 
 
-        <section id="about" className="about">
-          <p className="section-label">WHY ADHIKAAR?</p>
+        <section
+          id="about"
+          className="about"
+        >
+
+          <p className="section-label">
+            {t.whyAdhikaar}
+          </p>
 
           <h2>
-            Finding a scheme is only the beginning.
+            {t.aboutTitle}
           </h2>
 
           <p>
-            Government benefits can be difficult to discover, understand,
-            prepare for, and access. Adhikaar helps you navigate the entire
-            journey — from finding relevant benefits to knowing what to do next.
+            {t.aboutText}
           </p>
+
         </section>
 
 
-        <section id="how-it-works" className="journey">
-          <p className="section-label">HOW IT WORKS</p>
+        <section
+          id="how-it-works"
+          className="journey"
+        >
 
-          <h2>From discovery to access.</h2>
+          <p className="section-label">
+            {t.howItWorksLabel}
+          </p>
+
+          <h2>
+            {t.howItWorksTitle}
+          </h2>
 
           <div className="journey-grid">
 
             <div className="journey-card">
               <span>01</span>
-              <h3>Discover</h3>
-              <p>Find benefits relevant to your profile.</p>
+              <h3>{t.discover}</h3>
+              <p>{t.discoverText}</p>
             </div>
 
             <div className="journey-card">
               <span>02</span>
-              <h3>Understand</h3>
-              <p>See why you may qualify and what is still required.</p>
+              <h3>{t.understand}</h3>
+              <p>{t.understandText}</p>
             </div>
 
             <div className="journey-card">
               <span>03</span>
-              <h3>Prepare</h3>
-              <p>Know which documents and requirements you need.</p>
+              <h3>{t.prepare}</h3>
+              <p>{t.prepareText}</p>
             </div>
 
             <div className="journey-card">
               <span>04</span>
-              <h3>Act</h3>
-              <p>Get clear guidance on how and where to apply.</p>
+              <h3>{t.act}</h3>
+              <p>{t.actText}</p>
             </div>
 
             <div className="journey-card">
               <span>05</span>
-              <h3>Recover</h3>
-              <p>Understand what to do if your application is rejected.</p>
+              <h3>{t.recover}</h3>
+              <p>{t.recoverText}</p>
             </div>
 
           </div>
+
         </section>
 
 
-        <section id="features" className="features">
-          <p className="section-label">WHAT MAKES ADHIKAAR DIFFERENT?</p>
+        <section
+          id="features"
+          className="features"
+        >
 
-          <h2>More than a scheme directory.</h2>
+          <p className="section-label">
+            {t.featuresLabel}
+          </p>
+
+          <h2>
+            {t.featuresTitle}
+          </h2>
 
           <div className="feature-grid">
 
             <div className="feature-card">
-              <h3>Personalized Discovery</h3>
+
+              <h3>
+                {t.personalizedDiscovery}
+              </h3>
+
               <p>
-                Find potentially relevant benefits based on your profile,
-                even if you didn't know to search for them.
+                {t.personalizedDiscoveryText}
               </p>
+
             </div>
 
             <div className="feature-card">
-              <h3>Benefits Gap Analysis</h3>
+
+              <h3>
+                {t.benefitsGapAnalysis}
+              </h3>
+
               <p>
-                Discover benefits across categories that you may not have
-                considered.
+                {t.benefitsGapAnalysisText}
               </p>
+
             </div>
 
             <div className="feature-card">
-              <h3>Explainable Eligibility</h3>
+
+              <h3>
+                {t.explainableEligibility}
+              </h3>
+
               <p>
-                Understand which eligibility criteria you satisfy and
-                which requirements still need attention.
+                {t.explainableEligibilityText}
               </p>
+
             </div>
 
             <div className="feature-card">
-              <h3>Adaptive Questions</h3>
+
+              <h3>
+                {t.adaptiveQuestions}
+              </h3>
+
               <p>
-                Answer only the additional questions needed to determine
-                your eligibility.
+                {t.adaptiveQuestionsText}
               </p>
+
             </div>
 
           </div>
+
         </section>
 
 
         <section className="final-cta">
+
           <h2>
-            The right benefits are out there.
+            {t.finalTitle}
           </h2>
 
-          <p>Let's find yours.</p>
+          <p>
+            {t.finalText}
+          </p>
 
-          <button className="primary-button">Get Started</button>
+          <a
+            href="/login"
+            className="primary-button"
+          >
+            {common.getStarted}
+          </a>
+
         </section>
 
       </main>

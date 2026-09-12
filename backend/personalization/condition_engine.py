@@ -415,15 +415,46 @@ def get_condition_questions(
         # Ask only when the profile does not already
         # contain a user type.
         if user_type is None or user_type == "":
-            questions.append({
-                "id": "user_type",
-                "question": "Which of these best describes you?",
-                "options": [
-                    *scheme_user_types,
-                    "__none__"
-                ],
-                "type": "select",
-            })
+
+            filtered_user_types = list(
+                scheme_user_types
+            )
+
+            # Gender is already collected in the profile.
+            # Do not ask for gender again through user_type.
+            gender = profile.get("gender")
+
+            if gender is not None and gender != "":
+                gender_options = {
+                    "female",
+                    "women",
+                    "woman",
+                    "male",
+                    "men",
+                    "man",
+                    "other",
+                }
+
+                filtered_user_types = [
+                    option
+                    for option in filtered_user_types
+                    if str(option).strip().lower()
+                    not in gender_options
+                ]
+
+            # Only create the question if there is still
+            # additional user_type information to collect.
+            if filtered_user_types:
+                questions.append({
+                    "id": "user_type",
+                    "question":
+                        "Which of these best describes you?",
+                    "options": [
+                        *filtered_user_types,
+                        "__none__"
+                    ],
+                    "type": "select",
+                })
 
     return questions
 

@@ -234,18 +234,41 @@ def value_matches(
     if not user_values or not allowed_values:
         return False
 
+    exact_match_only_values = {
+        "male",
+        "female",
+        "other",
+    }
+
     for user_item in user_values:
 
         for allowed_item in allowed_values:
 
-            # Exact match
+            # Exact match always succeeds.
             if user_item == allowed_item:
                 return True
 
-            # Simple singular/plural or phrase matching
+            # Do not use substring matching for gender values.
+            #
+            # This prevents:
+            # "male" matching "female"
+            # "female" matching "male"
             if (
-                user_item in allowed_item
-                or allowed_item in user_item
+                user_item in exact_match_only_values
+                or allowed_item in exact_match_only_values
+            ):
+                continue
+
+            # Simple singular/plural matching.
+            if (
+                user_item.endswith("s")
+                and user_item[:-1] == allowed_item
+            ):
+                return True
+
+            if (
+                allowed_item.endswith("s")
+                and allowed_item[:-1] == user_item
             ):
                 return True
 

@@ -44,6 +44,7 @@ ACTIONABLE_FIELDS = {
     "institution_type",
 }
 
+
 IGNORED_FIELDS = {
     "other_conditions",
     "age",
@@ -342,7 +343,7 @@ def _blocker_priority(field: str) -> int:
 
 
 # ============================================================
-# MAIN ANALYSIS
+# PROFILE-SPECIFIC CONDITIONS
 # ============================================================
 
 def _violates_profile_specific_condition(
@@ -381,6 +382,90 @@ def _violates_profile_specific_condition(
 
     return False
 
+
+# ============================================================
+# INCOME GAP REALISM
+# ============================================================
+
+def _income_requirement_maximum(
+    requirement: Any,
+) -> Optional[float]:
+    """
+    Extract the maximum income threshold from a scheme's
+    annual_income requirement.
+    """
+
+    if isinstance(requirement, dict):
+        maximum = requirement.get("max")
+
+        if isinstance(maximum, (int, float)):
+            return float(maximum)
+
+        return None
+
+    if isinstance(requirement, list):
+        maximums = []
+
+        for item in requirement:
+            if isinstance(item, dict):
+                maximum = item.get("max")
+
+                if isinstance(maximum, (int, float)):
+                    maximums.append(float(maximum))
+
+        if maximums:
+            return max(maximums)
+
+    return None
+
+
+def _is_realistic_income_gap(
+    scheme: Dict[str, Any],
+    profile: Dict[str, Any],
+) -> bool:
+    """
+    Prevent Benefit Gap from recommending income-based schemes
+    when the user's current income is far beyond the scheme's
+    income ceiling.
+
+    A gap is considered potentially actionable only when the
+    user's income is no more than 2x the highest applicable
+    income threshold.
+
+    Example:
+        ₹4L vs ₹3L  -> allowed
+        ₹5.5L vs ₹3L -> allowed
+        ₹10L+ vs ₹3L -> rejected
+    """
+
+    eligibility = scheme.get("eligibility", {})
+
+    requirement = eligibility.get("annual_income")
+
+    maximum_income = _income_requirement_maximum(
+        requirement
+    )
+
+    if maximum_income is None:
+        return True
+
+    current_income = profile.get("annual_income")
+
+    if not isinstance(current_income, (int, float)):
+        return False
+
+    if current_income <= maximum_income:
+        return True
+
+    return current_income <= (
+        maximum_income * 2
+    )
+
+
+# ============================================================
+# REALISTIC GAP GATE
+# ============================================================
+
 def _is_realistic_gap(
     scheme: Dict[str, Any],
     profile: Dict[str, Any],
@@ -396,6 +481,7 @@ def _is_realistic_gap(
     # Social category
     # A person cannot simply "unlock" SC/ST/minority eligibility.
     # --------------------------------------------------------
+
     required_category = eligibility.get("social_category")
 
     if required_category:
@@ -421,16 +507,30 @@ def _is_realistic_gap(
     # --------------------------------------------------------
     # Disability
     # --------------------------------------------------------
-    required_disability = eligibility.get("disability_status")
+
+    required_disability = eligibility.get(
+        "disability_status"
+    )
 
     if required_disability is True:
         if profile.get("disability_status") is not True:
             return False
 
     # --------------------------------------------------------
+    # Income
+    # --------------------------------------------------------
+
+    if not _is_realistic_income_gap(
+        scheme,
+        profile,
+    ):
+        return False
+
+    # --------------------------------------------------------
     # EDUCATION LEVEL
     # Reject schemes meant for a LOWER education level.
     # --------------------------------------------------------
+
     education_order = {
         "class_9": 1,
         "class_10": 2,
@@ -442,8 +542,13 @@ def _is_realistic_gap(
         "phd": 7,
     }
 
-    required_education = eligibility.get("education_level")
-    user_education = profile.get("education_level")
+    required_education = eligibility.get(
+        "education_level"
+    )
+
+    user_education = profile.get(
+        "education_level"
+    )
 
     if required_education and user_education:
 
@@ -467,7 +572,8 @@ def _is_realistic_gap(
         ]
 
         user_levels = [
-            level for level in user_levels
+            level
+            for level in user_levels
             if level is not None
         ]
 
@@ -479,31 +585,57 @@ def _is_realistic_gap(
         ]
 
         required_levels = [
-            level for level in required_levels
+            level
+            for level in required_levels
             if level is not None
         ]
 
         # User is already beyond the scheme's education level.
         if user_levels and required_levels:
-            if min(user_levels) > max(required_levels):
+            if min(user_levels) > max(
+                required_levels
+            ):
                 return False
-            
+
     # --------------------------------------------------------
     # First-year PG requirement
     # --------------------------------------------------------
-    age_rule = eligibility.get("age", {})
-    other_conditions = eligibility.get("other_conditions", [])
+
+    age_rule = eligibility.get(
+        "age",
+        {}
+    )
+
+    other_conditions = eligibility.get(
+        "other_conditions",
+        []
+    )
 
     requirement_text = " ".join(
         [
-            str(age_rule.get("original_text", "")),
-            str(eligibility.get("original_eligibility_text", "")),
-            " ".join(str(x) for x in other_conditions),
+            str(
+                age_rule.get(
+                    "original_text",
+                    ""
+                )
+            ),
+            str(
+                eligibility.get(
+                    "original_eligibility_text",
+                    ""
+                )
+            ),
+            " ".join(
+                str(x)
+                for x in other_conditions
+            ),
         ]
     ).lower()
 
     if (
-        profile.get("is_first_year_pg") is False
+        profile.get(
+            "is_first_year_pg"
+        ) is False
         and (
             "first year" in requirement_text
             or "first-year" in requirement_text
@@ -518,6 +650,130 @@ def _is_realistic_gap(
 
     return True
 
+
+# ============================================================
+# RELEVANCE GATE
+# ============================================================
+
+def _passes_relevance_gate(
+    scheme: Dict[str, Any],
+    profile: Dict[str, Any],
+) -> bool:
+    """
+    Reject schemes intended for a fundamentally different
+    beneficiary group.
+    """
+
+    eligibility = scheme.get(
+        "eligibility",
+        {}
+    )
+
+    # --------------------------------------------------------
+    # Occupation mismatch
+    # --------------------------------------------------------
+
+    required_occupation = eligibility.get(
+        "occupation"
+    )
+
+    user_occupation = profile.get(
+        "occupation"
+    )
+
+    if required_occupation and user_occupation:
+
+        required_values = (
+            required_occupation
+            if isinstance(required_occupation, list)
+            else [required_occupation]
+        )
+
+        user_value = str(
+            user_occupation
+        ).lower()
+
+        occupation_match = any(
+            user_value == str(
+                value
+            ).lower()
+            or user_value in str(
+                value
+            ).lower()
+            or str(
+                value
+            ).lower() in user_value
+            for value in required_values
+        )
+
+        if not occupation_match:
+            return False
+
+    # --------------------------------------------------------
+    # User type mismatch
+    # --------------------------------------------------------
+
+    required_user_type = eligibility.get(
+        "user_type"
+    )
+
+    user_type = profile.get(
+        "user_type"
+    )
+
+    if required_user_type and user_type:
+
+        required_values = (
+            required_user_type
+            if isinstance(required_user_type, list)
+            else [required_user_type]
+        )
+
+        user_values = (
+            user_type
+            if isinstance(user_type, list)
+            else [user_type]
+        )
+
+        user_type_match = any(
+            str(user_val).lower()
+            == str(req_val).lower()
+            or str(user_val).lower()
+            in str(req_val).lower()
+            or str(req_val).lower()
+            in str(user_val).lower()
+            for user_val in user_values
+            for req_val in required_values
+        )
+
+        if not user_type_match:
+            return False
+
+    # --------------------------------------------------------
+    # Disability-specific schemes
+    # --------------------------------------------------------
+
+    required_disability = eligibility.get(
+        "disability_status"
+    )
+
+    user_disability = profile.get(
+        "disability_status"
+    )
+
+    if (
+        required_disability is True
+        and user_disability is False
+    ):
+        return False
+
+    return True
+
+
+# ============================================================
+# MAIN ANALYSIS
+# ============================================================
+
 def analyze_benefit_gaps(
     profile: Dict[str, Any],
     top_k: int = 5,
@@ -531,8 +787,27 @@ def analyze_benefit_gaps(
     gaps: List[Dict[str, Any]] = []
 
     for scheme in schemes:
-        if not _is_realistic_gap(scheme, profile):
+
+        # ----------------------------------------------------
+        # Realistic-profile gate
+        # ----------------------------------------------------
+
+        if not _is_realistic_gap(
+            scheme,
+            profile,
+        ):
             continue
+
+        # ----------------------------------------------------
+        # Relevance gate
+        # ----------------------------------------------------
+
+        if not _passes_relevance_gate(
+            scheme,
+            profile,
+        ):
+            continue
+
         # ----------------------------------------------------
         # Use existing matcher
         # ----------------------------------------------------
@@ -542,7 +817,9 @@ def analyze_benefit_gaps(
             profile,
         )
 
-        status = eligibility_result.get("status")
+        status = eligibility_result.get(
+            "status"
+        )
 
         if status == "eligible":
             continue
@@ -565,18 +842,20 @@ def analyze_benefit_gaps(
 
         for condition in failed_conditions:
 
-            field = _extract_field_from_condition(condition)
-            
+            field = _extract_field_from_condition(
+                condition
+            )
+
             if not field:
                 continue
 
             if _violates_profile_specific_condition(
-                            field,
-                            condition,
-                            profile,
-                        ):
-                            continue
-            
+                field,
+                condition,
+                profile,
+            ):
+                continue
+
             if _is_hard_blocker(field):
                 hard_blocked = True
                 break
@@ -594,15 +873,22 @@ def analyze_benefit_gaps(
                 continue
 
             # ------------------------------------------------
-            # IMPORTANT:
-            # Generic occupation failures are not automatically
-            # useful Benefit Gaps.
-            #
-            # We only accept occupation when the scheme's
-            # requirement is a realistic status/role transition.
+            # Income-specific realism
+            # ------------------------------------------------
+
+            if field == "annual_income":
+                if not _is_realistic_income_gap(
+                    scheme,
+                    profile,
+                ):
+                    continue
+
+            # ------------------------------------------------
+            # Occupation
             # ------------------------------------------------
 
             if field == "occupation":
+
                 requirement = scheme.get(
                     "eligibility",
                     {},
@@ -611,7 +897,10 @@ def analyze_benefit_gaps(
                     [],
                 )
 
-                if not isinstance(requirement, list):
+                if not isinstance(
+                    requirement,
+                    list,
+                ):
                     continue
 
                 if not requirement:
@@ -627,11 +916,15 @@ def analyze_benefit_gaps(
                         {},
                     ).get(field)
                 ),
-                "unlock_explanation": _build_unlock_explanation(
-                    field,
-                    scheme,
-                ),
-                "priority": _blocker_priority(field),
+                "unlock_explanation":
+                    _build_unlock_explanation(
+                        field,
+                        scheme,
+                    ),
+                "priority":
+                    _blocker_priority(
+                        field
+                    ),
             })
 
         # ----------------------------------------------------
@@ -655,7 +948,10 @@ def analyze_benefit_gaps(
         unique_blockers = {}
 
         for blocker in blockers:
-            field = blocker["field"]
+
+            field = blocker[
+                "field"
+            ]
 
             if field not in unique_blockers:
                 unique_blockers[field] = blocker
@@ -686,125 +982,99 @@ def analyze_benefit_gaps(
         # Benefit
         # ----------------------------------------------------
 
-        benefit_amount = _benefit_value(scheme)
+        benefit_amount = _benefit_value(
+            scheme
+        )
 
         # ----------------------------------------------------
         # Build result
         # ----------------------------------------------------
 
         gaps.append({
-            "scheme_id": scheme.get("scheme_id"),
-            "scheme_name": scheme.get("scheme_name"),
-            "category": scheme.get("category"),
-            "benefit": scheme.get(
-                "benefit",
-                {},
-            ),
-            "benefit_amount": benefit_amount,
-            "current_status": status,
-            "proximity_percentage": proximity_percentage,
-            "match_percentage": eligibility_result.get(
-                "match_percentage",
-                0,
-            ),
-            "blocker_count": len(blockers),
-            "blockers": blockers,
-            "failed_conditions": failed_conditions,
-            "missing_information": eligibility_result.get(
-                "missing_information",
-                [],
-            ),
-            "required_documents": scheme.get(
-                "required_documents",
-                [],
-            ),
-            "optional_documents": scheme.get(
-                "optional_documents",
-                [],
-            ),
-            "official_portal": scheme.get(
-                "official_portal"
-            ),
-            "source_url": scheme.get(
-                "source_url"
-            ),
-            "manual_verification_required": scheme.get(
-                "manual_verification_required",
-                False,
-            ),
-            "manual_verification_reason": scheme.get(
-                "manual_verification_reason"
-            ),
+            "scheme_id":
+                scheme.get(
+                    "scheme_id"
+                ),
+
+            "scheme_name":
+                scheme.get(
+                    "scheme_name"
+                ),
+
+            "category":
+                scheme.get(
+                    "category"
+                ),
+
+            "benefit":
+                scheme.get(
+                    "benefit",
+                    {},
+                ),
+
+            "benefit_amount":
+                benefit_amount,
+
+            "current_status":
+                status,
+
+            "proximity_percentage":
+                proximity_percentage,
+
+            "match_percentage":
+                eligibility_result.get(
+                    "match_percentage",
+                    0,
+                ),
+
+            "blocker_count":
+                len(blockers),
+
+            "blockers":
+                blockers,
+
+            "failed_conditions":
+                failed_conditions,
+
+            "missing_information":
+                eligibility_result.get(
+                    "missing_information",
+                    [],
+                ),
+
+            "required_documents":
+                scheme.get(
+                    "required_documents",
+                    [],
+                ),
+
+            "optional_documents":
+                scheme.get(
+                    "optional_documents",
+                    [],
+                ),
+
+            "official_portal":
+                scheme.get(
+                    "official_portal"
+                ),
+
+            "source_url":
+                scheme.get(
+                    "source_url"
+                ),
+
+            "manual_verification_required":
+                scheme.get(
+                    "manual_verification_required",
+                    False,
+                ),
+
+            "manual_verification_reason":
+                scheme.get(
+                    "manual_verification_reason"
+                ),
         })
-            # ----------------------------------------------------
-        # V1 RELEVANCE GATE
-        # ----------------------------------------------------
-        # Do not show schemes meant for a fundamentally
-        # different beneficiary group.
-        
-        eligibility = scheme.get("eligibility", {})
-
-        # Occupation mismatch = unrelated scheme
-        required_occupation = eligibility.get("occupation")
-        user_occupation = profile.get("occupation")
-
-        if required_occupation and user_occupation:
-            required_values = (
-                required_occupation
-                if isinstance(required_occupation, list)
-                else [required_occupation]
-            )
-
-            user_value = str(user_occupation).lower()
-
-            occupation_match = any(
-                user_value == str(value).lower()
-                or user_value in str(value).lower()
-                or str(value).lower() in user_value
-                for value in required_values
-            )
-
-            if not occupation_match:
-                continue
-
-        # User type mismatch = unrelated scheme
-        required_user_type = eligibility.get("user_type")
-        user_type = profile.get("user_type")
-
-        if required_user_type and user_type:
-            required_values = (
-                required_user_type
-                if isinstance(required_user_type, list)
-                else [required_user_type]
-            )
-
-            user_values = (
-                user_type
-                if isinstance(user_type, list)
-                else [user_type]
-            )
-
-            user_type_match = any(
-                str(user_val).lower() == str(req_val).lower()
-                or str(user_val).lower() in str(req_val).lower()
-                or str(req_val).lower() in str(user_val).lower()
-                for user_val in user_values
-                for req_val in required_values
-            )
-
-            if not user_type_match:
-                continue
-
-        # Disability-specific schemes should not appear for
-        # users who explicitly do not have a disability.
-        required_disability = eligibility.get("disability_status")
-        user_disability = profile.get("disability_status")
-
-        if (
-            required_disability is True
-            and user_disability is False
-        ):
-            continue
 
     # ========================================================
     # RANK RESULTS
@@ -812,19 +1082,35 @@ def analyze_benefit_gaps(
 
     gaps.sort(
         key=lambda item: (
-            -item["proximity_percentage"],
-            item["blocker_count"],
+            -item[
+                "proximity_percentage"
+            ],
+            item[
+                "blocker_count"
+            ],
             min(
                 (
                     _blocker_priority(
-                        blocker["field"]
+                        blocker[
+                            "field"
+                        ]
                     )
-                    for blocker in item["blockers"]
+                    for blocker
+                    in item[
+                        "blockers"
+                    ]
                 ),
                 default=99,
             ),
-            -(item["benefit_amount"] or 0),
-            item["scheme_name"] or "",
+            -(
+                item[
+                    "benefit_amount"
+                ]
+                or 0
+            ),
+            item[
+                "scheme_name"
+            ] or "",
         )
     )
 

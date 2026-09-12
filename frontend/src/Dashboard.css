@@ -40,6 +40,7 @@
   color: #1c1b18;
   font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .profile-link:hover {
@@ -143,9 +144,9 @@
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
-display: inline-flex;
-align-items: center;
-justify-content: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .find-button:hover {
@@ -154,17 +155,19 @@ justify-content: center;
 
 .dashboard-tools {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 18px;
 }
 
 .tool-card {
+  width: 100%;
+  box-sizing: border-box;
   padding: 30px;
   border: 1px solid #d8d1c4;
   background: #faf8f2;
   border-radius: 6px;
   text-decoration: none;
-color: #1c1b18;
+  color: #1c1b18;
 }
 
 .tool-card:hover {
@@ -211,10 +214,6 @@ color: #1c1b18;
 
   .dashboard-header h1 {
     letter-spacing: -2px;
-  }
-
-  .dashboard-tools {
-    grid-template-columns: 1fr;
   }
 
   .find-section {

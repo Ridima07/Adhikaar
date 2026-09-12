@@ -1,29 +1,133 @@
+import { useEffect, useState } from 'react'
 import './Dashboard.css'
+import LanguageSelector from './LanguageSelector.jsx'
+import translations from './translations.js'
 
 function Dashboard() {
-  const data =
-    JSON.parse(
-      localStorage.getItem('adhikaarRecommendations')
-    ) || {
-      total_recommendations: 0,
-      recommendations: []
+  const language =
+    localStorage.getItem('adhikaarLanguage') || 'en'
+
+  const t =
+    translations[language]?.dashboard ||
+    translations.en.dashboard
+
+  const common =
+    translations[language]?.common ||
+    translations.en.common
+
+  const [recommendations, setRecommendations] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const loadRecommendations = async () => {
+      const profile = JSON.parse(
+        localStorage.getItem('adhikaarBackendProfile')
+      )
+
+      if (!profile) {
+        setLoading(false)
+        return
+      }
+
+      try {
+        const response = await fetch(
+          'http://127.0.0.1:8000/recommend',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(profile)
+          }
+        )
+
+        if (!response.ok) {
+          throw new Error(
+            'Failed to load recommendations'
+          )
+        }
+
+        const data =
+          await response.json()
+
+        const freshRecommendations =
+          data.recommendations || []
+
+        setRecommendations(
+          freshRecommendations
+        )
+
+        localStorage.setItem(
+          'adhikaarRecommendations',
+          JSON.stringify(data)
+        )
+
+      } catch (error) {
+        console.error(
+          'Failed to load dashboard recommendations:',
+          error
+        )
+
+        const storedData =
+          JSON.parse(
+            localStorage.getItem(
+              'adhikaarRecommendations'
+            )
+          ) || {
+            recommendations: []
+          }
+
+        setRecommendations(
+          storedData.recommendations || []
+        )
+
+      } finally {
+        setLoading(false)
+      }
     }
 
-  const recommendations = data.recommendations || []
+    loadRecommendations()
+  }, [])
 
-  const topRecommendations = recommendations.slice(0, 3)
+  const topRecommendations =
+    recommendations.slice(0, 3)
 
   return (
     <div className="dashboard-page">
 
-      <nav className="auth-navbar">
-        <div className="logo">ADHIKAAR</div>
+      <nav
+        className="auth-navbar"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}
+      >
 
-        <a href="/" className="back-link">
-          Logout
-        </a>
+        <div className="logo">
+          ADHIKAAR
+        </div>
+
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '24px'
+          }}
+        >
+
+          <LanguageSelector />
+
+          <a
+            href="/"
+            className="back-link"
+          >
+            {common.logout}
+          </a>
+
+        </div>
+
       </nav>
-
 
       <main className="dashboard-container">
 
@@ -32,15 +136,15 @@ function Dashboard() {
           <div>
 
             <p className="section-label">
-              YOUR ADHIKAAR
+              {t.sectionLabel}
             </p>
 
             <h1>
-              Your benefits dashboard.
+              {t.title}
             </h1>
 
             <p>
-              Explore benefits that may be relevant to your profile.
+              {t.description}
             </p>
 
           </div>
@@ -49,11 +153,10 @@ function Dashboard() {
             href="/profile"
             className="profile-link"
           >
-            View profile
+            {t.viewProfile}
           </a>
 
         </div>
-
 
         <section className="dashboard-section">
 
@@ -62,33 +165,41 @@ function Dashboard() {
             <div>
 
               <p className="section-label">
-                FOR YOU
+                {t.forYou}
               </p>
 
               <h2>
-                Benefits you may be eligible for.
+                {t.benefitsTitle}
               </h2>
 
             </div>
 
           </div>
 
+          {loading ? (
 
-          {topRecommendations.length === 0 ? (
+            <div className="scheme-card">
+
+              <p>
+                {t.loading}
+              </p>
+
+            </div>
+
+          ) : topRecommendations.length === 0 ? (
 
             <div className="scheme-card">
 
               <h3>
-                No recommendations yet.
+                {t.noRecommendations}
               </h3>
 
               <p>
-                Complete your profile and find your schemes
-                to see benefits relevant to you.
+                {t.noRecommendationsText}
               </p>
 
               <a href="/find-schemes">
-                Find My Schemes →
+                {common.findMySchemes}
               </a>
 
             </div>
@@ -97,38 +208,40 @@ function Dashboard() {
 
             <div className="scheme-grid">
 
-              {topRecommendations.map((scheme) => (
+              {topRecommendations.map(
+                (scheme) => (
 
-                <div
-                  className="scheme-card"
-                  key={scheme.scheme_id}
-                >
-
-                  <span className="scheme-category">
-                    {scheme.category
-                      ? scheme.category.toUpperCase()
-                      : 'GENERAL'}
-                  </span>
-
-                  <h3>
-                    {scheme.scheme_name}
-                  </h3>
-
-                  <p>
-                    {scheme.benefit?.description ||
-                      scheme.eligibility_summary ||
-                      'This benefit may be relevant to your profile.'}
-                  </p>
-
-                  <a
-                    href={`/scheme-details/${scheme.scheme_id}`}
+                  <div
+                    className="scheme-card"
+                    key={scheme.scheme_id}
                   >
-                    View details →
-                  </a>
 
-                </div>
+                    <span className="scheme-category">
+                      {scheme.category
+                        ? scheme.category.toUpperCase()
+                        : 'GENERAL'}
+                    </span>
 
-              ))}
+                    <h3>
+                      {scheme.scheme_name}
+                    </h3>
+
+                    <p>
+                      {scheme.benefit?.description ||
+                        scheme.eligibility_summary ||
+                        'This benefit may be relevant to your profile.'}
+                    </p>
+
+                    <a
+                      href={`/scheme-details/${scheme.scheme_id}`}
+                    >
+                      {common.viewDetails}
+                    </a>
+
+                  </div>
+
+                )
+              )}
 
             </div>
 
@@ -136,22 +249,20 @@ function Dashboard() {
 
         </section>
 
-
         <section className="find-section">
 
           <div>
 
             <p className="section-label">
-              GO FURTHER
+              {t.goFurther}
             </p>
 
             <h2>
-              Find benefits you might be missing.
+              {t.goFurtherTitle}
             </h2>
 
             <p>
-              Answer a few additional questions and let Adhikaar
-              identify benefits you may not have considered.
+              {t.goFurtherText}
             </p>
 
           </div>
@@ -160,49 +271,28 @@ function Dashboard() {
             href="/find-schemes"
             className="find-button"
           >
-            Find My Schemes →
+            {common.findMySchemes}
           </a>
 
         </section>
 
-
         <section className="dashboard-tools">
-
-          <a
-  href={
-    recommendations.length > 0
-      ? `/application-readiness/${recommendations[0].scheme_id}`
-      : '/find-schemes'
-  }
-  className="tool-card"
->
-            <span>01</span>
-
-            <h3>
-              Application readiness
-            </h3>
-
-            <p>
-              Check your documents and see what you still need
-              before applying.
-            </p>
-
-          </a>
-
 
           <a
             href="/rejection-recovery"
             className="tool-card"
           >
-            <span>02</span>
+
+            <span>
+              01
+            </span>
 
             <h3>
-              Rejection recovery
+              {t.rejectionRecovery}
             </h3>
 
             <p>
-              Understand what may have gone wrong and what you
-              can do next.
+              {t.rejectionRecoveryText}
             </p>
 
           </a>

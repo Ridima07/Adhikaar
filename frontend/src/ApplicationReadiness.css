@@ -31,6 +31,122 @@
   line-height: 1.6;
 }
 
+/* =========================================================
+   SCHEME SELECTION
+   ========================================================= */
+
+.scheme-selection {
+  width: 100%;
+}
+
+.scheme-selection .section-heading {
+  margin-bottom: 35px;
+}
+
+.scheme-selection .section-heading h2 {
+  margin: 12px 0 0;
+  font-size: 32px;
+  letter-spacing: -1px;
+}
+
+.scheme-selection-list {
+  width: 100%;
+  border-top: 1px solid #d8d1c4;
+}
+
+.scheme-selection-card {
+  display: grid;
+  grid-template-columns: 55px 1fr 40px;
+  gap: 25px;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30px 5px;
+  border-bottom: 1px solid #d8d1c4;
+  color: #1c1b18;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    padding-left 0.2s ease,
+    padding-right 0.2s ease;
+}
+
+.scheme-selection-card:hover {
+  background: #eae4d7;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.scheme-selection-number {
+  font-size: 14px;
+  font-weight: 700;
+  color: #68645c;
+  letter-spacing: 1px;
+}
+
+.scheme-selection-content {
+  min-width: 0;
+}
+
+.scheme-selection-category {
+  margin: 0 0 9px;
+  color: #68645c;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.scheme-selection-content h3 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  line-height: 1.25;
+  letter-spacing: -0.6px;
+  font-weight: 600;
+}
+
+.scheme-selection-match {
+  margin: 0;
+  color: #68645c;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.scheme-selection-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-readiness {
+  padding: 40px;
+  border: 1px solid #d8d1c4;
+  background: #eae4d7;
+}
+
+.empty-readiness h2 {
+  margin: 12px 0;
+  font-size: 30px;
+  letter-spacing: -1px;
+}
+
+.empty-readiness > p:not(.section-label) {
+  max-width: 650px;
+  margin: 0 0 25px;
+  color: #68645c;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   READINESS SUMMARY
+   ========================================================= */
+
 .readiness-summary {
   display: grid;
   grid-template-columns: 250px 1fr;
@@ -69,6 +185,14 @@
   margin: 0;
   color: #68645c;
   line-height: 1.6;
+}
+
+/* =========================================================
+   DOCUMENT SECTION
+   ========================================================= */
+
+.documents-section {
+  width: 100%;
 }
 
 .section-heading {
@@ -132,6 +256,25 @@
   color: #a65d45;
 }
 
+/* =========================================================
+   DOCUMENT CHECKBOXES
+   ========================================================= */
+
+label.readiness-item {
+  cursor: pointer;
+}
+
+label.readiness-item input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #1c1b18;
+}
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
 .readiness-actions {
   display: flex;
   justify-content: space-between;
@@ -157,19 +300,36 @@
 }
 
 .official-button {
+  display: inline-block;
   flex-shrink: 0;
   padding: 14px 22px;
   border-radius: 4px;
+  border: none;
   background: #f5f1e8;
   color: #1c1b18;
   text-decoration: none;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .official-button:hover {
   background: #a65d45;
   color: #f5f1e8;
 }
+
+.official-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-note {
+  margin-top: 20px;
+  color: #a65d45;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media (max-width: 700px) {
   .readiness-container {
@@ -178,6 +338,21 @@
 
   .readiness-header h1 {
     letter-spacing: -2px;
+  }
+
+  .scheme-selection-card {
+    grid-template-columns: 35px 1fr 25px;
+    gap: 15px;
+    padding: 24px 0;
+  }
+
+  .scheme-selection-card:hover {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .scheme-selection-content h3 {
+    font-size: 20px;
   }
 
   .readiness-summary {
