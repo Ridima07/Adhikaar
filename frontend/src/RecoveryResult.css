@@ -1,0 +1,162 @@
+.recovery-result-page {
+  min-height: 100vh;
+  background: #f5f1e8;
+  color: #1c1b18;
+}
+
+.recovery-result-container {
+  width: 86%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 0 120px;
+}
+
+.recovery-result-header {
+  max-width: 760px;
+  margin-bottom: 55px;
+}
+
+.recovery-result-header h1 {
+  margin: 10px 0 18px;
+  font-size: 48px;
+  line-height: 1.1;
+}
+
+.recovery-result-header > p:last-child {
+  color: #68645c;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.submitted-rejection {
+  margin-bottom: 80px;
+}
+
+.rejection-message {
+  margin-top: 20px;
+  padding: 28px;
+  background: #faf8f2;
+  border: 1px solid #d8d1c4;
+  border-radius: 6px;
+  color: #68645c;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.recovery-section,
+.next-steps-section {
+  margin-bottom: 80px;
+}
+
+.recovery-section h2,
+.next-steps-section h2 {
+  margin: 8px 0 30px;
+  font-size: 30px;
+}
+
+.finding-list,
+.next-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.finding-item,
+.next-step {
+  display: flex;
+  gap: 24px;
+  padding: 28px;
+  background: #faf8f2;
+  border: 1px solid #d8d1c4;
+  border-radius: 6px;
+}
+
+.finding-number,
+.next-step > span {
+  color: #a65d45;
+  font-size: 14px;
+  font-weight: 700;
+  min-width: 30px;
+}
+
+.finding-item h3,
+.next-step h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.finding-item p,
+.next-step p {
+  margin: 0;
+  color: #68645c;
+  line-height: 1.6;
+}
+
+.recovery-warning {
+  margin-bottom: 50px;
+  padding: 30px;
+  background: #eae4d7;
+  border: 1px solid #d8d1c4;
+  border-radius: 6px;
+}
+
+.recovery-warning h2 {
+  margin: 8px 0 12px;
+  font-size: 24px;
+}
+
+.recovery-warning p:last-child {
+  margin: 0;
+  color: #68645c;
+  line-height: 1.7;
+}
+
+.recovery-result-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.readiness-button,
+.dashboard-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.readiness-button {
+  background: #1c1b18;
+  color: #faf8f2;
+}
+
+.dashboard-button {
+  border: 1px solid #d8d1c4;
+  color: #1c1b18;
+  background: #faf8f2;
+}
+
+@media (max-width: 700px) {
+  .recovery-result-container {
+    width: 90%;
+    padding: 55px 0 80px;
+  }
+
+  .recovery-result-header h1 {
+    font-size: 38px;
+  }
+
+  .finding-item,
+  .next-step {
+    padding: 22px;
+    gap: 15px;
+  }
+
+  .recovery-result-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

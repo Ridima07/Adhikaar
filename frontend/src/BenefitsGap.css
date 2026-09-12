@@ -1,0 +1,126 @@
+.benefits-gap-page {
+  min-height: 100vh;
+  background: #f5f1e8;
+  color: #1c1b18;
+}
+
+.benefits-gap-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 90px 7% 120px;
+}
+
+.benefits-gap-header {
+  max-width: 800px;
+  margin-bottom: 70px;
+}
+
+.benefits-gap-header h1 {
+  margin: 15px 0 20px;
+  font-size: clamp(45px, 6vw, 68px);
+  line-height: 1;
+  letter-spacing: -3px;
+}
+
+.benefits-gap-header p:last-child {
+  max-width: 700px;
+  margin: 0;
+  color: #68645c;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid #d8d1c4;
+  border-left: 1px solid #d8d1c4;
+}
+
+.category-card {
+  min-height: 300px;
+  padding: 30px;
+  border-right: 1px solid #d8d1c4;
+  border-bottom: 1px solid #d8d1c4;
+  background: #faf8f2;
+  color: #1c1b18;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.category-card:hover {
+  background: #eae4d7;
+}
+
+.category-number {
+  color: #a65d45;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.category-label {
+  color: #a65d45;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.category-card h2 {
+  margin: 10px 0 12px;
+  font-size: 28px;
+  letter-spacing: -1px;
+}
+
+.category-card p {
+  max-width: 450px;
+  margin: 0;
+  color: #68645c;
+  line-height: 1.6;
+}
+
+.category-count {
+  margin-top: 30px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.gap-note {
+  margin-top: 90px;
+  padding: 45px;
+  border: 1px solid #d8d1c4;
+  background: #eae4d7;
+}
+
+.gap-note h2 {
+  margin: 12px 0 15px;
+  font-size: 32px;
+  letter-spacing: -1px;
+}
+
+.gap-note p:last-child {
+  max-width: 700px;
+  margin: 0;
+  color: #68645c;
+  line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+  .benefits-gap-container {
+    padding: 60px 5% 80px;
+  }
+
+  .benefits-gap-header h1 {
+    letter-spacing: -2px;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gap-note {
+    padding: 30px;
+  }
+}

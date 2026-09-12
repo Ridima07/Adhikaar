@@ -24,7 +24,7 @@ from backend.personalization.questions import (
     get_personalization_questions,
     apply_personalization_answers,
 )
-from backend.matcher import match_scheme
+from backend.matcher import check_eligibility
 
 
 def personalize_schemes(profile, schemes, answers_by_scheme):
@@ -82,19 +82,10 @@ def personalize_schemes(profile, schemes, answers_by_scheme):
         # 3. Run the existing matcher
         # --------------------------------------------------
 
-        try:
-            result = match_scheme(
-                updated_profile,
-                scheme
-            )
-
-        except TypeError:
-            # Some versions of matcher.py may use the
-            # arguments in the opposite order.
-            result = match_scheme(
-                scheme,
-                updated_profile
-            )
+        result = check_eligibility(
+    scheme,
+    updated_profile
+)
 
         # --------------------------------------------------
         # 4. Store personalized result

@@ -1,0 +1,142 @@
+.questions-page {
+  min-height: 100vh;
+  background: #f5f1e8;
+  color: #1c1b18;
+}
+
+.questions-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 90px 7% 120px;
+}
+
+.questions-header {
+  max-width: 700px;
+  margin-bottom: 70px;
+}
+
+.questions-header h1 {
+  margin: 15px 0 20px;
+  font-size: clamp(45px, 6vw, 68px);
+  line-height: 1;
+  letter-spacing: -3px;
+}
+
+.questions-header p:last-child {
+  margin: 0;
+  color: #68645c;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.questions-form {
+  padding: 40px;
+  border: 1px solid #d8d1c4;
+  background: #faf8f2;
+  border-radius: 6px;
+}
+
+.question {
+  padding: 30px 0;
+  border-bottom: 1px solid #d8d1c4;
+}
+
+.question:first-child {
+  padding-top: 0;
+}
+
+.question-number {
+  display: block;
+  margin-bottom: 15px;
+  color: #a65d45;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.question label {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.question select {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #d8d1c4;
+  border-radius: 4px;
+  background: #f5f1e8;
+  color: #1c1b18;
+  font-family: inherit;
+  font-size: 15px;
+}
+
+.question select:focus {
+  outline: 2px solid #a65d45;
+  outline-offset: 1px;
+}
+
+.questions-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-top: 35px;
+}
+
+.back-button,
+.continue-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 22px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-button {
+  border: 1px solid #d8d1c4;
+  color: #1c1b18;
+}
+
+.continue-button {
+  border: 1px solid #1c1b18;
+  background: #1c1b18;
+  color: #f5f1e8;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background: #eae4d7;
+}
+
+.continue-button:hover {
+  background: #a65d45;
+  border-color: #a65d45;
+}
+
+@media (max-width: 600px) {
+  .questions-container {
+    padding: 60px 5% 80px;
+  }
+
+  .questions-header h1 {
+    letter-spacing: -2px;
+  }
+
+  .questions-form {
+    padding: 25px;
+  }
+
+  .questions-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .back-button,
+  .continue-button {
+    width: 100%;
+  }
+}

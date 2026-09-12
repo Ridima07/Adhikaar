@@ -1,0 +1,154 @@
+.find-schemes-page {
+  min-height: 100vh;
+  background: #f5f1e8;
+  color: #1c1b18;
+}
+
+.find-schemes-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 90px 7% 120px;
+}
+
+.find-schemes-header {
+  max-width: 750px;
+  margin-bottom: 70px;
+}
+
+.find-schemes-header h1 {
+  margin: 15px 0 20px;
+  font-size: clamp(45px, 6vw, 68px);
+  line-height: 1;
+  letter-spacing: -3px;
+}
+
+.find-schemes-header > p:last-child {
+  max-width: 650px;
+  margin: 0;
+  color: #68645c;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.profile-summary {
+  padding: 40px;
+  border: 1px solid #d8d1c4;
+  background: #faf8f2;
+  border-radius: 6px;
+}
+
+.profile-summary h2 {
+  margin: 12px 0 35px;
+  font-size: 30px;
+  letter-spacing: -1px;
+}
+
+.profile-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid #d8d1c4;
+}
+
+.profile-summary-grid > div {
+  padding: 22px 0;
+  border-bottom: 1px solid #d8d1c4;
+}
+
+.profile-summary-grid > div:nth-child(odd) {
+  padding-right: 30px;
+}
+
+.profile-summary-grid > div:nth-child(even) {
+  padding-left: 30px;
+  border-left: 1px solid #d8d1c4;
+}
+
+.profile-summary-grid span {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 12px;
+  color: #68645c;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.profile-summary-grid strong {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 35px;
+}
+
+.edit-profile-button,
+.continue-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 22px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.edit-profile-button {
+  border: 1px solid #d8d1c4;
+  color: #1c1b18;
+  background: transparent;
+}
+
+.continue-button {
+  border: 1px solid #1c1b18;
+  background: #1c1b18;
+  color: #f5f1e8;
+}
+
+.edit-profile-button:hover {
+  background: #eae4d7;
+}
+
+.continue-button:hover {
+  background: #a65d45;
+  border-color: #a65d45;
+}
+
+@media (max-width: 650px) {
+  .find-schemes-container {
+    padding: 60px 5% 80px;
+  }
+
+  .find-schemes-header h1 {
+    letter-spacing: -2px;
+  }
+
+  .profile-summary {
+    padding: 25px;
+  }
+
+  .profile-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-summary-grid > div:nth-child(even) {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .profile-summary-grid > div:nth-child(odd) {
+    padding-right: 0;
+  }
+
+  .profile-actions {
+    flex-direction: column;
+  }
+
+  .edit-profile-button,
+  .continue-button {
+    width: 100%;
+  }
+}

@@ -12,7 +12,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from matcher import load_schemes
+from backend.matcher import load_schemes
 
 
 def normalize_text(value: Any) -> str:

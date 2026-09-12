@@ -1,0 +1,156 @@
+.recovery-page {
+  min-height: 100vh;
+  background: #f5f1e8;
+  color: #1c1b18;
+}
+
+.recovery-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 90px 7% 120px;
+}
+
+.recovery-header {
+  max-width: 750px;
+  margin-bottom: 60px;
+}
+
+.recovery-header h1 {
+  margin: 15px 0 20px;
+  font-size: clamp(45px, 6vw, 68px);
+  line-height: 1;
+  letter-spacing: -3px;
+}
+
+.recovery-header > p:last-child {
+  max-width: 650px;
+  margin: 0;
+  color: #68645c;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.recovery-form {
+  padding: 40px;
+  border: 1px solid #d8d1c4;
+  background: #faf8f2;
+  border-radius: 6px;
+}
+
+.recovery-form label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.recovery-form textarea {
+  width: 100%;
+  min-height: 220px;
+  padding: 16px;
+  border: 1px solid #d8d1c4;
+  border-radius: 4px;
+  background: #f5f1e8;
+  color: #1c1b18;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.recovery-form textarea:focus {
+  outline: 2px solid #a65d45;
+  outline-offset: 1px;
+}
+
+.form-note {
+  margin: 12px 0 0;
+  color: #68645c;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.recovery-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.cancel-button,
+.analyze-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 22px;
+  border-radius: 4px;
+  font-family: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cancel-button {
+  border: 1px solid #d8d1c4;
+  background: transparent;
+  color: #1c1b18;
+}
+
+.analyze-button {
+  border: 1px solid #1c1b18;
+  background: #1c1b18;
+  color: #f5f1e8;
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background: #eae4d7;
+}
+
+.analyze-button:hover {
+  border-color: #a65d45;
+  background: #a65d45;
+}
+
+.recovery-note {
+  margin-top: 60px;
+  padding: 35px;
+  border: 1px solid #d8d1c4;
+  background: #eae4d7;
+}
+
+.recovery-note h2 {
+  margin: 12px 0 15px;
+  font-size: 27px;
+  letter-spacing: -1px;
+}
+
+.recovery-note p:last-child {
+  max-width: 700px;
+  margin: 0;
+  color: #68645c;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .recovery-container {
+    padding: 60px 5% 80px;
+  }
+
+  .recovery-header h1 {
+    letter-spacing: -2px;
+  }
+
+  .recovery-form {
+    padding: 25px;
+  }
+
+  .recovery-actions {
+    flex-direction: column-reverse;
+  }
+
+  .cancel-button,
+  .analyze-button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,534 @@
+/* ========================================
+   GLOBAL LANDING PAGE
+======================================== */
+
+.landing-page {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+
+/* ========================================
+   NAVBAR
+======================================== */
+
+.navbar {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 7%;
+  border-bottom: 1px solid #e2e0da;
+  background: rgba(248, 247, 243, 0.92);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #1c1b18;
+  font-size: 15px;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.nav-links a:hover {
+  opacity: 0.5;
+}
+
+.nav-button {
+  border: 1px solid #1c1b18;
+  background: transparent;
+  color: #1c1b18;
+  padding: 11px 20px;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.nav-button:hover {
+  background: #1c1b18;
+  color: #f5f1e8;
+  transform: translateY(-1px);
+}
+
+
+/* ========================================
+   HERO
+======================================== */
+
+.hero {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 90px 7%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative background glow */
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 650px;
+  height: 650px;
+  border-radius: 50%;
+  background: #e9e4d8;
+  filter: blur(90px);
+  opacity: 0.6;
+  top: -300px;
+  left: -200px;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 550px;
+  height: 550px;
+  border-radius: 50%;
+  background: #dedbd2;
+  filter: blur(100px);
+  opacity: 0.5;
+  bottom: -300px;
+  right: -180px;
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 950px;
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  padding: 9px 16px;
+  margin-bottom: 28px;
+  border: 1px solid #d6d2c8;
+  border-radius: 100px;
+  background: rgba(248, 247, 243, 0.75);
+}
+
+.hero h1 {
+  font-size: clamp(56px, 8vw, 100px);
+  line-height: 0.95;
+  letter-spacing: -5px;
+  margin: 0;
+  font-weight: 800;
+}
+
+.hero-description {
+  max-width: 650px;
+  margin: 32px auto 0;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #68645c;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #1c1b18;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 12px 20px;
+  border: 1px solid #cfcac0;
+  border-radius: 100px;
+  background: rgba(248, 247, 243, 0.8);
+  transition: all 0.25s ease;
+}
+
+.secondary-button:hover {
+  transform: translateY(-2px);
+  background: #1c1b18;
+  color: #f5f1e8;
+  border-color: #1c1b18;
+}
+
+
+/* ========================================
+   GENERAL SECTIONS
+======================================== */
+
+.about,
+.journey,
+.features,
+.final-cta {
+  padding: 130px 7%;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #a65d45;
+}
+
+
+/* ========================================
+   ABOUT
+======================================== */
+
+.about {
+  max-width: 1050px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.about h2,
+.journey h2,
+.features h2,
+.final-cta h2 {
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -2.5px;
+  margin: 20px 0 28px;
+  font-weight: 800;
+}
+
+.about > p:last-child {
+  max-width: 760px;
+  font-size: 20px;
+  line-height: 1.8;
+  color: #68645c;
+}
+
+
+/* ========================================
+   JOURNEY
+======================================== */
+
+.journey {
+  background: #eae4d7;
+  position: relative;
+}
+
+.journey-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-top: 60px;
+}
+
+.journey-card {
+  min-height: 270px;
+  padding: 28px;
+  border: 1px solid #d8d1c4;
+  border-radius: 6px;
+  background: rgba(248, 247, 243, 0.65);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.journey-card:hover {
+  transform: translateY(-7px);
+  background: #f5f1e8;
+  box-shadow: 0 18px 40px rgba(23, 23, 23, 0.08);
+}
+
+.journey-card span {
+  font-size: 12px;
+  font-weight: 700;
+  color: #77736b;
+  letter-spacing: 1px;
+}
+
+.journey-card h3 {
+  font-size: 24px;
+  margin: 45px 0 12px;
+  letter-spacing: -0.5px;
+}
+
+.journey-card p {
+  margin: 0;
+  line-height: 1.6;
+  color: #68645c;
+  font-size: 15px;
+}
+
+
+/* ========================================
+   FEATURES
+======================================== */
+
+.features {
+  width: 100%;
+  margin: 0;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 60px;
+}
+
+.feature-card {
+  padding: 38px;
+  min-height: 230px;
+  border: 1px solid #ddd9d0;
+  border-radius: 6px;
+  background: #f5f1e8;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.feature-card::before {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: #ebe7dc;
+  filter: blur(35px);
+  top: -80px;
+  right: -60px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  border-color: #c8c3b9;
+  box-shadow: 0 16px 35px rgba(23, 23, 23, 0.07);
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+}
+
+.feature-card h3,
+.feature-card p {
+  position: relative;
+  z-index: 1;
+}
+
+.feature-card h3 {
+  font-size: 24px;
+  margin: 0 0 14px;
+  letter-spacing: -0.5px;
+}
+
+.feature-card p {
+  max-width: 500px;
+  margin: 0;
+  line-height: 1.7;
+  color: #68645c;
+  font-size: 16px;
+}
+
+
+/* ========================================
+   FINAL CTA
+======================================== */
+
+.final-cta {
+  text-align: center;
+  padding-top: 160px;
+  padding-bottom: 160px;
+  background: #1c1b18;
+  color: #f5f1e8;
+  position: relative;
+  overflow: hidden;
+}
+
+.final-cta::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: #4a4842;
+  filter: blur(120px);
+  opacity: 0.3;
+  top: -300px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.final-cta h2 {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: clamp(44px, 6vw, 72px);
+}
+
+.final-cta p {
+  position: relative;
+  z-index: 1;
+  font-size: 22px;
+  color: #bdbab2;
+  margin: 0 0 32px;
+}
+
+.primary-button {
+  position: relative;
+  z-index: 1;
+  border: none;
+  background: #f5f1e8;
+  color: #1c1b18;
+  padding: 15px 30px;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  transition: all 0.25s ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ========================================
+   TEXT SELECTION
+======================================== */
+
+::selection {
+  background: #1c1b18;
+  color: #f5f1e8;
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 900px) {
+
+  .journey-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .journey-card:last-child {
+    grid-column: span 2;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+  .navbar {
+    height: 70px;
+    padding: 0 5%;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-button {
+    padding: 9px 15px;
+    font-size: 13px;
+  }
+
+  .hero {
+    min-height: calc(100vh - 70px);
+    padding: 70px 5%;
+  }
+
+  .hero h1 {
+    font-size: clamp(48px, 14vw, 68px);
+    letter-spacing: -3px;
+  }
+
+  .hero-description {
+    font-size: 16px;
+  }
+
+  .about,
+  .journey,
+  .features,
+  .final-cta {
+    padding: 90px 5%;
+  }
+
+  .about h2,
+  .journey h2,
+  .features h2,
+  .final-cta h2 {
+    letter-spacing: -1.5px;
+  }
+
+  .about > p:last-child {
+    font-size: 17px;
+  }
+
+  .journey-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .journey-card {
+    min-height: 220px;
+  }
+
+  .journey-card:last-child {
+    grid-column: auto;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card {
+    padding: 30px;
+  }
+
+}
+
+.nav-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
