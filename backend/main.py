@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+from typing import Optional, List
 
 # Add both root and backend directories to sys.path
 backend_dir = Path(__file__).resolve().parent
@@ -12,7 +13,6 @@ for path in (str(backend_dir), str(root_dir)):
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Optional
 
 from matcher import recommend_schemes, load_schemes
 from document_checker import check_document_readiness
@@ -23,7 +23,7 @@ from personalization.personalize import (
     get_questions_for_scheme,
     personalize_schemes
 )
-
+from personalization.benefit_gap import analyze_benefit_gaps
 
 app = FastAPI(title="Adhikaar API", version="1.0")
 
@@ -31,7 +31,9 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5174",
-        "http://127.0.0.1:5174"
+        "http://127.0.0.1:5174",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173"
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -116,6 +118,24 @@ def get_recommendations(
         response,
         target_lang=lang
     )
+
+
+@app.post("/benefit-gaps")
+def get_benefit_gaps(
+    user_profile: UserProfile,
+    top_k: int = Query(5, description="Maximum number of near-miss opportunities to return"),
+    lang: str = Query("en", description="Supported: en, hi, bn")
+):
+    gaps = analyze_benefit_gaps(
+        profile=user_profile.model_dump(),
+        top_k=top_k
+    )
+    response = {
+        "status": "success",
+        "total_gaps": len(gaps),
+        "benefit_gaps": gaps,
+    }
+    return translate_data(response, target_lang=lang)
 
 
 @app.get("/scheme/{scheme_id}")
