@@ -61,6 +61,36 @@ function formatOption(option, language) {
     .replace(/\b\w/g, (letter) => letter.toUpperCase())
 }
 
+function formatQuestion(question, language) {
+  if (!question) {
+    return ''
+  }
+
+  if (language === 'hi') {
+    const hindiQuestions = {
+      'Which of these best describes you?':
+        'इनमें से कौन सा आपका सबसे अच्छा वर्णन करता है?'
+    }
+
+    if (hindiQuestions[question]) {
+      return hindiQuestions[question]
+    }
+  }
+
+  if (language === 'bn') {
+    const bengaliQuestions = {
+      'Which of these best describes you?':
+        'নিচের কোনটি আপনাকে সবচেয়ে ভালোভাবে বর্ণনা করে?'
+    }
+
+    if (bengaliQuestions[question]) {
+      return bengaliQuestions[question]
+    }
+  }
+
+  return question
+}
+
 function Questions() {
   const language =
     localStorage.getItem('adhikaarLanguage') || 'en'
@@ -305,11 +335,6 @@ function Questions() {
         updatedAnswers[answerKey] =
           updatedValues
 
-        /*
-         * Citizen is a general user attribute.
-         * Carry it across all schemes that ask
-         * the same user_type question.
-         */
         if (value === 'citizen') {
           Object.entries(
             questionsByScheme
@@ -746,7 +771,10 @@ function Questions() {
                           </span>
 
                           <label>
-                            {question.question}
+                            {formatQuestion(
+                              question.question,
+                              language
+                            )}
                           </label>
 
                           {question.id ===

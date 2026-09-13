@@ -200,6 +200,107 @@ function ApplicationReadiness() {
     }
   }
 
+  const schemeTranslations = {
+    FIN001: {
+      name: {
+        hi: 'प्रधानमंत्री सुरक्षा बीमा योजना (PMSBY)',
+        bn: 'প্রধানমন্ত্রী সুরক্ষা বিমা যোজনা (PMSBY)'
+      }
+    },
+
+    RUR002: {
+      name: {
+        hi: 'प्रधानमंत्री स्वामित्व योजना (PMSY)',
+        bn: 'প্রধানমন্ত্রী স্বামিত্ব প্রকল্প (PMSY)'
+      }
+    },
+
+    MED004: {
+      name: {
+        hi: 'दिल्ली आरोग्य कोष (DAK)',
+        bn: 'দিল্লি আরোগ্য কোষ (DAK)'
+      }
+    }
+  }
+
+  const documentTranslations = {
+    'Voter ID card showing 3 years residency in Delhi': {
+      hi: 'दिल्ली में 3 वर्ष के निवास वाला मतदाता पहचान पत्र',
+      bn: 'দিল্লিতে ৩ বছরের বসবাসের উল্লেখ থাকা ভোটার আইডি কার্ড'
+    },
+
+    'Aadhaar Card': {
+      hi: 'आधार कार्ड',
+      bn: 'আধার কার্ড'
+    },
+
+    'आय प्रमाण पत्र (एसडीएम जारी)': {
+      hi: 'आय प्रमाण पत्र (एसडीएम द्वारा जारी)',
+      bn: 'আয় শংসাপত্র (এসডিএম কর্তৃক জারি)'
+    },
+
+    'Income Certificate (SDM issued)': {
+      hi: 'आय प्रमाण पत्र (एसडीएम द्वारा जारी)',
+      bn: 'আয় শংসাপত্র (এসডিএম কর্তৃক জারি)'
+    },
+
+    'Referral letter & treatment estimate from Delhi Govt Hospital': {
+      hi: 'दिल्ली सरकार के अस्पताल से रेफरल पत्र और उपचार का अनुमान',
+      bn: 'দিল্লি সরকারের হাসপাতাল থেকে রেফারেল চিঠি ও চিকিৎসার আনুমানিক খরচ'
+    },
+
+    'Bank Account details': {
+      hi: 'बैंक खाते का विवरण',
+      bn: 'ব্যাংক অ্যাকাউন্টের বিবরণ'
+    },
+
+    'Nominee details': {
+      hi: 'नामांकित व्यक्ति का विवरण',
+      bn: 'নমিনির বিবরণ'
+    },
+
+    'Auto-debit consent form': {
+      hi: 'ऑटो-डेबिट सहमति फॉर्म',
+      bn: 'অটো-ডেবিট সম্মতি ফর্ম'
+    }
+  }
+
+  const translateText = (value) => {
+    if (
+      value === null ||
+      value === undefined ||
+      value === ''
+    ) {
+      return value
+    }
+
+    if (language === 'en') {
+      return String(value)
+    }
+
+    const text = String(value)
+
+    return (
+      documentTranslations[text]?.[language] ||
+      text
+    )
+  }
+
+  const translateSchemeName = (schemeId, name) => {
+    if (!name) {
+      return name
+    }
+
+    if (language === 'en') {
+      return name
+    }
+
+    return (
+      schemeTranslations[schemeId]?.name?.[language] ||
+      name
+    )
+  }
+
   const t =
     content[language] ||
     content.en
@@ -501,7 +602,10 @@ function ApplicationReadiness() {
                         </p>
 
                         <h3>
-                          {recommendation.scheme_name}
+                          {translateSchemeName(
+                            recommendation.scheme_id,
+                            recommendation.scheme_name
+                          )}
                         </h3>
 
                         {recommendation.match_percentage !==
@@ -614,6 +718,12 @@ function ApplicationReadiness() {
       ? documentStatus.readiness_percentage
       : 0
 
+  const translatedSchemeName =
+    translateSchemeName(
+      scheme.scheme_id,
+      scheme.scheme_name
+    )
+
   return (
     <div className="readiness-page">
 
@@ -659,7 +769,7 @@ function ApplicationReadiness() {
           <p>
             {t.readyDescription}{' '}
             <strong>
-              {scheme.scheme_name}
+              {translatedSchemeName}
             </strong>.
           </p>
 
@@ -708,7 +818,9 @@ function ApplicationReadiness() {
                     <div>
 
                       <h3>
-                        {document}
+                        {translateText(
+                          document
+                        )}
                       </h3>
 
                       <p>
@@ -839,7 +951,9 @@ function ApplicationReadiness() {
                       <div>
 
                         <h3>
-                          {document}
+                          {translateText(
+                            document
+                          )}
                         </h3>
 
                         <p>
@@ -874,7 +988,9 @@ function ApplicationReadiness() {
                       <div>
 
                         <h3>
-                          {document}
+                          {translateText(
+                            document
+                          )}
                         </h3>
 
                         <p>

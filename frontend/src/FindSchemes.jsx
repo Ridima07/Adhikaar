@@ -83,6 +83,171 @@ function FindSchemes() {
     }
   }
 
+  const optionTranslations = {
+    state: {
+      Delhi: {
+        hi: 'दिल्ली',
+        bn: 'দিল্লি'
+      },
+      Haryana: {
+        hi: 'हरियाणा',
+        bn: 'হরিয়ানা'
+      },
+      'Uttar Pradesh': {
+        hi: 'उत्तर प्रदेश',
+        bn: 'উত্তর প্রদেশ'
+      },
+      Rajasthan: {
+        hi: 'राजस्थान',
+        bn: 'রাজস্থান'
+      },
+      Maharashtra: {
+        hi: 'महाराष्ट्र',
+        bn: 'মহারাষ্ট্র'
+      }
+    },
+
+    education: {
+      School: {
+        hi: 'स्कूल',
+        bn: 'স্কুল'
+      },
+      Undergraduate: {
+        hi: 'स्नातक',
+        bn: 'স্নাতক'
+      },
+      Postgraduate: {
+        hi: 'स्नातकोत्तर',
+        bn: 'স্নাতকোত্তর'
+      },
+      Diploma: {
+        hi: 'डिप्लोमा',
+        bn: 'ডিপ্লোমা'
+      },
+      Other: {
+        hi: 'अन्य',
+        bn: 'অন্যান্য'
+      }
+    },
+
+    occupation: {
+      Student: {
+        hi: 'छात्र',
+        bn: 'শিক্ষার্থী'
+      },
+      Employed: {
+        hi: 'नौकरीपेशा',
+        bn: 'চাকরিজীবী'
+      },
+      'Self-employed': {
+        hi: 'स्वरोज़गार',
+        bn: 'স্বনিযুক্ত'
+      },
+      Unemployed: {
+        hi: 'बेरोज़गार',
+        bn: 'বেকার'
+      },
+      Other: {
+        hi: 'अन्य',
+        bn: 'অন্যান্য'
+      }
+    },
+
+    income: {
+      'Below ₹1 lakh': {
+        hi: '₹1 लाख से कम',
+        bn: '₹১ লক্ষের কম'
+      },
+      '₹1–3 lakh': {
+        hi: '₹1–3 लाख',
+        bn: '₹১–৩ লক্ষ'
+      },
+      '₹3–5 lakh': {
+        hi: '₹3–5 लाख',
+        bn: '₹৩–৫ লক্ষ'
+      },
+      '₹5–10 lakh': {
+        hi: '₹5–10 लाख',
+        bn: '₹৫–১০ লক্ষ'
+      },
+      'Above ₹10 lakh': {
+        hi: '₹10 लाख से अधिक',
+        bn: '₹১০ লক্ষের বেশি'
+      }
+    },
+
+    category: {
+      General: {
+        hi: 'सामान्य',
+        bn: 'সাধারণ'
+      },
+      OBC: {
+        hi: 'अन्य पिछड़ा वर्ग (OBC)',
+        bn: 'অন্যান্য অনগ্রসর শ্রেণি (OBC)'
+      },
+      SC: {
+        hi: 'अनुसूचित जाति (SC)',
+        bn: 'তফসিলি জাতি (SC)'
+      },
+      ST: {
+        hi: 'अनुसूचित जनजाति (ST)',
+        bn: 'তফসিলি উপজাতি (ST)'
+      },
+      'Prefer not to say': {
+        hi: 'बताना पसंद नहीं',
+        bn: 'জানাতে চাই না'
+      }
+    },
+
+    gender: {
+      Female: {
+        hi: 'महिला',
+        bn: 'মহিলা'
+      },
+      Male: {
+        hi: 'पुरुष',
+        bn: 'পুরুষ'
+      },
+      Other: {
+        hi: 'अन्य',
+        bn: 'অন্যান্য'
+      },
+      'Prefer not to say': {
+        hi: 'बताना पसंद नहीं',
+        bn: 'জানাতে চাই না'
+      }
+    },
+
+    disability: {
+      Yes: {
+        hi: 'हाँ',
+        bn: 'হ্যাঁ'
+      },
+      No: {
+        hi: 'नहीं',
+        bn: 'না'
+      },
+      'Prefer not to say': {
+        hi: 'बताना पसंद नहीं',
+        bn: 'জানাতে চাই না'
+      }
+    }
+  }
+
+  const getOptionLabel = (
+    category,
+    value
+  ) => {
+    if (language === 'en') {
+      return value
+    }
+
+    return (
+      optionTranslations[category]?.[value]?.[language] ||
+      value
+    )
+  }
+
   const t =
     content[language] ||
     content.en
@@ -142,6 +307,7 @@ function FindSchemes() {
         <section className="profile-summary">
 
           <div>
+
             <p className="section-label">
               {t.profileLabel}
             </p>
@@ -149,6 +315,7 @@ function FindSchemes() {
             <h2>
               {t.profileTitle}
             </h2>
+
           </div>
 
           <div className="profile-summary-grid">
@@ -163,49 +330,84 @@ function FindSchemes() {
             <div>
               <span>{t.state}</span>
               <strong>
-                {profile.state || notProvided}
+                {profile.state
+                  ? getOptionLabel(
+                      'state',
+                      profile.state
+                    )
+                  : notProvided}
               </strong>
             </div>
 
             <div>
               <span>{t.education}</span>
               <strong>
-                {profile.education || notProvided}
+                {profile.education
+                  ? getOptionLabel(
+                      'education',
+                      profile.education
+                    )
+                  : notProvided}
               </strong>
             </div>
 
             <div>
               <span>{t.occupation}</span>
               <strong>
-                {profile.occupation || notProvided}
+                {profile.occupation
+                  ? getOptionLabel(
+                      'occupation',
+                      profile.occupation
+                    )
+                  : notProvided}
               </strong>
             </div>
 
             <div>
               <span>{t.income}</span>
               <strong>
-                {profile.income || notProvided}
+                {profile.income
+                  ? getOptionLabel(
+                      'income',
+                      profile.income
+                    )
+                  : notProvided}
               </strong>
             </div>
 
             <div>
               <span>{t.category}</span>
               <strong>
-                {profile.category || notProvided}
+                {profile.category
+                  ? getOptionLabel(
+                      'category',
+                      profile.category
+                    )
+                  : notProvided}
               </strong>
             </div>
 
             <div>
               <span>{t.gender}</span>
               <strong>
-                {profile.gender || notProvided}
+                {profile.gender
+                  ? getOptionLabel(
+                      'gender',
+                      profile.gender
+                    )
+                  : notProvided}
               </strong>
             </div>
 
             <div>
               <span>{t.disability}</span>
               <strong>
-                {profile.disability || notProvided}
+                {profile.disability
+                  ? getOptionLabel(
+                      'disability',
+                      profile.disability
+                    )
+                  : notProvided}
               </strong>
             </div>
 

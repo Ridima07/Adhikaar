@@ -140,6 +140,208 @@ function SchemeDetails() {
     }
   }
 
+  const schemeTranslations = {
+    FIN001: {
+      name: {
+        hi: 'प्रधानमंत्री सुरक्षा बीमा योजना (PMSBY)',
+        bn: 'প্রধানমন্ত্রী সুরক্ষা বিমা যোজনা (PMSBY)'
+      },
+      category: {
+        hi: 'वित्तीय समावेशन / बीमा',
+        bn: 'আর্থিক অন্তর্ভুক্তি / বীমা'
+      },
+      description: {
+        hi: 'आकस्मिक मृत्यु या पूर्ण स्थायी विकलांगता के लिए ₹2,00,000 और आंशिक स्थायी विकलांगता के लिए ₹1,00,000 की सहायता (प्रीमियम: ₹20/वर्ष)।',
+        bn: 'আকস্মিক মৃত্যু বা সম্পূর্ণ স্থায়ী প্রতিবন্ধিতার জন্য ₹২,০০,০০০ এবং আংশিক স্থায়ী প্রতিবন্ধিতার জন্য ₹১,০০,০০০ সহায়তা (প্রিমিয়াম: ₹২০/বছর)।'
+      }
+    },
+
+    RUR002: {
+      name: {
+        hi: 'प्रधानमंत्री स्वामित्व योजना (PMSY)',
+        bn: 'প্রধানমন্ত্রী স্বামিত্ব প্রকল্প (PMSY)'
+      },
+      category: {
+        hi: 'ग्रामीण विकास / भूमि स्वामित्व',
+        bn: 'গ্রামীণ উন্নয়ন / জমির মালিকানা'
+      },
+      description: {
+        hi: 'आधिकारिक संपत्ति कार्ड जारी करना, जिससे वित्तीय ऋण प्राप्त करने और संपत्ति विवादों के समाधान में सहायता मिलती है।',
+        bn: 'অফিসিয়াল সম্পত্তি কার্ড জারি করা হয়, যা আর্থিক ঋণ পেতে এবং সম্পত্তি বিরোধ সমাধানে সহায়তা করে।'
+      }
+    },
+
+    MED004: {
+      name: {
+        hi: 'दिल्ली आरोग्य कोष (DAK)',
+        bn: 'দিল্লি আরোগ্য কোষ (DAK)'
+      },
+      category: {
+        hi: 'स्वास्थ्य सेवा / वित्तीय सहायता',
+        bn: 'স্বাস্থ্যসেবা / আর্থিক সহায়তা'
+      },
+      description: {
+        hi: 'गंभीर सर्जरी के लिए ₹5,00,000 तक की वित्तीय सहायता और सूचीबद्ध केंद्रों पर मुफ्त उच्च स्तरीय नैदानिक परीक्षण (MRI, PET-CT)।',
+        bn: 'জটিল অস্ত্রোপচারের জন্য ₹৫,০০,০০০ পর্যন্ত আর্থিক সহায়তা এবং তালিকাভুক্ত কেন্দ্রে বিনামূল্যে উচ্চমানের ডায়াগনস্টিক পরীক্ষা (MRI, PET-CT)।'
+      }
+    }
+  }
+
+  const eligibilityLabels = {
+    age: {
+      hi: 'आयु',
+      bn: 'বয়স'
+    },
+    state: {
+      hi: 'राज्य',
+      bn: 'রাজ্য'
+    },
+    district: {
+      hi: 'जिला',
+      bn: 'জেলা'
+    },
+    residence_requirement: {
+      hi: 'निवास की आवश्यकता',
+      bn: 'বাসস্থানের প্রয়োজনীয়তা'
+    },
+    occupation: {
+      hi: 'व्यवसाय',
+      bn: 'পেশা'
+    },
+    user_type: {
+      hi: 'उपयोगकर्ता प्रकार',
+      bn: 'ব্যবহারকারীর ধরন'
+    },
+    education_level: {
+      hi: 'शिक्षा स्तर',
+      bn: 'শিক্ষার স্তর'
+    },
+    course_type: {
+      hi: 'पाठ्यक्रम प्रकार',
+      bn: 'কোর্সের ধরন'
+    },
+    institution_type: {
+      hi: 'संस्थान प्रकार',
+      bn: 'প্রতিষ্ঠানের ধরন'
+    },
+    social_category: {
+      hi: 'सामाजिक श्रेणी',
+      bn: 'সামাজিক শ্রেণি'
+    },
+    gender: {
+      hi: 'लिंग',
+      bn: 'লিঙ্গ'
+    },
+    disability_status: {
+      hi: 'दिव्यांगता स्थिति',
+      bn: 'প্রতিবন্ধিতার অবস্থা'
+    },
+    disability_percentage: {
+      hi: 'दिव्यांगता प्रतिशत',
+      bn: 'প্রতিবন্ধিতার শতাংশ'
+    },
+    annual_income: {
+      hi: 'वार्षिक आय',
+      bn: 'বার্ষিক আয়'
+    },
+    employment_status: {
+      hi: 'रोज़गार स्थिति',
+      bn: 'কর্মসংস্থানের অবস্থা'
+    },
+    other_conditions: {
+      hi: 'अन्य शर्तें',
+      bn: 'অন্যান্য শর্ত'
+    },
+    original_eligibility_text: {
+      hi: 'मूल पात्रता पाठ',
+      bn: 'মূল যোগ্যতার বিবরণ'
+    }
+  }
+
+  const commonTextTranslations = {
+    'No age restriction': {
+      hi: 'आयु की कोई सीमा नहीं',
+      bn: 'বয়সের কোনো সীমা নেই'
+    },
+    Delhi: {
+      hi: 'दिल्ली',
+      bn: 'দিল्ली'
+    },
+    'Open to all': {
+      hi: 'सभी के लिए खुला',
+      bn: 'সকলের জন্য উন্মুক্ত'
+    },
+    'No requirement': {
+      hi: 'कोई आवश्यकता नहीं',
+      bn: 'কোনো প্রয়োজন নেই'
+    },
+    'Must hold individual savings account in participating bank/post office and authorize auto-debit': {
+      hi: 'भाग लेने वाले बैंक/डाकघर में व्यक्तिगत बचत खाता होना चाहिए और ऑटो-डेबिट की अनुमति देनी होगी।',
+      bn: 'অংশগ্রহণকারী ব্যাংক/ডাকঘরে ব্যক্তিগত সঞ্চয় অ্যাকাউন্ট থাকতে হবে এবং অটো-ডেবিটের অনুমতি দিতে হবে।'
+    },
+    'Resident of Delhi holding valid Voter ID / Proof of residence for 3 years': {
+      hi: 'दिल्ली का निवासी होना चाहिए और 3 वर्षों के निवास का वैध मतदाता पहचान पत्र या निवास प्रमाण होना चाहिए।',
+      bn: 'দিল্লির বাসিন্দা হতে হবে এবং ৩ বছরের বসবাসের বৈধ ভোটার আইডি বা বাসস্থানের প্রমাণ থাকতে হবে।'
+    },
+    'Treatment or diagnostic test referred by a Delhi Govt hospital to empaneled private centres': {
+      hi: 'उपचार या नैदानिक परीक्षण के लिए दिल्ली सरकार के अस्पताल से सूचीबद्ध निजी केंद्र में रेफरल होना चाहिए।',
+      bn: 'চিকিৎসা বা ডায়াগনস্টিক পরীক্ষার জন্য দিল্লি সরকারের হাসপাতাল থেকে তালিকাভুক্ত বেসরকারি কেন্দ্রে রেফার করা হতে হবে।'
+    },
+    'Annual family income up to ₹3,00,000 (No income bar for road accident victims)': {
+      hi: 'वार्षिक पारिवारिक आय ₹3,00,000 तक होनी चाहिए (सड़क दुर्घटना पीड़ितों के लिए आय सीमा नहीं है)।',
+      bn: 'বার্ষিক পারিবারিক আয় ₹৩,০০,০০০ পর্যন্ত হতে হবে (সড়ক দুর্ঘটনার শিকারদের জন্য আয়ের কোনো সীমা নেই)।'
+    },
+    'State: Delhi; Residence: Minimum 3 years; Annual Income: Up to ₹3,00,000; Referred by Delhi Govt Hospital': {
+      hi: 'राज्य: दिल्ली; निवास: न्यूनतम 3 वर्ष; वार्षिक आय: ₹3,00,000 तक; दिल्ली सरकार के अस्पताल से रेफरल आवश्यक।',
+      bn: 'রাজ্য: দিল্লি; বাসস্থান: ন্যূনতম ৩ বছর; বার্ষিক আয়: ₹৩,০০,০০০ পর্যন্ত; দিল্লি সরকারের হাসপাতাল থেকে রেফারেল প্রয়োজন।'
+    }
+  }
+
+  const translateText = (value) => {
+    if (
+      value === null ||
+      value === undefined ||
+      value === ''
+    ) {
+      return value
+    }
+
+    if (language === 'en') {
+      return String(value)
+    }
+
+    const text = String(value)
+
+    if (
+      commonTextTranslations[text]?.[language]
+    ) {
+      return commonTextTranslations[text][language]
+    }
+
+    return text
+  }
+
+  const translateSchemeField = (
+    field,
+    value
+  ) => {
+    if (
+      language === 'en' ||
+      value === null ||
+      value === undefined
+    ) {
+      return value
+    }
+
+    if (
+      schemeTranslations[schemeId]?.[field]?.[language]
+    ) {
+      return schemeTranslations[schemeId][field][language]
+    }
+
+    return translateText(value)
+  }
+
   const t =
     content[language] ||
     content.en
@@ -174,7 +376,11 @@ function SchemeDetails() {
         console.error(error)
 
         setError(
-          'Could not load this scheme.'
+          language === 'hi'
+            ? 'यह योजना लोड नहीं हो सकी।'
+            : language === 'bn'
+              ? 'এই স্কিমটি লোড করা যায়নি।'
+              : 'Could not load this scheme.'
         )
       } finally {
         setLoading(false)
@@ -182,9 +388,16 @@ function SchemeDetails() {
     }
 
     fetchScheme()
-  }, [schemeId])
+  }, [schemeId, language])
 
   const formatEligibilityKey = (key) => {
+    if (
+      language !== 'en' &&
+      eligibilityLabels[key]?.[language]
+    ) {
+      return eligibilityLabels[key][language]
+    }
+
     return key
       .replaceAll('_', ' ')
       .replace(
@@ -193,32 +406,84 @@ function SchemeDetails() {
       )
   }
 
-  const formatEligibilityValue = (value) => {
+  const formatEligibilityValue = (key, value) => {
+    if (
+      value === null ||
+      value === undefined ||
+      value === ''
+    ) {
+      return null
+    }
+
     if (Array.isArray(value)) {
-      return value.join(', ')
+      const translatedItems =
+        value
+          .map((item) =>
+            translateText(item)
+          )
+          .filter(Boolean)
+
+      return translatedItems.join(', ')
     }
 
     if (
-      typeof value === 'object' &&
-      value !== null
+      typeof value === 'object'
+      && value !== null
     ) {
       if (value.original_text) {
-        return String(
+        return translateText(
           value.original_text
         )
       }
 
       return Object.entries(value)
         .map(
-          ([key, item]) =>
-            `${formatEligibilityKey(
-              key
-            )}: ${String(item)}`
+          ([childKey, item]) => {
+
+            if (
+              item === null ||
+              item === undefined ||
+              item === ''
+            ) {
+              return null
+            }
+
+            return `${formatEligibilityKey(
+              childKey
+            )}: ${translateText(item)}`
+          }
         )
+        .filter(Boolean)
         .join(', ')
     }
 
-    return String(value)
+    return translateText(value)
+  }
+
+  const translateListItem = (item) => {
+    if (!item) {
+      return ''
+    }
+
+    return translateText(item)
+  }
+
+  const translateReason = (reason) => {
+    if (!reason) {
+      return t.statusFallback
+    }
+
+    const knownReasons = {
+      'Medical superintendent endorsement and income verification from revenue authorities are mandatory.': {
+        hi: 'चिकित्सा अधीक्षक की स्वीकृति और राजस्व अधिकारियों से आय सत्यापन अनिवार्य है।',
+        bn: 'মেডিক্যাল সুপারিনটেনডেন্টের অনুমোদন এবং রাজস্ব কর্তৃপক্ষের কাছ থেকে আয় যাচাই বাধ্যতামূলক।'
+      }
+    }
+
+    return (
+      knownReasons[reason]?.[language] ||
+      translateText(reason)
+    )
   }
 
   if (loading) {
@@ -318,6 +583,45 @@ function SchemeDetails() {
     )
   }
 
+  const schemeName =
+    translateSchemeField(
+      'name',
+      scheme.scheme_name
+    )
+
+  const schemeCategory =
+    translateSchemeField(
+      'category',
+      scheme.category
+    ) || t.general
+
+  const schemeDescription =
+    translateSchemeField(
+      'description',
+      scheme.benefit?.description
+    ) ||
+    t.benefitFallback
+
+  const additionalConditions =
+    (scheme.additional_conditions || [])
+      .map(translateListItem)
+      .filter(Boolean)
+
+  const requiredDocuments =
+    (scheme.required_documents || [])
+      .map(translateListItem)
+      .filter(Boolean)
+
+  const optionalDocuments =
+    (scheme.optional_documents || [])
+      .map(translateListItem)
+      .filter(Boolean)
+
+  const applicationSteps =
+    (scheme.application_steps || [])
+      .map(translateListItem)
+      .filter(Boolean)
+
   return (
     <div className="scheme-details-page">
 
@@ -353,20 +657,17 @@ function SchemeDetails() {
         <div className="scheme-details-header">
 
           <span className="scheme-category">
-
-            {scheme.category
-              ? scheme.category.toUpperCase()
-              : t.general}
-
+            {language === 'en'
+              ? schemeCategory.toUpperCase()
+              : schemeCategory}
           </span>
 
           <h1>
-            {scheme.scheme_name}
+            {schemeName}
           </h1>
 
           <p>
-            {scheme.benefit?.description ||
-              t.benefitFallback}
+            {schemeDescription}
           </p>
 
         </div>
@@ -389,8 +690,9 @@ function SchemeDetails() {
           </div>
 
           <p>
-            {scheme.manual_verification_reason ||
-              t.statusFallback}
+            {translateReason(
+              scheme.manual_verification_reason
+            )}
           </p>
 
         </section>
@@ -409,7 +711,7 @@ function SchemeDetails() {
             </h2>
 
             <p>
-              {scheme.benefit?.description ||
+              {schemeDescription ||
                 t.benefitFallbackLong}
             </p>
 
@@ -427,41 +729,55 @@ function SchemeDetails() {
             </h2>
 
             {scheme.eligibility &&
-            Object.keys(
+            Object.entries(
               scheme.eligibility
-            ).length > 0 ? (
+            ).some(
+              ([, value]) =>
+                value !== null &&
+                value !== undefined &&
+                value !== ''
+            ) ? (
 
               <div className="criteria-list">
 
                 {Object.entries(
                   scheme.eligibility
                 ).map(
-                  ([key, value]) => (
+                  ([key, value]) => {
 
-                    <div
-                      className="criteria-item"
-                      key={key}
-                    >
+                    const formattedValue =
+                      formatEligibilityValue(
+                        key,
+                        value
+                      )
 
-                      <div>
+                    if (!formattedValue) {
+                      return null
+                    }
 
-                        <strong>
-                          {formatEligibilityKey(
-                            key
-                          )}
-                        </strong>
+                    return (
+                      <div
+                        className="criteria-item"
+                        key={key}
+                      >
 
-                        <p>
-                          {formatEligibilityValue(
-                            value
-                          )}
-                        </p>
+                        <div>
+
+                          <strong>
+                            {formatEligibilityKey(
+                              key
+                            )}
+                          </strong>
+
+                          <p>
+                            {formattedValue}
+                          </p>
+
+                        </div>
 
                       </div>
-
-                    </div>
-
-                  )
+                    )
+                  }
                 )}
 
               </div>
@@ -477,7 +793,7 @@ function SchemeDetails() {
           </section>
 
 
-          {scheme.additional_conditions?.length > 0 && (
+          {additionalConditions.length > 0 && (
 
             <section className="details-section">
 
@@ -487,7 +803,7 @@ function SchemeDetails() {
 
               <ul className="document-list">
 
-                {scheme.additional_conditions.map(
+                {additionalConditions.map(
                   (condition, index) => (
 
                     <li key={index}>
@@ -514,11 +830,11 @@ function SchemeDetails() {
               {t.documentsTitle}
             </h2>
 
-            {scheme.required_documents?.length > 0 ? (
+            {requiredDocuments.length > 0 ? (
 
               <ul className="document-list">
 
-                {scheme.required_documents.map(
+                {requiredDocuments.map(
                   (document, index) => (
 
                     <li key={index}>
@@ -541,7 +857,7 @@ function SchemeDetails() {
           </section>
 
 
-          {scheme.optional_documents?.length > 0 && (
+          {optionalDocuments.length > 0 && (
 
             <section className="details-section">
 
@@ -551,7 +867,7 @@ function SchemeDetails() {
 
               <ul className="document-list">
 
-                {scheme.optional_documents.map(
+                {optionalDocuments.map(
                   (document, index) => (
 
                     <li key={index}>
@@ -578,11 +894,11 @@ function SchemeDetails() {
               {t.applicationSteps}
             </h2>
 
-            {scheme.application_steps?.length > 0 ? (
+            {applicationSteps.length > 0 ? (
 
               <ol className="document-list">
 
-                {scheme.application_steps.map(
+                {applicationSteps.map(
                   (step, index) => (
 
                     <li key={index}>

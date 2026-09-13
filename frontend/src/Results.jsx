@@ -97,6 +97,104 @@ function Results() {
     }
   }
 
+  const schemeNames = {
+    'pradhan mantri suraksha bima yojana (pmsby)': {
+      hi: 'प्रधानमंत्री सुरक्षा बीमा योजना (PMSBY)',
+      bn: 'প্রধানমন্ত্রী সুরক্ষা বিমা যোজনা (PMSBY)'
+    },
+
+    'pradhan mantri svamitva scheme (pmsy)': {
+      hi: 'प्रधानमंत्री स्वामित्व योजना (PMSY)',
+      bn: 'প্রধানমন্ত্রী স্বামিত্ব প্রকল্প (PMSY)'
+    },
+
+    'delhi arogya kosh (dak)': {
+      hi: 'दिल्ली आरोग्य कोष (DAK)',
+      bn: 'দিল্লি আরোগ্য কোষ (DAK)'
+    }
+  }
+
+  const categories = {
+    'financial inclusion / insurance': {
+      hi: 'वित्तीय समावेशन / बीमा',
+      bn: 'আর্থিক অন্তর্ভুক্তি / বীমা'
+    },
+
+    'rural development / land ownership': {
+      hi: 'ग्रामीण विकास / भूमि स्वामित्व',
+      bn: 'গ্রামীণ উন্নয়ন / জমির মালিকানা'
+    },
+
+    'healthcare / financial assistance': {
+      hi: 'स्वास्थ्य सेवा / वित्तीय सहायता',
+      bn: 'স্বাস্থ্যসেবা / আর্থিক সহায়তা'
+    }
+  }
+
+  const summaries = {
+    'you satisfy all the known eligibility conditions for this scheme.': {
+      hi: 'आप इस योजना की सभी ज्ञात पात्रता शर्तों को पूरा करते हैं।',
+      bn: 'আপনি এই প্রকল্পের সমস্ত পরিচিত যোগ্যতার শর্ত পূরণ করেন।'
+    },
+
+    'you satisfy all the known eligibility conditions for this scheme. some conditions may still require official verification.': {
+      hi: 'आप इस योजना की सभी ज्ञात पात्रता शर्तों को पूरा करते हैं। कुछ शर्तों के लिए अभी भी आधिकारिक सत्यापन आवश्यक हो सकता है।',
+      bn: 'আপনি এই প্রকল্পের সমস্ত পরিচিত যোগ্যতার শর্ত পূরণ করেন। কিছু শর্তের জন্য এখনও সরকারি যাচাই প্রয়োজন হতে পারে।'
+    }
+  }
+
+  const translateSchemeName = (name) => {
+    if (!name || language === 'en') {
+      return name
+    }
+
+    const key =
+      String(name)
+        .trim()
+        .toLowerCase()
+
+    return (
+      schemeNames[key]?.[language] ||
+      name
+    )
+  }
+
+  const translateCategory = (category) => {
+    if (!category) {
+      return ''
+    }
+
+    if (language === 'en') {
+      return category
+    }
+
+    const key =
+      String(category)
+        .trim()
+        .toLowerCase()
+
+    return (
+      categories[key]?.[language] ||
+      category
+    )
+  }
+
+  const translateSummary = (summary) => {
+    if (!summary || language === 'en') {
+      return summary
+    }
+
+    const key =
+      String(summary)
+        .trim()
+        .toLowerCase()
+
+    return (
+      summaries[key]?.[language] ||
+      summary
+    )
+  }
+
   const t =
     content[language] ||
     content.en
@@ -114,7 +212,7 @@ function Results() {
   const recommendations =
     data.recommendations || []
 
-  const categories =
+  const categoriesCount =
     new Set(
       recommendations.map(
         (scheme) => scheme.category
@@ -235,7 +333,7 @@ function Results() {
           <div>
 
             <span className="result-number">
-              {categories}
+              {categoriesCount}
             </span>
 
             <p>
@@ -316,16 +414,22 @@ function Results() {
 
                       <span>
                         {scheme.category
-                          ? scheme.category.toUpperCase()
+                          ? translateCategory(
+                              scheme.category
+                            )
                           : t.general}
                       </span>
 
                       <h3>
-                        {scheme.scheme_name}
+                        {translateSchemeName(
+                          scheme.scheme_name
+                        )}
                       </h3>
 
                       <p>
-                        {scheme.eligibility_summary ||
+                        {translateSummary(
+                          scheme.eligibility_summary
+                        ) ||
                           t.genericSchemeText}
                       </p>
 

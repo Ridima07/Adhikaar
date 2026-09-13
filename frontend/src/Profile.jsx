@@ -86,9 +86,174 @@ function Profile() {
     }
   }
 
+  const optionTranslations = {
+    state: {
+      Delhi: {
+        hi: 'दिल्ली',
+        bn: 'দিল্লি'
+      },
+      Haryana: {
+        hi: 'हरियाणा',
+        bn: 'হরিয়ানা'
+      },
+      'Uttar Pradesh': {
+        hi: 'उत्तर प्रदेश',
+        bn: 'উত্তর প্রদেশ'
+      },
+      Rajasthan: {
+        hi: 'राजस्थान',
+        bn: 'রাজস্থান'
+      },
+      Maharashtra: {
+        hi: 'महाराष्ट्र',
+        bn: 'মহারাষ্ট্র'
+      }
+    },
+
+    education: {
+      School: {
+        hi: 'स्कूल',
+        bn: 'স্কুল'
+      },
+      Undergraduate: {
+        hi: 'स्नातक',
+        bn: 'স্নাতক'
+      },
+      Postgraduate: {
+        hi: 'स्नातकोत्तर',
+        bn: 'স্নাতকোত্তর'
+      },
+      Diploma: {
+        hi: 'डिप्लोमा',
+        bn: 'ডিপ্লোমা'
+      },
+      Other: {
+        hi: 'अन्य',
+        bn: 'অন্যান্য'
+      }
+    },
+
+    occupation: {
+      Student: {
+        hi: 'छात्र',
+        bn: 'শিক্ষার্থী'
+      },
+      Employed: {
+        hi: 'नौकरीपेशा',
+        bn: 'চাকরিজীবী'
+      },
+      'Self-employed': {
+        hi: 'स्वरोज़गार',
+        bn: 'স্বনিযুক্ত'
+      },
+      Unemployed: {
+        hi: 'बेरोज़गार',
+        bn: 'বেকার'
+      },
+      Other: {
+        hi: 'अन्य',
+        bn: 'অন্যান্য'
+      }
+    },
+
+    income: {
+      'Below ₹1 lakh': {
+        hi: '₹1 लाख से कम',
+        bn: '₹১ লক্ষের কম'
+      },
+      '₹1–3 lakh': {
+        hi: '₹1–3 लाख',
+        bn: '₹১–৩ লক্ষ'
+      },
+      '₹3–5 lakh': {
+        hi: '₹3–5 लाख',
+        bn: '₹৩–৫ লক্ষ'
+      },
+      '₹5–10 lakh': {
+        hi: '₹5–10 लाख',
+        bn: '₹৫–১০ লক্ষ'
+      },
+      'Above ₹10 lakh': {
+        hi: '₹10 लाख से अधिक',
+        bn: '₹১০ লক্ষের বেশি'
+      }
+    },
+
+    category: {
+      General: {
+        hi: 'सामान्य',
+        bn: 'সাধারণ'
+      },
+      OBC: {
+        hi: 'अन्य पिछड़ा वर्ग (OBC)',
+        bn: 'অন্যান্য অনগ্রসর শ্রেণি (OBC)'
+      },
+      SC: {
+        hi: 'अनुसूचित जाति (SC)',
+        bn: 'তফসিলি জাতি (SC)'
+      },
+      ST: {
+        hi: 'अनुसूचित जनजाति (ST)',
+        bn: 'তফসিলি উপজাতি (ST)'
+      },
+      'Prefer not to say': {
+        hi: 'बताना पसंद नहीं',
+        bn: 'জানাতে চাই না'
+      }
+    },
+
+    gender: {
+      Female: {
+        hi: 'महिला',
+        bn: 'মহিলা'
+      },
+      Male: {
+        hi: 'पुरुष',
+        bn: 'পুরুষ'
+      },
+      Other: {
+        hi: 'अन्य',
+        bn: 'অন্যান্য'
+      },
+      'Prefer not to say': {
+        hi: 'बताना पसंद नहीं',
+        bn: 'জানাতে চাই না'
+      }
+    },
+
+    disability: {
+      Yes: {
+        hi: 'हाँ',
+        bn: 'হ্যাঁ'
+      },
+      No: {
+        hi: 'नहीं',
+        bn: 'না'
+      },
+      'Prefer not to say': {
+        hi: 'बताना पसंद नहीं',
+        bn: 'জানাতে চাই না'
+      }
+    }
+  }
+
   const t =
     content[language] ||
     content.en
+
+  const getOptionLabel = (
+    category,
+    value
+  ) => {
+    if (language === 'en') {
+      return value
+    }
+
+    return (
+      optionTranslations[category]?.[value]?.[language] ||
+      value
+    )
+  }
 
   const [profile, setProfile] = useState({
     age: '',
@@ -251,11 +416,25 @@ function Profile() {
                     {t.statePlaceholder}
                   </option>
 
-                  <option>Delhi</option>
-                  <option>Haryana</option>
-                  <option>Uttar Pradesh</option>
-                  <option>Rajasthan</option>
-                  <option>Maharashtra</option>
+                  <option value="Delhi">
+                    {getOptionLabel('state', 'Delhi')}
+                  </option>
+
+                  <option value="Haryana">
+                    {getOptionLabel('state', 'Haryana')}
+                  </option>
+
+                  <option value="Uttar Pradesh">
+                    {getOptionLabel('state', 'Uttar Pradesh')}
+                  </option>
+
+                  <option value="Rajasthan">
+                    {getOptionLabel('state', 'Rajasthan')}
+                  </option>
+
+                  <option value="Maharashtra">
+                    {getOptionLabel('state', 'Maharashtra')}
+                  </option>
 
                 </select>
 
@@ -279,11 +458,25 @@ function Profile() {
                     {t.educationPlaceholder}
                   </option>
 
-                  <option>School</option>
-                  <option>Undergraduate</option>
-                  <option>Postgraduate</option>
-                  <option>Diploma</option>
-                  <option>Other</option>
+                  <option value="School">
+                    {getOptionLabel('education', 'School')}
+                  </option>
+
+                  <option value="Undergraduate">
+                    {getOptionLabel('education', 'Undergraduate')}
+                  </option>
+
+                  <option value="Postgraduate">
+                    {getOptionLabel('education', 'Postgraduate')}
+                  </option>
+
+                  <option value="Diploma">
+                    {getOptionLabel('education', 'Diploma')}
+                  </option>
+
+                  <option value="Other">
+                    {getOptionLabel('education', 'Other')}
+                  </option>
 
                 </select>
 
@@ -307,11 +500,25 @@ function Profile() {
                     {t.occupationPlaceholder}
                   </option>
 
-                  <option>Student</option>
-                  <option>Employed</option>
-                  <option>Self-employed</option>
-                  <option>Unemployed</option>
-                  <option>Other</option>
+                  <option value="Student">
+                    {getOptionLabel('occupation', 'Student')}
+                  </option>
+
+                  <option value="Employed">
+                    {getOptionLabel('occupation', 'Employed')}
+                  </option>
+
+                  <option value="Self-employed">
+                    {getOptionLabel('occupation', 'Self-employed')}
+                  </option>
+
+                  <option value="Unemployed">
+                    {getOptionLabel('occupation', 'Unemployed')}
+                  </option>
+
+                  <option value="Other">
+                    {getOptionLabel('occupation', 'Other')}
+                  </option>
 
                 </select>
 
@@ -335,11 +542,25 @@ function Profile() {
                     {t.incomePlaceholder}
                   </option>
 
-                  <option>Below ₹1 lakh</option>
-                  <option>₹1–3 lakh</option>
-                  <option>₹3–5 lakh</option>
-                  <option>₹5–10 lakh</option>
-                  <option>Above ₹10 lakh</option>
+                  <option value="Below ₹1 lakh">
+                    {getOptionLabel('income', 'Below ₹1 lakh')}
+                  </option>
+
+                  <option value="₹1–3 lakh">
+                    {getOptionLabel('income', '₹1–3 lakh')}
+                  </option>
+
+                  <option value="₹3–5 lakh">
+                    {getOptionLabel('income', '₹3–5 lakh')}
+                  </option>
+
+                  <option value="₹5–10 lakh">
+                    {getOptionLabel('income', '₹5–10 lakh')}
+                  </option>
+
+                  <option value="Above ₹10 lakh">
+                    {getOptionLabel('income', 'Above ₹10 lakh')}
+                  </option>
 
                 </select>
 
@@ -363,11 +584,28 @@ function Profile() {
                     {t.categoryPlaceholder}
                   </option>
 
-                  <option>General</option>
-                  <option>OBC</option>
-                  <option>SC</option>
-                  <option>ST</option>
-                  <option>Prefer not to say</option>
+                  <option value="General">
+                    {getOptionLabel('category', 'General')}
+                  </option>
+
+                  <option value="OBC">
+                    {getOptionLabel('category', 'OBC')}
+                  </option>
+
+                  <option value="SC">
+                    {getOptionLabel('category', 'SC')}
+                  </option>
+
+                  <option value="ST">
+                    {getOptionLabel('category', 'ST')}
+                  </option>
+
+                  <option value="Prefer not to say">
+                    {getOptionLabel(
+                      'category',
+                      'Prefer not to say'
+                    )}
+                  </option>
 
                 </select>
 
@@ -391,10 +629,24 @@ function Profile() {
                     {t.genderPlaceholder}
                   </option>
 
-                  <option>Female</option>
-                  <option>Male</option>
-                  <option>Other</option>
-                  <option>Prefer not to say</option>
+                  <option value="Female">
+                    {getOptionLabel('gender', 'Female')}
+                  </option>
+
+                  <option value="Male">
+                    {getOptionLabel('gender', 'Male')}
+                  </option>
+
+                  <option value="Other">
+                    {getOptionLabel('gender', 'Other')}
+                  </option>
+
+                  <option value="Prefer not to say">
+                    {getOptionLabel(
+                      'gender',
+                      'Prefer not to say'
+                    )}
+                  </option>
 
                 </select>
 
@@ -418,9 +670,20 @@ function Profile() {
                     {t.disabilityPlaceholder}
                   </option>
 
-                  <option>Yes</option>
-                  <option>No</option>
-                  <option>Prefer not to say</option>
+                  <option value="Yes">
+                    {getOptionLabel('disability', 'Yes')}
+                  </option>
+
+                  <option value="No">
+                    {getOptionLabel('disability', 'No')}
+                  </option>
+
+                  <option value="Prefer not to say">
+                    {getOptionLabel(
+                      'disability',
+                      'Prefer not to say'
+                    )}
+                  </option>
 
                 </select>
 
