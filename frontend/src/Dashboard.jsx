@@ -47,8 +47,7 @@ function Dashboard() {
           )
         }
 
-        const data =
-          await response.json()
+        const data = await response.json()
 
         const freshRecommendations =
           data.recommendations || []
@@ -88,9 +87,6 @@ function Dashboard() {
 
     loadRecommendations()
   }, [])
-
-  const topRecommendations =
-    recommendations.slice(0, 3)
 
   return (
     <div className="dashboard-page">
@@ -186,7 +182,7 @@ function Dashboard() {
 
             </div>
 
-          ) : topRecommendations.length === 0 ? (
+          ) : recommendations.length === 0 ? (
 
             <div className="scheme-card">
 
@@ -208,7 +204,7 @@ function Dashboard() {
 
             <div className="scheme-grid">
 
-              {topRecommendations.map(
+              {recommendations.map(
                 (scheme) => (
 
                   <div

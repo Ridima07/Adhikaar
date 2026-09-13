@@ -7,23 +7,28 @@
 
   background:
     radial-gradient(
-      circle at 8% 10%,
-      rgba(111, 53, 69, 0.06),
+      circle at 7% 8%,
+      rgba(111, 53, 69, 0.065),
       transparent 25%
     ),
     radial-gradient(
-      circle at 92% 88%,
-      rgba(184, 117, 120, 0.06),
-      transparent 25%
+      circle at 94% 88%,
+      rgba(184, 117, 120, 0.065),
+      transparent 24%
     ),
     var(--bg);
 
   color: var(--text);
 }
 
+
+/* ========================================
+   CONTAINER
+======================================== */
+
 .dashboard-container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1240px;
 
   margin: 0 auto;
 
@@ -40,9 +45,13 @@
   align-items: flex-end;
   justify-content: space-between;
 
-  gap: 40px;
+  gap: 50px;
 
-  margin-bottom: 70px;
+  margin-bottom: 76px;
+}
+
+.dashboard-header > div {
+  min-width: 0;
 }
 
 .dashboard-header h1 {
@@ -50,22 +59,22 @@
 
   color: var(--burgundy-dark);
 
-  font-size: clamp(3rem, 6vw, 4.6rem);
-  line-height: 0.98;
+  font-size: clamp(3rem, 6vw, 4.7rem);
+  line-height: 0.96;
 
   letter-spacing: -0.055em;
   font-weight: 720;
 }
 
 .dashboard-header p:last-child {
-  max-width: 650px;
+  max-width: 680px;
 
   margin: 0;
 
   color: var(--text-muted);
 
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
 .profile-link {
@@ -75,9 +84,9 @@
   align-items: center;
   justify-content: center;
 
-  min-height: 42px;
+  min-height: 43px;
 
-  padding: 0 18px;
+  padding: 0 19px;
 
   color: var(--burgundy);
 
@@ -86,8 +95,8 @@
   border: 1px solid var(--border-dark);
   border-radius: 6px;
 
-  font-size: 0.86rem;
-  font-weight: 650;
+  font-size: 0.85rem;
+  font-weight: 700;
 
   text-decoration: none;
 
@@ -100,93 +109,150 @@
 
 .profile-link:hover {
   color: #fff;
+
   background: var(--burgundy);
+
   border-color: var(--burgundy);
 
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 
 /* ========================================
-   SECTION
+   DASHBOARD SECTION
 ======================================== */
 
 .dashboard-section {
-  margin-bottom: 78px;
+  margin-bottom: 86px;
 }
 
 .section-heading {
-  margin-bottom: 34px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin-bottom: 30px;
 }
 
 .section-heading h2 {
-  margin: 12px 0 0;
+  margin: 11px 0 0;
 
   color: var(--burgundy-dark);
 
-  font-size: clamp(1.8rem, 3vw, 2.25rem);
-  line-height: 1.1;
+  font-size: clamp(1.8rem, 3vw, 2.3rem);
+  line-height: 1.08;
 
-  letter-spacing: -0.035em;
+  letter-spacing: -0.04em;
 }
 
 
 /* ========================================
-   SCHEME CARDS
+   SCHEME CAROUSEL
 ======================================== */
 
 .scheme-grid {
   display: grid;
 
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
+  grid-auto-flow: column;
+  grid-auto-columns:
+    calc((100% - 36px) / 3);
 
   gap: 18px;
+
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding: 3px 2px 13px;
+
+  scroll-snap-type: x proximity;
+
+  scrollbar-width: thin;
+  scrollbar-color:
+    var(--border-dark)
+    transparent;
 }
 
+.scheme-grid::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scheme-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scheme-grid::-webkit-scrollbar-thumb {
+  background: var(--border-dark);
+  border-radius: 999px;
+}
+
+.scheme-grid::-webkit-scrollbar-thumb:hover {
+  background: var(--burgundy);
+}
+
+
+/* ========================================
+   SCHEME CARD
+======================================== */
+
 .scheme-card {
-  min-height: 285px;
+  position: relative;
+
+  min-width: 0;
+  min-height: 290px;
 
   display: flex;
   flex-direction: column;
 
   padding: 30px;
 
-  background: rgba(255, 255, 255, 0.82);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.95),
+      rgba(253, 250, 248, 0.9)
+    );
 
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 9px;
+
+  scroll-snap-align: start;
 
   transition:
-    transform 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
+    transform 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    background-color 0.28s ease;
 }
 
 .scheme-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
 
   border-color: var(--border-dark);
 
-  box-shadow: var(--shadow-sm);
+  background: #fff;
+
+  box-shadow: var(--shadow-md);
 }
 
 .scheme-category {
   color: var(--burgundy);
 
-  font-size: 0.68rem;
+  font-size: 0.67rem;
   font-weight: 750;
+
   letter-spacing: 0.14em;
 
   text-transform: uppercase;
 }
 
 .scheme-card h3 {
-  margin: 34px 0 12px;
+  margin: 34px 0 13px;
 
   color: var(--burgundy-dark);
 
-  font-size: 1.3rem;
+  font-size: 1.28rem;
   line-height: 1.25;
 
   letter-spacing: -0.025em;
@@ -198,25 +264,35 @@
   color: var(--text-muted);
 
   font-size: 0.9rem;
-  line-height: 1.7;
+  line-height: 1.72;
 }
 
 .scheme-card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  width: fit-content;
+
   margin-top: auto;
   padding-top: 25px;
 
   color: var(--burgundy);
 
-  font-size: 0.84rem;
-  font-weight: 700;
+  font-size: 0.83rem;
+  font-weight: 750;
 
   text-decoration: none;
 
-  transition: color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    gap 0.2s ease;
 }
 
 .scheme-card a:hover {
   color: var(--rose);
+
+  gap: 8px;
 }
 
 
@@ -225,16 +301,25 @@
 ======================================== */
 
 .find-section {
+  position: relative;
+  overflow: hidden;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  gap: 50px;
+  gap: 55px;
 
-  margin-bottom: 78px;
-  padding: 44px;
+  margin-bottom: 82px;
+
+  padding: 45px;
 
   background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(173, 135, 88, 0.12),
+      transparent 30%
+    ),
     linear-gradient(
       135deg,
       var(--burgundy-soft),
@@ -242,32 +327,57 @@
     );
 
   border: 1px solid var(--border-dark);
-  border-radius: 8px;
+  border-radius: 9px;
+}
+
+.find-section::after {
+  content: "";
+
+  position: absolute;
+
+  width: 240px;
+  height: 240px;
+
+  right: -120px;
+  bottom: -135px;
+
+  border: 1px solid rgba(111, 53, 69, 0.1);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.find-section > div {
+  position: relative;
+  z-index: 1;
 }
 
 .find-section h2 {
-  margin: 12px 0 14px;
+  margin: 11px 0 14px;
 
   color: var(--burgundy-dark);
 
-  font-size: clamp(1.8rem, 3vw, 2.25rem);
-  line-height: 1.1;
+  font-size: clamp(1.8rem, 3vw, 2.3rem);
+  line-height: 1.08;
 
-  letter-spacing: -0.035em;
+  letter-spacing: -0.04em;
 }
 
 .find-section p:last-child {
-  max-width: 690px;
+  max-width: 700px;
 
   margin: 0;
 
   color: var(--text-muted);
 
-  line-height: 1.7;
   font-size: 0.94rem;
+  line-height: 1.72;
 }
 
 .find-button {
+  position: relative;
+  z-index: 2;
+
   flex-shrink: 0;
 
   display: inline-flex;
@@ -279,24 +389,27 @@
   padding: 0 23px;
 
   color: #fff;
+
   background: var(--burgundy);
 
   border: 1px solid var(--burgundy);
   border-radius: 6px;
 
-  font-size: 0.87rem;
+  font-size: 0.86rem;
   font-weight: 750;
 
   text-decoration: none;
 
   transition:
     background-color 0.25s ease,
+    border-color 0.25s ease,
     transform 0.25s ease,
     box-shadow 0.25s ease;
 }
 
 .find-button:hover {
   background: var(--burgundy-dark);
+
   border-color: var(--burgundy-dark);
 
   transform: translateY(-2px);
@@ -312,25 +425,32 @@
 .dashboard-tools {
   display: grid;
 
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
 
   gap: 18px;
 }
 
 .tool-card {
+  position: relative;
+
   width: 100%;
   box-sizing: border-box;
 
-  min-height: 200px;
+  min-height: 205px;
 
   padding: 30px;
 
   color: var(--text);
 
-  background: var(--surface-soft);
+  background:
+    linear-gradient(
+      145deg,
+      var(--surface-soft),
+      #fff
+    );
 
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 9px;
 
   text-decoration: none;
 
@@ -354,8 +474,9 @@
 .tool-card span {
   color: var(--brass);
 
-  font-size: 0.7rem;
+  font-size: 0.69rem;
   font-weight: 750;
+
   letter-spacing: 0.13em;
 
   text-transform: uppercase;
@@ -366,11 +487,13 @@
 
   color: var(--burgundy-dark);
 
-  font-size: 1.25rem;
+  font-size: 1.28rem;
   line-height: 1.25;
 }
 
 .tool-card p {
+  max-width: 720px;
+
   margin: 0;
 
   color: var(--text-muted);
@@ -381,16 +504,13 @@
 
 
 /* ========================================
-   RESPONSIVE
+   TABLET
 ======================================== */
 
-@media (max-width: 950px) {
+@media (max-width: 1050px) {
   .scheme-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .dashboard-tools {
-    grid-template-columns: 1fr;
+    grid-auto-columns:
+      calc((100% - 18px) / 2);
   }
 
   .dashboard-header {
@@ -398,35 +518,102 @@
     flex-direction: column;
   }
 
-  .find-section {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .find-button {
-    width: 100%;
+  .profile-link {
+    align-self: flex-start;
   }
 }
 
-@media (max-width: 600px) {
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 700px) {
   .dashboard-container {
-    padding: 60px 5% 80px;
+    padding: 60px 5% 85px;
   }
 
   .dashboard-header {
-    margin-bottom: 55px;
+    margin-bottom: 58px;
   }
 
   .dashboard-header h1 {
     letter-spacing: -0.045em;
   }
 
-  .find-section {
-    padding: 30px;
+  .dashboard-section {
+    margin-bottom: 68px;
   }
 
-  .scheme-card,
+  .section-heading {
+    margin-bottom: 24px;
+  }
+
+  .scheme-grid {
+    grid-auto-columns: 84%;
+    gap: 14px;
+
+    padding-bottom: 11px;
+  }
+
+  .scheme-card {
+    min-height: 280px;
+
+    padding: 27px;
+  }
+
+  .find-section {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 28px;
+
+    margin-bottom: 68px;
+
+    padding: 31px 27px;
+  }
+
+  .find-button {
+    width: 100%;
+  }
+
   .tool-card {
-    padding: 26px;
+    min-height: auto;
+
+    padding: 27px;
+  }
+}
+
+
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
+@media (max-width: 440px) {
+  .scheme-grid {
+    grid-auto-columns: 90%;
+  }
+
+  .scheme-card {
+    min-height: 270px;
+  }
+}
+
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .scheme-card,
+  .profile-link,
+  .find-button,
+  .tool-card {
+    transition: none;
+  }
+
+  .scheme-grid {
+    scroll-behavior: auto;
   }
 }
