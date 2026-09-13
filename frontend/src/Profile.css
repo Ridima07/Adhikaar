@@ -1,116 +1,289 @@
+/* ========================================
+   PROFILE PAGE
+======================================== */
+
 .profile-page {
   min-height: 100vh;
-  background: #f5f1e8;
-  color: #1c1b18;
+
+  background:
+    radial-gradient(
+      circle at 9% 12%,
+      rgba(111, 53, 69, 0.07),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 92% 88%,
+      rgba(184, 117, 120, 0.06),
+      transparent 24%
+    ),
+    var(--bg);
+
+  color: var(--text);
 }
+
+
+/* ========================================
+   PROFILE CONTAINER
+======================================== */
 
 .profile-container {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1180px;
+
   margin: 0 auto;
-  padding: 90px 7% 120px;
+
+  padding: 86px 6vw 120px;
 }
 
+
+/* ========================================
+   HEADER
+======================================== */
+
 .profile-header {
-  max-width: 700px;
-  margin-bottom: 60px;
+  max-width: 760px;
+
+  margin-bottom: 52px;
 }
 
 .profile-header .section-label {
-  color: #a65d45;
-  margin-bottom: 18px;
+  margin: 0 0 15px;
+
+  color: var(--burgundy);
+
+  font-size: 0.73rem;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .profile-header h1 {
   margin: 0;
-  font-size: clamp(48px, 6vw, 72px);
-  line-height: 1;
-  letter-spacing: -3px;
+
+  color: var(--burgundy-dark);
+
+  font-size: clamp(3rem, 6vw, 4.7rem);
+  line-height: 0.98;
+
+  letter-spacing: -0.055em;
+  font-weight: 720;
 }
 
 .profile-header p:last-child {
-  margin-top: 25px;
-  color: #68645c;
-  font-size: 18px;
-  line-height: 1.7;
+  max-width: 660px;
+
+  margin: 24px 0 0;
+
+  color: var(--text-muted);
+
+  font-size: 1rem;
+  line-height: 1.8;
 }
+
+
+/* ========================================
+   PROFILE FORM
+======================================== */
 
 .profile-form {
-  background: #faf8f2;
-  border: 1px solid #d8d1c4;
-  border-radius: 6px;
-  padding: 45px;
+  position: relative;
+  overflow: hidden;
+
+  width: 100%;
+
+  padding: 44px;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  box-shadow:
+    0 24px 60px rgba(93, 41, 56, 0.06),
+    0 5px 16px rgba(93, 41, 56, 0.025);
 }
 
-.form-section h2 {
-  margin: 0 0 30px;
-  font-size: 26px;
-  letter-spacing: -0.5px;
+.profile-form::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 82px;
+  height: 4px;
+
+  background: var(--burgundy);
 }
+
+
+/* ========================================
+   FORM SECTION
+======================================== */
+
+.form-section h2 {
+  margin: 0 0 28px;
+
+  color: var(--burgundy-dark);
+
+  font-size: 1.4rem;
+  line-height: 1.25;
+
+  letter-spacing: -0.025em;
+}
+
+
+/* ========================================
+   FORM GRID
+======================================== */
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 25px;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 23px 24px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
+
   gap: 8px;
 }
 
 .form-group label {
-  font-size: 14px;
-  font-weight: 600;
+  color: var(--text);
+
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.03em;
 }
+
+
+/* ========================================
+   INPUTS / SELECTS
+======================================== */
 
 .form-group input,
 .form-group select {
   width: 100%;
-  padding: 14px 15px;
-  border: 1px solid #d8d1c4;
-  border-radius: 4px;
-  background: #f5f1e8;
-  color: #1c1b18;
+
+  min-height: 47px;
+
+  padding: 12px 14px;
+
+  color: var(--text);
+  background: var(--surface-soft);
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
   font-family: inherit;
-  font-size: 15px;
+  font-size: 0.9rem;
+
   outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.form-group input:hover,
+.form-group select:hover {
+  border-color: var(--border-dark);
 }
 
 .form-group input:focus,
 .form-group select:focus {
-  border-color: #a65d45;
+  background: var(--surface);
+
+  border-color: var(--burgundy);
+
+  box-shadow:
+    0 0 0 4px rgba(111, 53, 69, 0.08);
 }
 
-.profile-button {
-  margin-top: 40px;
-  padding: 15px 25px;
-  border: none;
-  border-radius: 4px;
-  background: #1c1b18;
-  color: #f5f1e8;
-  font-size: 15px;
-  font-weight: 700;
+.form-group input::placeholder {
+  color: var(--text-light);
+}
+
+.form-group select {
   cursor: pointer;
 }
 
-.profile-button:hover {
-  background: #a65d45;
+
+/* ========================================
+   SAVE BUTTON
+======================================== */
+
+.profile-button {
+  margin-top: 38px;
+
+  min-height: 47px;
+
+  padding: 0 24px;
+
+  color: #fff;
+  background: var(--burgundy);
+
+  border: 1px solid var(--burgundy);
+  border-radius: 6px;
+
+  font-size: 0.87rem;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-@media (max-width: 700px) {
+.profile-button:hover {
+  background: var(--burgundy-dark);
+  border-color: var(--burgundy-dark);
 
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(93, 41, 56, 0.14);
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 700px) {
   .profile-container {
-    padding: 60px 5% 80px;
+    padding: 60px 5% 85px;
+  }
+
+  .profile-header {
+    margin-bottom: 40px;
+  }
+
+  .profile-header h1 {
+    letter-spacing: -0.045em;
   }
 
   .profile-form {
-    padding: 30px 25px;
+    padding: 34px 25px;
+
+    border-radius: 7px;
   }
 
   .form-grid {
     grid-template-columns: 1fr;
+
+    gap: 20px;
   }
 
+  .profile-button {
+    width: 100%;
+  }
 }

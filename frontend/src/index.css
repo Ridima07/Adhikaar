@@ -6,15 +6,147 @@ html {
   scroll-behavior: smooth;
 }
 
+:root {
+  --bg: #f8f3ef;
+  --bg-alt: #f2e7e5;
+
+  --surface: #ffffff;
+  --surface-soft: #fdfaf8;
+
+  --text: #403637;
+  --text-muted: #776d6f;
+  --text-light: #988d8f;
+
+  --burgundy: #6f3545;
+--burgundy-dark: #5d2938;
+  --burgundy-soft: #ead9dd;
+
+  --rose: #b87578;
+  --rose-soft: #f1dddd;
+
+  --brass: #ad8758;
+  --brass-soft: #eee2d3;
+
+  --success: #637c6a;
+  --success-soft: #e2ebe4;
+
+  --warning: #a4744d;
+  --warning-soft: #f1e5d9;
+
+  --danger: #9c5a5d;
+  --danger-soft: #f0dddd;
+
+  --border: #dfd2d0;
+  --border-soft: #ebe2df;
+  --border-dark: #ccb9bb;
+
+  --shadow-xs:
+    0 2px 8px rgba(93, 41, 56, 0.035);
+
+  --shadow-sm:
+    0 8px 24px rgba(93, 41, 56, 0.055);
+
+  --shadow-md:
+    0 18px 45px rgba(93, 41, 56, 0.075);
+
+  --shadow-lg:
+    0 30px 70px rgba(93, 41, 56, 0.09);
+}
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f1e8;
-  color: #1c1b18;
+  font-family: Inter, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 button,
 a {
-  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
 }
 
+button {
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--burgundy-soft);
+  color: var(--burgundy-dark);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-light);
+}
+
+input,
+select,
+textarea {
+  accent-color: var(--burgundy);
+}
+
+select {
+  color: var(--text);
+}
+
+option {
+  color: var(--text);
+  background: var(--surface);
+}
+
+/* ========================================
+   SHARED INTERACTION
+======================================== */
+
+button,
+a,
+select,
+input {
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(111, 53, 69, 0.16);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   SHARED STATUS COLORS
+======================================== */
+
+.status-success {
+  color: var(--success);
+}
+
+.status-warning {
+  color: var(--warning);
+}
+
+.status-danger {
+  color: var(--danger);
+}

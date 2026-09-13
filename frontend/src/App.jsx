@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import LanguageSelector from './LanguageSelector.jsx'
 import translations from './translations.js'
@@ -14,6 +15,101 @@ function App() {
     translations[language]?.common ||
     translations.en.common
 
+  const heroRef = useRef(null)
+
+  const [pointer, setPointer] = useState({
+    x: -1000,
+    y: -1000
+  })
+
+  useEffect(() => {
+    const handlePointerMove = (event) => {
+      setPointer({
+        x: event.clientX,
+        y: event.clientY
+      })
+    }
+
+    window.addEventListener(
+      'pointermove',
+      handlePointerMove
+    )
+
+    return () => {
+      window.removeEventListener(
+        'pointermove',
+        handlePointerMove
+      )
+    }
+  }, [])
+
+  const getRepelStyle = (
+    xPercent,
+    yPercent,
+    radius = 260,
+    strength = 90
+  ) => {
+    if (!heroRef.current) {
+      return {
+        transform: 'translate3d(0, 0, 0)'
+      }
+    }
+
+    const heroRect =
+      heroRef.current.getBoundingClientRect()
+
+    const baseX =
+      heroRect.left +
+      heroRect.width * xPercent
+
+    const baseY =
+      heroRect.top +
+      heroRect.height * yPercent
+
+    const dx =
+      pointer.x - baseX
+
+    const dy =
+      pointer.y - baseY
+
+    const distance =
+      Math.sqrt(
+        dx * dx +
+        dy * dy
+      )
+
+    if (
+      distance <= 0 ||
+      distance >= radius
+    ) {
+      return {
+        transform:
+          'translate3d(0, 0, 0)'
+      }
+    }
+
+    const force =
+      Math.pow(
+        1 - distance / radius,
+        2
+      )
+
+    const moveX =
+      -(dx / distance) *
+      strength *
+      force
+
+    const moveY =
+      -(dy / distance) *
+      strength *
+      force
+
+    return {
+      transform:
+        `translate3d(${moveX}px, ${moveY}px, 0)`
+    }
+  }
+
   return (
     <div className="landing-page">
 
@@ -24,6 +120,7 @@ function App() {
         </div>
 
         <div className="nav-links">
+
           <a href="#about">
             {language === 'en'
               ? 'About'
@@ -39,6 +136,7 @@ function App() {
                 ? 'विशेषताएँ'
                 : 'বৈশিষ্ট্য'}
           </a>
+
         </div>
 
         <div
@@ -65,7 +163,46 @@ function App() {
 
       <main>
 
-        <section className="hero">
+        <section
+          className="hero"
+          ref={heroRef}
+        >
+
+          <div
+            className="hero-orbit hero-orbit-one"
+            style={getRepelStyle(
+              0.16,
+              0.38,
+              300,
+              105
+            )}
+          >
+            <span />
+          </div>
+
+          <div
+            className="hero-orbit hero-orbit-two"
+            style={getRepelStyle(
+              0.84,
+              0.47,
+              320,
+              120
+            )}
+          >
+            <span />
+          </div>
+
+          <div
+            className="hero-orbit hero-orbit-three"
+            style={getRepelStyle(
+              0.78,
+              0.84,
+              250,
+              80
+            )}
+          >
+            <span />
+          </div>
 
           <div className="hero-content">
 
@@ -190,7 +327,6 @@ function App() {
           <div className="feature-grid">
 
             <div className="feature-card">
-
               <h3>
                 {t.personalizedDiscovery}
               </h3>
@@ -198,11 +334,9 @@ function App() {
               <p>
                 {t.personalizedDiscoveryText}
               </p>
-
             </div>
 
             <div className="feature-card">
-
               <h3>
                 {t.benefitsGapAnalysis}
               </h3>
@@ -210,11 +344,9 @@ function App() {
               <p>
                 {t.benefitsGapAnalysisText}
               </p>
-
             </div>
 
             <div className="feature-card">
-
               <h3>
                 {t.explainableEligibility}
               </h3>
@@ -222,11 +354,9 @@ function App() {
               <p>
                 {t.explainableEligibilityText}
               </p>
-
             </div>
 
             <div className="feature-card">
-
               <h3>
                 {t.adaptiveQuestions}
               </h3>
@@ -234,7 +364,6 @@ function App() {
               <p>
                 {t.adaptiveQuestionsText}
               </p>
-
             </div>
 
           </div>

@@ -1,58 +1,132 @@
+/* ========================================
+   FIND SCHEMES PAGE
+======================================== */
+
 .find-schemes-page {
   min-height: 100vh;
-  background: #f5f1e8;
-  color: #1c1b18;
+
+  background:
+    radial-gradient(
+      circle at 8% 10%,
+      rgba(111, 53, 69, 0.06),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 92% 85%,
+      rgba(184, 117, 120, 0.06),
+      transparent 24%
+    ),
+    var(--bg);
+
+  color: var(--text);
 }
 
 .find-schemes-container {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1180px;
+
   margin: 0 auto;
-  padding: 90px 7% 120px;
+
+  padding: 86px 6vw 120px;
 }
 
+
+/* ========================================
+   HEADER
+======================================== */
+
 .find-schemes-header {
-  max-width: 750px;
-  margin-bottom: 70px;
+  max-width: 780px;
+
+  margin-bottom: 58px;
 }
 
 .find-schemes-header h1 {
-  margin: 15px 0 20px;
-  font-size: clamp(45px, 6vw, 68px);
-  line-height: 1;
-  letter-spacing: -3px;
+  margin: 14px 0 20px;
+
+  color: var(--burgundy-dark);
+
+  font-size: clamp(3rem, 6vw, 4.6rem);
+  line-height: 0.98;
+
+  letter-spacing: -0.055em;
+  font-weight: 720;
 }
 
 .find-schemes-header > p:last-child {
-  max-width: 650px;
+  max-width: 680px;
+
   margin: 0;
-  color: #68645c;
-  font-size: 18px;
-  line-height: 1.6;
+
+  color: var(--text-muted);
+
+  font-size: 1rem;
+  line-height: 1.8;
 }
 
+
+/* ========================================
+   PROFILE SUMMARY
+======================================== */
+
 .profile-summary {
+  position: relative;
+  overflow: hidden;
+
   padding: 40px;
-  border: 1px solid #d8d1c4;
-  background: #faf8f2;
-  border-radius: 6px;
+
+  background: rgba(255, 255, 255, 0.88);
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  box-shadow:
+    0 18px 45px rgba(93, 41, 56, 0.045),
+    0 4px 14px rgba(93, 41, 56, 0.02);
+}
+
+.profile-summary::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 82px;
+  height: 4px;
+
+  background: var(--burgundy);
 }
 
 .profile-summary h2 {
-  margin: 12px 0 35px;
-  font-size: 30px;
-  letter-spacing: -1px;
+  margin: 0 0 32px;
+
+  color: var(--burgundy-dark);
+
+  font-size: clamp(1.7rem, 3vw, 2.1rem);
+  line-height: 1.1;
+
+  letter-spacing: -0.035em;
 }
+
+
+/* ========================================
+   PROFILE SUMMARY GRID
+======================================== */
 
 .profile-summary-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  border-top: 1px solid #d8d1c4;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  border-top: 1px solid var(--border);
 }
 
 .profile-summary-grid > div {
-  padding: 22px 0;
-  border-bottom: 1px solid #d8d1c4;
+  padding: 20px 0;
+
+  border-bottom: 1px solid var(--border);
 }
 
 .profile-summary-grid > div:nth-child(odd) {
@@ -61,28 +135,44 @@
 
 .profile-summary-grid > div:nth-child(even) {
   padding-left: 30px;
-  border-left: 1px solid #d8d1c4;
+
+  border-left: 1px solid var(--border);
 }
 
 .profile-summary-grid span {
   display: block;
+
   margin-bottom: 7px;
-  font-size: 12px;
-  color: #68645c;
+
+  color: var(--text-light);
+
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+
   text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
 .profile-summary-grid strong {
-  font-size: 16px;
-  font-weight: 600;
+  color: var(--text);
+
+  font-size: 0.94rem;
+  font-weight: 650;
 }
+
+
+/* ========================================
+   ACTIONS
+======================================== */
 
 .profile-actions {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+
   gap: 12px;
-  margin-top: 35px;
+
+  margin-top: 32px;
 }
 
 .edit-profile-button,
@@ -90,32 +180,62 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 13px 22px;
-  border-radius: 4px;
+
+  min-height: 44px;
+
+  padding: 0 20px;
+
+  border-radius: 6px;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+
   text-decoration: none;
-  font-weight: 600;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .edit-profile-button {
-  border: 1px solid #d8d1c4;
-  color: #1c1b18;
-  background: transparent;
-}
+  color: var(--burgundy);
 
-.continue-button {
-  border: 1px solid #1c1b18;
-  background: #1c1b18;
-  color: #f5f1e8;
+  background: transparent;
+
+  border: 1px solid var(--border-dark);
 }
 
 .edit-profile-button:hover {
-  background: #eae4d7;
+  background: var(--burgundy-soft);
+  border-color: var(--burgundy);
+
+  transform: translateY(-1px);
+}
+
+.continue-button {
+  color: #fff;
+
+  background: var(--burgundy);
+
+  border: 1px solid var(--burgundy);
 }
 
 .continue-button:hover {
-  background: #a65d45;
-  border-color: #a65d45;
+  background: var(--burgundy-dark);
+  border-color: var(--burgundy-dark);
+
+  transform: translateY(-1px);
+
+  box-shadow: var(--shadow-sm);
 }
+
+
+/* ========================================
+   MOBILE
+======================================== */
 
 @media (max-width: 650px) {
   .find-schemes-container {
@@ -123,28 +243,30 @@
   }
 
   .find-schemes-header h1 {
-    letter-spacing: -2px;
+    letter-spacing: -0.045em;
   }
 
   .profile-summary {
-    padding: 25px;
+    padding: 28px 24px;
   }
 
   .profile-summary-grid {
     grid-template-columns: 1fr;
   }
 
+  .profile-summary-grid > div:nth-child(odd),
   .profile-summary-grid > div:nth-child(even) {
     padding-left: 0;
-    border-left: none;
+    padding-right: 0;
   }
 
-  .profile-summary-grid > div:nth-child(odd) {
-    padding-right: 0;
+  .profile-summary-grid > div:nth-child(even) {
+    border-left: none;
   }
 
   .profile-actions {
     flex-direction: column;
+    align-items: stretch;
   }
 
   .edit-profile-button,

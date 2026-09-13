@@ -1,198 +1,395 @@
+/* ========================================
+   DASHBOARD PAGE
+======================================== */
+
 .dashboard-page {
   min-height: 100vh;
-  background: #f5f1e8;
-  color: #1c1b18;
+
+  background:
+    radial-gradient(
+      circle at 8% 10%,
+      rgba(111, 53, 69, 0.06),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 92% 88%,
+      rgba(184, 117, 120, 0.06),
+      transparent 25%
+    ),
+    var(--bg);
+
+  color: var(--text);
 }
 
 .dashboard-container {
   width: 100%;
   max-width: 1200px;
+
   margin: 0 auto;
-  padding: 80px 7% 120px;
+
+  padding: 82px 6vw 120px;
 }
+
+
+/* ========================================
+   HEADER
+======================================== */
 
 .dashboard-header {
   display: flex;
-  justify-content: space-between;
   align-items: flex-end;
+  justify-content: space-between;
+
   gap: 40px;
-  margin-bottom: 80px;
+
+  margin-bottom: 70px;
 }
 
 .dashboard-header h1 {
-  margin: 15px 0 20px;
-  font-size: clamp(45px, 6vw, 70px);
-  line-height: 1;
-  letter-spacing: -3px;
+  margin: 14px 0 17px;
+
+  color: var(--burgundy-dark);
+
+  font-size: clamp(3rem, 6vw, 4.6rem);
+  line-height: 0.98;
+
+  letter-spacing: -0.055em;
+  font-weight: 720;
 }
 
 .dashboard-header p:last-child {
+  max-width: 650px;
+
   margin: 0;
-  color: #68645c;
-  font-size: 18px;
+
+  color: var(--text-muted);
+
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
 .profile-link {
-  padding: 12px 20px;
-  border: 1px solid #d8d1c4;
-  border-radius: 4px;
+  flex-shrink: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 42px;
+
+  padding: 0 18px;
+
+  color: var(--burgundy);
+
   background: transparent;
-  color: #1c1b18;
-  font-weight: 600;
-  cursor: pointer;
+
+  border: 1px solid var(--border-dark);
+  border-radius: 6px;
+
+  font-size: 0.86rem;
+  font-weight: 650;
+
   text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .profile-link:hover {
-  background: #1c1b18;
-  color: #f5f1e8;
+  color: #fff;
+  background: var(--burgundy);
+  border-color: var(--burgundy);
+
+  transform: translateY(-1px);
 }
 
+
+/* ========================================
+   SECTION
+======================================== */
+
 .dashboard-section {
-  margin-bottom: 80px;
+  margin-bottom: 78px;
 }
 
 .section-heading {
-  margin-bottom: 35px;
+  margin-bottom: 34px;
 }
 
 .section-heading h2 {
   margin: 12px 0 0;
-  font-size: 32px;
-  letter-spacing: -1px;
+
+  color: var(--burgundy-dark);
+
+  font-size: clamp(1.8rem, 3vw, 2.25rem);
+  line-height: 1.1;
+
+  letter-spacing: -0.035em;
 }
+
+
+/* ========================================
+   SCHEME CARDS
+======================================== */
 
 .scheme-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
   gap: 18px;
 }
 
 .scheme-card {
-  min-height: 270px;
-  padding: 30px;
-  border: 1px solid #d8d1c4;
-  border-radius: 6px;
-  background: #faf8f2;
+  min-height: 285px;
+
   display: flex;
   flex-direction: column;
+
+  padding: 30px;
+
+  background: rgba(255, 255, 255, 0.82);
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.scheme-card:hover {
+  transform: translateY(-4px);
+
+  border-color: var(--border-dark);
+
+  box-shadow: var(--shadow-sm);
 }
 
 .scheme-category {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: #a65d45;
+  color: var(--burgundy);
+
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
 }
 
 .scheme-card h3 {
-  margin: 35px 0 12px;
-  font-size: 23px;
+  margin: 34px 0 12px;
+
+  color: var(--burgundy-dark);
+
+  font-size: 1.3rem;
+  line-height: 1.25;
+
+  letter-spacing: -0.025em;
 }
 
 .scheme-card p {
   margin: 0;
-  color: #68645c;
-  line-height: 1.6;
-  font-size: 15px;
+
+  color: var(--text-muted);
+
+  font-size: 0.9rem;
+  line-height: 1.7;
 }
 
 .scheme-card a {
   margin-top: auto;
   padding-top: 25px;
-  color: #1c1b18;
-  text-decoration: none;
-  font-size: 14px;
+
+  color: var(--burgundy);
+
+  font-size: 0.84rem;
   font-weight: 700;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
 }
 
 .scheme-card a:hover {
-  color: #a65d45;
+  color: var(--rose);
 }
 
+
+/* ========================================
+   FIND SCHEMES
+======================================== */
+
 .find-section {
-  padding: 45px;
-  margin-bottom: 80px;
-  border: 1px solid #d8d1c4;
-  background: #eae4d7;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
   gap: 50px;
+
+  margin-bottom: 78px;
+  padding: 44px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--burgundy-soft),
+      var(--rose-soft)
+    );
+
+  border: 1px solid var(--border-dark);
+  border-radius: 8px;
 }
 
 .find-section h2 {
-  margin: 12px 0 15px;
-  font-size: 32px;
-  letter-spacing: -1px;
+  margin: 12px 0 14px;
+
+  color: var(--burgundy-dark);
+
+  font-size: clamp(1.8rem, 3vw, 2.25rem);
+  line-height: 1.1;
+
+  letter-spacing: -0.035em;
 }
 
 .find-section p:last-child {
-  max-width: 650px;
+  max-width: 690px;
+
   margin: 0;
-  color: #68645c;
-  line-height: 1.6;
+
+  color: var(--text-muted);
+
+  line-height: 1.7;
+  font-size: 0.94rem;
 }
 
 .find-button {
   flex-shrink: 0;
-  padding: 15px 24px;
-  border: none;
-  border-radius: 4px;
-  background: #1c1b18;
-  color: #f5f1e8;
-  font-weight: 700;
-  cursor: pointer;
-  text-decoration: none;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
+  min-height: 47px;
+
+  padding: 0 23px;
+
+  color: #fff;
+  background: var(--burgundy);
+
+  border: 1px solid var(--burgundy);
+  border-radius: 6px;
+
+  font-size: 0.87rem;
+  font-weight: 750;
+
+  text-decoration: none;
+
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .find-button:hover {
-  background: #a65d45;
+  background: var(--burgundy-dark);
+  border-color: var(--burgundy-dark);
+
+  transform: translateY(-2px);
+
+  box-shadow: var(--shadow-sm);
 }
+
+
+/* ========================================
+   DASHBOARD TOOLS
+======================================== */
 
 .dashboard-tools {
   display: grid;
-  grid-template-columns: 1fr;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
   gap: 18px;
 }
 
 .tool-card {
   width: 100%;
   box-sizing: border-box;
+
+  min-height: 200px;
+
   padding: 30px;
-  border: 1px solid #d8d1c4;
-  background: #faf8f2;
-  border-radius: 6px;
+
+  color: var(--text);
+
+  background: var(--surface-soft);
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
   text-decoration: none;
-  color: #1c1b18;
+
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .tool-card:hover {
-  background: #eae4d7;
+  background: #fff;
+
+  border-color: var(--border-dark);
+
+  transform: translateY(-4px);
+
+  box-shadow: var(--shadow-sm);
 }
 
 .tool-card span {
-  font-size: 12px;
-  font-weight: 700;
-  color: #a65d45;
+  color: var(--brass);
+
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
 }
 
 .tool-card h3 {
-  margin: 35px 0 12px;
-  font-size: 23px;
+  margin: 31px 0 12px;
+
+  color: var(--burgundy-dark);
+
+  font-size: 1.25rem;
+  line-height: 1.25;
 }
 
 .tool-card p {
   margin: 0;
-  color: #68645c;
-  line-height: 1.6;
+
+  color: var(--text-muted);
+
+  font-size: 0.9rem;
+  line-height: 1.7;
 }
 
-@media (max-width: 900px) {
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 950px) {
   .scheme-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-tools {
     grid-template-columns: 1fr;
   }
 
@@ -202,8 +399,12 @@
   }
 
   .find-section {
-    flex-direction: column;
     align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .find-button {
+    width: 100%;
   }
 }
 
@@ -212,11 +413,20 @@
     padding: 60px 5% 80px;
   }
 
+  .dashboard-header {
+    margin-bottom: 55px;
+  }
+
   .dashboard-header h1 {
-    letter-spacing: -2px;
+    letter-spacing: -0.045em;
   }
 
   .find-section {
     padding: 30px;
+  }
+
+  .scheme-card,
+  .tool-card {
+    padding: 26px;
   }
 }

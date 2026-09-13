@@ -1,120 +1,247 @@
+/* ========================================
+   RECOVERY RESULT PAGE
+======================================== */
+
 .recovery-result-page {
   min-height: 100vh;
-  background: #f5f1e8;
-  color: #1c1b18;
+
+  background:
+    radial-gradient(
+      circle at 8% 10%,
+      rgba(111, 53, 69, 0.06),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 92% 86%,
+      rgba(184, 117, 120, 0.06),
+      transparent 24%
+    ),
+    var(--bg);
+
+  color: var(--text);
 }
+
+
+/* ========================================
+   CONTAINER
+======================================== */
 
 .recovery-result-container {
-  width: 86%;
-  max-width: 1100px;
+  width: 100%;
+  max-width: 1120px;
+
   margin: 0 auto;
-  padding: 80px 0 120px;
+
+  padding: 84px 6vw 120px;
 }
 
+
+/* ========================================
+   HEADER
+======================================== */
+
 .recovery-result-header {
-  max-width: 760px;
-  margin-bottom: 55px;
+  max-width: 780px;
+
+  margin-bottom: 58px;
 }
 
 .recovery-result-header h1 {
-  margin: 10px 0 18px;
-  font-size: 48px;
-  line-height: 1.1;
+  margin: 12px 0 18px;
+
+  color: var(--burgundy-dark);
+
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  line-height: 0.98;
+
+  letter-spacing: -0.055em;
+  font-weight: 720;
 }
 
 .recovery-result-header > p:last-child {
-  color: #68645c;
-  font-size: 17px;
-  line-height: 1.7;
+  max-width: 690px;
+
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 1rem;
+  line-height: 1.8;
 }
 
+
+/* ========================================
+   SUBMITTED REJECTION
+======================================== */
+
 .submitted-rejection {
-  margin-bottom: 80px;
+  margin-bottom: 76px;
 }
 
 .rejection-message {
   margin-top: 20px;
-  padding: 28px;
-  background: #faf8f2;
-  border: 1px solid #d8d1c4;
-  border-radius: 6px;
-  color: #68645c;
-  line-height: 1.7;
+
+  padding: 27px 29px;
+
+  color: var(--text-muted);
+
+  background: rgba(255, 255, 255, 0.88);
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  line-height: 1.75;
+
   white-space: pre-wrap;
+
+  box-shadow:
+    0 12px 32px rgba(93, 41, 56, 0.035);
 }
+
+
+/* ========================================
+   SECTIONS
+======================================== */
 
 .recovery-section,
 .next-steps-section {
-  margin-bottom: 80px;
+  margin-bottom: 76px;
 }
 
 .recovery-section h2,
 .next-steps-section h2 {
-  margin: 8px 0 30px;
-  font-size: 30px;
+  margin: 8px 0 28px;
+
+  color: var(--burgundy-dark);
+
+  font-size: clamp(1.8rem, 3vw, 2.3rem);
+  line-height: 1.1;
+
+  letter-spacing: -0.035em;
 }
+
+
+/* ========================================
+   FINDINGS / NEXT STEPS
+======================================== */
 
 .finding-list,
 .next-steps-list {
   display: flex;
   flex-direction: column;
+
   gap: 12px;
 }
 
 .finding-item,
 .next-step {
   display: flex;
-  gap: 24px;
-  padding: 28px;
-  background: #faf8f2;
-  border: 1px solid #d8d1c4;
-  border-radius: 6px;
+
+  gap: 22px;
+
+  padding: 26px 28px;
+
+  background: rgba(255, 255, 255, 0.86);
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.finding-item:hover,
+.next-step:hover {
+  transform: translateY(-2px);
+
+  border-color: var(--border-dark);
+
+  box-shadow: var(--shadow-xs);
 }
 
 .finding-number,
 .next-step > span {
-  color: #a65d45;
-  font-size: 14px;
-  font-weight: 700;
+  flex-shrink: 0;
+
   min-width: 30px;
+
+  color: var(--brass);
+
+  font-size: 0.73rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
 }
 
 .finding-item h3,
 .next-step h3 {
   margin: 0 0 8px;
-  font-size: 18px;
+
+  color: var(--burgundy-dark);
+
+  font-size: 1rem;
+  line-height: 1.35;
 }
 
 .finding-item p,
 .next-step p {
   margin: 0;
-  color: #68645c;
-  line-height: 1.6;
+
+  color: var(--text-muted);
+
+  font-size: 0.9rem;
+  line-height: 1.68;
 }
+
+
+/* ========================================
+   WARNING
+======================================== */
 
 .recovery-warning {
   margin-bottom: 50px;
+
   padding: 30px;
-  background: #eae4d7;
-  border: 1px solid #d8d1c4;
-  border-radius: 6px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--warning-soft),
+      #f7ebe2
+    );
+
+  border: 1px solid rgba(164, 116, 77, 0.22);
+  border-radius: 8px;
 }
 
 .recovery-warning h2 {
   margin: 8px 0 12px;
-  font-size: 24px;
+
+  color: var(--burgundy-dark);
+
+  font-size: 1.45rem;
+  line-height: 1.2;
 }
 
 .recovery-warning p:last-child {
   margin: 0;
-  color: #68645c;
-  line-height: 1.7;
+
+  color: var(--text-muted);
+
+  line-height: 1.72;
 }
+
+
+/* ========================================
+   ACTIONS
+======================================== */
 
 .recovery-result-actions {
   display: flex;
-  gap: 14px;
   align-items: center;
+
+  gap: 12px;
 }
 
 .readiness-button,
@@ -122,41 +249,92 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 13px 20px;
-  border-radius: 4px;
+
+  min-height: 45px;
+
+  padding: 0 20px;
+
+  border-radius: 6px;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+
   text-decoration: none;
-  font-size: 14px;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .readiness-button {
-  background: #1c1b18;
-  color: #faf8f2;
+  color: #fff;
+
+  background: var(--burgundy);
+
+  border: 1px solid var(--burgundy);
+}
+
+.readiness-button:hover {
+  background: var(--burgundy-dark);
+
+  border-color: var(--burgundy-dark);
+
+  transform: translateY(-1px);
+
+  box-shadow: var(--shadow-sm);
 }
 
 .dashboard-button {
-  border: 1px solid #d8d1c4;
-  color: #1c1b18;
-  background: #faf8f2;
+  color: var(--burgundy);
+
+  background: transparent;
+
+  border: 1px solid var(--border-dark);
 }
+
+.dashboard-button:hover {
+  background: var(--burgundy-soft);
+
+  border-color: var(--burgundy);
+
+  transform: translateY(-1px);
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
 
 @media (max-width: 700px) {
   .recovery-result-container {
-    width: 90%;
-    padding: 55px 0 80px;
+    padding: 58px 5% 80px;
+  }
+
+  .recovery-result-header {
+    margin-bottom: 42px;
   }
 
   .recovery-result-header h1 {
-    font-size: 38px;
+    letter-spacing: -0.045em;
   }
 
   .finding-item,
   .next-step {
     padding: 22px;
+
     gap: 15px;
   }
 
   .recovery-result-actions {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .readiness-button,
+  .dashboard-button {
+    width: 100%;
   }
 }

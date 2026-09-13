@@ -1,0 +1,55 @@
+﻿
+ID     Name                                                                
+--     ----                                                                
+MED001 Chikitsa Pratipoorti Yojana                                         
+CUL001 Scheme For Financial Assistance For Veteran Artists                 
+SOC001 Indira Gandhi National Disability Pension Scheme (IGNDPS)           
+HOU001 Garima Greh Shelter Homes For Transgender Persons                   
+EXT001 Indian Community Welfare Fund (ICWF)                                
+RUR001 Akshay Gram Yojana (AGY)                                            
+EDU001 Higher Education For Persons With Special Needs (HEPSN)             
+EDU002 Post-Matric Scholarship To VJNT Students - Maharashtra              
+RES001 Research Grant For In-Service Faculty Members (RGISFM)              
+FIN001 Pradhan Mantri Suraksha Bima Yojana (PMSBY)                         
+AGR001 National Scheme Of Welfare Of Fishermen (NSWF)                      
+MED002 Financial Assistance to Persons Suffering from Rare Diseases        
+       (FAPSRD)                                                            
+SOC002 West Bengal Transport Workers' Social Security Scheme: Assistance   
+       on Hospitalization                                                  
+EMP001 Mukhyamantri Alpasankhyak Udyami Yojana (MMUY)                      
+SKL001 Community Canning & Training On Fruit Preservation (CCTOFP)         
+AGR002 Integrated Scheme for Export Promotion: Post-Harvest Polisher       
+       (ISFEPQISARADOCPHIPFSCLCTW)                                         
+AGR003 Mukhya Mantri Krishi Sa Sajuli Yozana (MMKSSY-ASSAM)                
+RUR002 Pradhan Mantri SVAMITVA Scheme (PMSY)                               
+DIS001 Grant of Transport Allowance to Differently Abled Persons (GTADAP)  
+SKL002 Skilled Youth Startup Scheme                                        
+SOC003 Shrama Shakthi Scheme                                               
+MIN001 Pradhan Mantri Virasat Ka Samvardhan (PM VIKAS)                     
+COM001 One District One Product (ODOP) Awards                              
+SCI001 PRISM Phase-II: Enterprise Incubation                               
+FIN002 Stand-Up India (SUI)                                                
+MED003 Rajasthan Chief Minister's Relief Fund - Medical Help (RCMRF-MH)    
+MED004 Delhi Arogya Kosh (DAK)                                             
+MED005 Chief Minister's Health Insurance Scheme - Nagaland (CMHISN)        
+WOM001 Scheme for Adolescent Girls (SAG)                                   
+HEA001 Pradhan Mantri Bhartiya Janaushadhi Pariyojana (PMBJP)              
+EDU003 PM POSHAN (Pradhan Mantri Poshan Shakti Nirman)                     
+EDU004 Post Matric Scholarship for Students with Disabilities              
+EDU005 Pre-Matric Scholarship for Scheduled Caste Students                 
+EDU006 Post Graduate Indira Gandhi Scholarship For Single Girl Child       
+RES002 Fellowship Scheme for Minority/SC/ST/Women Pursuing Higher Education
+SKI001 Upgrading Skills and Training in Traditional Arts/Crafts for        
+       Development                                                         
+WOM002 Nari Adalat                                                         
+EDU007 National Means-cum-Merit Scholarship Scheme (NMMSS)                 
+RES003 WIDUSHI (Women's Instinct for Developing and Ushering in Scientific 
+       Heights & Innovations)                                              
+EDU008 Visvesvaraya Ph.D. Scheme for Electronics and IT                    
+RES004 Abdul Kalam Technology Innovation National Fellowship               
+CUL002 Scheme of Encouragement to Young Artists (SEYA)                     
+CUL003 Yuva Srujan Puraskar (Navsarjan Chetana Puraskar)                   
+CUL004 Assistance for Maintenance and Operational Cost of Cultural Spaces  
+       (SHRDS-AMOCSP)                                                      
+
+

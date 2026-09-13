@@ -962,11 +962,11 @@ function SchemeDetails() {
             {scheme.official_portal && (
 
               <a
-                href={scheme.official_portal}
-                className="source-link"
-                target="_blank"
-                rel="noreferrer"
-              >
+  href={scheme.official_portal}
+  className="source-link"
+  target="_blank"
+  rel="noopener noreferrer"
+>
                 {t.visitPortal}
               </a>
 
