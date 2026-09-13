@@ -64,6 +64,10 @@ class DocumentCheckRequest(BaseModel):
 
 class RejectionRecoveryRequest(BaseModel):
     rejection_message: str
+    applicant_name: Optional[str] = "Citizen Applicant"
+    application_id: Optional[str] = "REF-2026-PENDING"
+    phone_number: Optional[str] = "Not Specified"
+    state: Optional[str] = "Delhi"
 
 
 class PersonalizationQuestionRequest(BaseModel):
@@ -271,8 +275,12 @@ def scheme_rejection_recovery(
 ):
     try:
         result = recover_from_rejection(
-            scheme_id,
-            request.rejection_message
+            scheme_id=scheme_id,
+            rejection_message=request.rejection_message,
+            applicant_name=request.applicant_name or "Citizen Applicant",
+            application_id=request.application_id or "REF-2026-PENDING",
+            phone_number=request.phone_number or "Not Specified",
+            state=request.state or "Delhi"
         )
 
         return translate_data(

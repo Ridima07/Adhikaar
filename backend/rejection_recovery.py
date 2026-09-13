@@ -1,42 +1,32 @@
 """
 Rejection Recovery for Adhikaar.
 
-This module explains possible rejection-related issues using only
-the information already present in schemes.json.
-
-It does not claim to know the exact rejection reason unless the
-user provides it.
+This module explains possible rejection-related issues using the information
+already present in schemes.json and dynamically generates formal administrative
+appeal drafts and escalation pathways based on the citizen's profile.
 """
 
 from __future__ import annotations
 
+from datetime import date
 from typing import Any
 
 from backend.matcher import load_schemes
 
 
 def normalize_text(value: Any) -> str:
-    """
-    Convert a value into normalized lowercase text.
-    """
+    """Convert a value into normalized lowercase text."""
     if value is None:
         return ""
-
     return str(value).strip().lower()
 
 
 def find_scheme(scheme_id: str, schemes: list[dict]) -> dict | None:
-    """
-    Find a scheme using its scheme_id.
-    Matching is case-insensitive.
-    """
+    """Find a scheme using its scheme_id. Matching is case-insensitive."""
     requested_id = normalize_text(scheme_id)
 
     for scheme in schemes:
-        current_id = normalize_text(
-            scheme.get("scheme_id", "")
-        )
-
+        current_id = normalize_text(scheme.get("scheme_id", ""))
         if current_id == requested_id:
             return scheme
 
@@ -44,26 +34,16 @@ def find_scheme(scheme_id: str, schemes: list[dict]) -> dict | None:
 
 
 def text_contains_any(text: str, keywords: list[str]) -> bool:
-    """
-    Check whether any keyword appears in the given text.
-    """
+    """Check whether any keyword appears in the given text."""
     normalized = normalize_text(text)
+    return any(keyword in normalized for keyword in keywords)
 
-    return any(
-        keyword in normalized
-        for keyword in keywords
-    )
 
-def extract_rejection_sentence(
-    rejection_message: str
-) -> str:
+def extract_rejection_sentence(rejection_message: str) -> str:
     """
     Find the most relevant sentence from a rejection letter.
-
-    This is a simple rule-based extraction step.
-    It does not claim to understand the entire letter.
+    Rule-based extraction targeting operational rejection terminology.
     """
-
     sentences = [
         sentence.strip()
         for sentence in rejection_message.replace("\n", " ").split(".")
@@ -87,14 +67,12 @@ def extract_rejection_sentence(
         "certificate",
         "document",
         "proof",
-        "requirement"
+        "requirement",
+        "mismatch"
     ]
 
     for sentence in sentences:
-        if text_contains_any(
-            sentence,
-            rejection_keywords
-        ):
+        if text_contains_any(sentence, rejection_keywords):
             return sentence
 
     return rejection_message.strip()
@@ -104,16 +82,10 @@ def format_eligibility_conditions(
     eligibility: dict,
     keywords: list[str]
 ) -> list[str]:
-    """
-    Return meaningful eligibility conditions as separate items.
-
-    Empty structured values are ignored.
-    """
-
+    """Return meaningful eligibility conditions as separate items."""
     relevant_conditions = []
 
     for field, value in eligibility.items():
-
         if field == "original_eligibility_text":
             continue
 
@@ -121,72 +93,43 @@ def format_eligibility_conditions(
             continue
 
         if isinstance(value, dict):
-
             meaningful_values = [
                 item
                 for item in value.values()
                 if item is not None and item != ""
             ]
-
             if not meaningful_values:
                 continue
 
-            # Prefer the original readable condition if available.
             original_text = value.get("original_text")
-
-            if original_text:
-                condition_text = str(original_text)
-            else:
-                condition_text = str(value)
+            condition_text = str(original_text) if original_text else str(value)
 
         elif isinstance(value, list):
-
             for item in value:
-                if item and text_contains_any(
-                    str(item),
-                    keywords
-                ):
-                    relevant_conditions.append(
-                        str(item)
-                    )
-
+                if item and text_contains_any(str(item), keywords):
+                    relevant_conditions.append(str(item))
             continue
-
         else:
             condition_text = str(value)
 
-        field_text = str(field).replace(
-            "_",
-            " "
-        )
+        field_text = str(field).replace("_", " ")
+        combined_text = f"{field_text}: {condition_text}"
 
-        combined_text = (
-            f"{field_text}: {condition_text}"
-        )
-
-        if text_contains_any(
-            combined_text,
-            keywords
-        ):
-            relevant_conditions.append(
-                combined_text
-            )
+        if text_contains_any(combined_text, keywords):
+            relevant_conditions.append(combined_text)
 
     return relevant_conditions
+
 
 def find_related_documents(
     required_documents: list[str],
     keywords: list[str]
 ) -> list[str]:
-    """
-    Find required documents related to a rejection category.
-    """
+    """Find required documents related to a rejection category."""
     related_documents = []
-
     for document in required_documents:
         if text_contains_any(document, keywords):
             related_documents.append(document)
-
     return related_documents
 
 
@@ -194,455 +137,340 @@ def get_relevant_conditions(
     eligibility: dict,
     keywords: list[str]
 ) -> list[str]:
-    """
-    Return only meaningful eligibility conditions related
-    to the supplied rejection category.
-    """
-
+    """Return only meaningful eligibility conditions related to the rejection category."""
     relevant_conditions = []
 
     for field, value in eligibility.items():
-
         if field == "original_eligibility_text":
             continue
 
         if value is None or value == [] or value == "":
             continue
 
-        # Ignore empty structured eligibility values.
         if isinstance(value, dict):
             meaningful_values = [
                 item
                 for item in value.values()
                 if item is not None and item != ""
             ]
-
             if not meaningful_values:
                 continue
-
             value_text = str(value)
-
         else:
             value_text = str(value)
 
         field_text = str(field).replace("_", " ")
-
         combined_text = f"{field_text}: {value_text}"
 
         if text_contains_any(combined_text, keywords):
             relevant_conditions.append(combined_text)
 
     return relevant_conditions
-    relevant_conditions = []
 
-    for field, value in eligibility.items():
 
-        if field == "original_eligibility_text":
-            continue
+def generate_appeal_representation(
+    applicant_name: str,
+    application_id: str,
+    phone_number: str,
+    state: str,
+    scheme_name: str,
+    ministry: str,
+    rejection_reason: str,
+    corrective_action: str
+) -> str:
+    """Generate a formal administrative representation and grievance letter."""
+    today_str = date.today().strftime("%d-%m-%Y")
 
-        if value is None or value == [] or value == "":
-            continue
+    letter_template = f"""Date: {today_str}
 
-        field_text = str(field).replace("_", " ")
-        value_text = str(value)
+To,
+The Competent Authority / Nodal Grievance Redressal Officer,
+{ministry},
+District Welfare & Grievance Redressal Cell, {state}
 
-        combined_text = f"{field_text}: {value_text}"
+Subject: Formal Representation & Administrative Appeal regarding rejection of Application ID: {application_id} for '{scheme_name}'
 
-        if text_contains_any(combined_text, keywords):
-            relevant_conditions.append(combined_text)
+Respected Sir / Madam,
 
-    return relevant_conditions
+I, {applicant_name}, resident of {state}, am formally submitting this representation in response to the rejection notification received concerning my application under '{scheme_name}' (Reference ID: {application_id}).
+
+1. Stated Ground for Rejection:
+"{rejection_reason}"
+
+2. Factual Clarification & Corrective Measures:
+In accordance with scheme norms, the noted ground has been reviewed and addressed:
+- Corrective Measure Undertaken: {corrective_action}
+- Verified documentary evidence, authenticated revenue/category certificates, and valid identification proofs have been compiled and attached herewith.
+
+3. Prayer / Relief Sought:
+Considering that the procedural discrepancy stands corrected with authenticated records attached, I respectfully request your office to:
+a) Re-open and review Application ID {application_id} on merit.
+b) Grant condonation for procedural clarification and sanction the entitled assistance.
+
+Thanking you for your time and fair consideration.
+
+Yours faithfully,
+
+{applicant_name}
+Application Reference ID: {application_id}
+Contact Number: {phone_number}
+State: {state}
+Enclosures: Updated Supporting Records & Copy of Rejection Notice Slip
+"""
+    return letter_template.strip()
 
 
 def recover_from_rejection(
     scheme_id: str,
-    rejection_message: str
+    rejection_message: str,
+    applicant_name: str = "Citizen Applicant",
+    application_id: str = "REF-2026-PENDING",
+    phone_number: str = "Not Specified",
+    state: str = "Delhi"
 ) -> dict:
     """
-    Generate rejection-recovery guidance for a scheme.
-
-    The response is based only on the scheme's stored data and
-    the rejection reason supplied by the user.
+    Generate rejection-recovery guidance and formal appeal documentation for a scheme.
     """
-
     if not normalize_text(rejection_message):
-        raise ValueError(
-            "Please provide the rejection message."
-        )
+        raise ValueError("Please provide the rejection message.")
 
     schemes = load_schemes()
-
-    scheme = find_scheme(
-        scheme_id,
-        schemes
-    )
+    scheme = find_scheme(scheme_id, schemes)
 
     if scheme is None:
-        raise ValueError(
-            f"Scheme '{scheme_id}' not found."
-        )
+        raise ValueError(f"Scheme '{scheme_id}' not found.")
 
-    scheme_name = scheme.get(
-        "scheme_name",
-        "This scheme"
-    )
+    scheme_name = scheme.get("scheme_name", "This scheme")
+    eligibility = scheme.get("eligibility", {})
+    required_documents = scheme.get("required_documents", [])
+    application_steps = scheme.get("application_steps", [])
+    official_portal = scheme.get("official_portal")
+    source_url = scheme.get("source_url")
+    manual_verification_required = scheme.get("manual_verification_required", False)
+    manual_verification_reason = scheme.get("manual_verification_reason", "")
 
-    eligibility = scheme.get(
-        "eligibility",
-        {}
+    # Scheme metadata or defaults
+    ministry = scheme.get(
+        "ministry",
+        "Department of Social Welfare & Public Grievance Redressal"
     )
+    helpline = scheme.get("helpline_number", "1800-11-0031 / 14434")
 
-    required_documents = scheme.get(
-        "required_documents",
-        []
-    )
-
-    application_steps = scheme.get(
-        "application_steps",
-        []
-    )
-
-    official_portal = scheme.get(
-        "official_portal"
-    )
-
-    source_url = scheme.get(
-        "source_url"
-    )
-
-    manual_verification_required = scheme.get(
-        "manual_verification_required",
-        False
-    )
-
-    manual_verification_reason = scheme.get(
-        "manual_verification_reason",
-        ""
-    )
-
-    rejection_sentence = extract_rejection_sentence(
-    rejection_message
-    )
-
-    reason = normalize_text(
-        rejection_sentence
-    )
+    rejection_sentence = extract_rejection_sentence(rejection_message)
+    reason = normalize_text(rejection_sentence)
 
     # --------------------------------------------------
     # Rejection category detection
     # --------------------------------------------------
-
     document_keywords = [
-        "document",
-        "documents",
-        "missing",
-        "proof",
-        "certificate",
-        "upload",
-        "uploaded",
-        "paper",
-        "papers",
-        "invalid",
-        "incorrect",
-        "incomplete"
+        "document", "documents", "missing", "proof", "certificate",
+        "upload", "uploaded", "paper", "papers", "invalid", "incorrect", "incomplete"
     ]
 
     medical_keywords = [
-        "medical",
-        "medicine",
-        "illness",
-        "disease",
-        "diagnosis",
-        "hospital",
-        "health",
-        "treatment",
-        "disability"
+        "medical", "medicine", "illness", "disease", "diagnosis",
+        "hospital", "health", "treatment", "disability"
     ]
 
     registration_keywords = [
-        "registration",
-        "registered",
-        "worker",
-        "license",
-        "licence",
-        "identity",
-        "aadhaar",
-        "passport",
-        "account"
+        "registration", "registered", "worker", "license", "licence",
+        "identity", "aadhaar", "passport", "account", "mismatch"
     ]
 
     eligibility_keywords = [
-        "eligibility",
-        "eligible",
-        "age",
-        "income",
-        "state",
-        "district",
-        "category",
-        "occupation",
-        "gender",
-        "resident",
-        "residence",
-        "education",
-        "course",
-        "institution",
-        "employment",
-        "disability"
+        "eligibility", "eligible", "age", "income", "state", "district",
+        "category", "occupation", "gender", "resident", "residence",
+        "education", "course", "institution", "employment", "disability"
     ]
 
     verification_keywords = [
-        "verification",
-        "verified",
-        "committee",
-        "inspection",
-        "approval",
-        "manual",
-        "authority",
-        "pending",
-        "review"
+        "verification", "verified", "committee", "inspection", "approval",
+        "manual", "authority", "pending", "review"
     ]
 
     category = "other"
 
     if text_contains_any(reason, medical_keywords):
         category = "medical_or_supporting_proof"
-
     elif text_contains_any(reason, registration_keywords):
         category = "registration_or_identity"
-
     elif text_contains_any(reason, document_keywords):
         category = "missing_or_incorrect_documents"
-
     elif text_contains_any(reason, eligibility_keywords):
         category = "eligibility_mismatch"
-
     elif text_contains_any(reason, verification_keywords):
         category = "manual_verification"
 
     # --------------------------------------------------
     # Category-specific guidance
     # --------------------------------------------------
-
     related_documents = []
     relevant_conditions = []
 
     if category == "missing_or_incorrect_documents":
-
         related_documents = find_related_documents(
             required_documents,
             [
-                "document",
-                "certificate",
-                "proof",
-                "card",
-                "details",
-                "photo",
-                "income",
-                "bank",
-                "identity",
-                "registration",
-                "medical"
+                "document", "certificate", "proof", "card", "details",
+                "photo", "income", "bank", "identity", "registration", "medical"
             ]
         )
-
         explanation = (
-            "The supplied rejection reason may indicate that "
-            "one or more required documents were missing, "
-            "incorrect, incomplete, or not accepted."
+            "The supplied rejection reason indicates that one or more required "
+            "documents were missing, incorrect, incomplete, or rejected during verification."
         )
-
         next_steps = [
-            "Check the rejection message and identify the document mentioned by the authority.",
-            "Compare that document with the scheme's required-document list.",
-            "Obtain a valid or corrected version of the document.",
-            "Check whether the document details match the application.",
-            "Submit the corrected document through the official application channel."
+            "Identify the specific document mentioned in the rejection slip.",
+            "Cross-verify the document details against the required-document list for this scheme.",
+            "Obtain a certified, updated replacement from the competent issuing authority.",
+            "Ensure spelling of personal details matches official identification records.",
+            "Submit the corrected documentation alongside a formal representation."
         ]
 
     elif category == "medical_or_supporting_proof":
-
         related_documents = find_related_documents(
             required_documents,
-            [
-                "medical",
-                "illness",
-                "disease",
-                "diagnosis",
-                "health",
-                "disability",
-                "hospital"
-            ]
+            ["medical", "illness", "disease", "diagnosis", "health", "disability", "hospital"]
         )
-
         relevant_conditions = format_eligibility_conditions(
             eligibility,
-            [
-                "medical",
-                "illness",
-                "disease",
-                "disability",
-                "health",
-                "registered",
-                "registration"
-            ]
+            ["medical", "illness", "disease", "disability", "health", "registered", "registration"]
         )
-
         explanation = (
-            "The rejection letter states: "
-            f"'{rejection_sentence}'. "
-            "For this scheme, medical proof is required "
-            "for specified serious illnesses. The submitted "
-            "certificate may therefore need to be checked "
-            "for the required diagnosis, validity, and "
-            "supporting details."
+            f"The rejection letter states: '{rejection_sentence}'. "
+            "This scheme requires certified medical or disability proof issued by an empaneled "
+            "hospital or medical board."
         )
-
         next_steps = [
-            "Check whether the medical condition mentioned in the application is covered by the scheme.",
-            "Review the medical or disability proof required by the scheme.",
-            "Obtain corrected or additional supporting proof if required.",
-            "Confirm that the details in the proof match the application.",
-            "Contact the implementing authority if the reason is unclear."
+            "Verify that the medical diagnosis meets the qualifying condition guidelines of the scheme.",
+            "Procure a signed disability/medical certificate from a recognized Chief Medical Officer (CMO).",
+            "Ensure the hospital registration number and medical officer stamp are clearly legible.",
+            "Attach the authorized medical board report with your appeal."
         ]
 
     elif category == "registration_or_identity":
-
         related_documents = find_related_documents(
             required_documents,
-            [
-                "registration",
-                "worker",
-                "identity",
-                "aadhaar",
-                "passport",
-                "license",
-                "licence",
-                "card",
-                "bank"
-            ]
+            ["registration", "worker", "identity", "aadhaar", "passport", "license", "licence", "card", "bank"]
         )
-
         relevant_conditions = get_relevant_conditions(
             eligibility,
-            [
-                "registration",
-                "worker",
-                "occupation",
-                "identity",
-                "resident",
-                "residence"
-            ]
+            ["registration", "worker", "occupation", "identity", "resident", "residence"]
         )
-
         explanation = (
-            "The supplied rejection reason may indicate an "
-            "issue with registration, identity, or proof of "
-            "the applicant's status."
+            "The rejection points to an issue with identity authentication, worker registration status, "
+            "or clerical discrepancies across linked official databases."
         )
-
         next_steps = [
-            "Check whether the required registration or identity information is valid.",
-            "Compare the submitted details with the scheme's eligibility conditions.",
-            "Correct any mismatch in names, identification details, or registration details.",
-            "Obtain the relevant registration or identity proof if it is missing.",
-            "Contact the implementing authority if registration status needs verification."
+            "Check for clerical discrepancies between your identity document, bank passbook, and portal registration.",
+            "Update any mismatched details through an authorized enrollment centre.",
+            "Procure a notarized affidavit verifying clerical consistency if names vary slightly.",
+            "Resubmit the validated identity proof to the grievance authority."
         ]
 
     elif category == "eligibility_mismatch":
-
         relevant_conditions = get_relevant_conditions(
             eligibility,
             eligibility_keywords
         )
-
         explanation = (
-            "The supplied rejection reason may indicate that "
-            "one or more eligibility conditions did not match "
-            "the information submitted in the application."
+            "The rejection indicates a recorded mismatch with scheme eligibility limits "
+            "(such as income thresholds, age brackets, or educational criteria)."
         )
-
         next_steps = [
-            "Compare the application details with the scheme's eligibility criteria.",
-            "Check age, income, residence, occupation, category, education, or other relevant conditions.",
-            "Correct inaccurate information only if the corrected information is genuine and supported by proof.",
-            "If the applicant does not satisfy the criteria, check whether another scheme may be more suitable.",
-            "Contact the implementing authority if the eligibility decision appears unclear."
+            "Review your application entries against the scheme's statutory eligibility criteria.",
+            "If income was miscalculated by the reviewing officer, secure an updated Tehsil Revenue Income Certificate.",
+            "Provide documentary corroboration (marksheet, ration card, or category certificate) supporting actual eligibility.",
+            "Submit a formal representation requesting re-evaluation based on verified certificates."
         ]
 
     elif category == "manual_verification":
-
         explanation = (
-            "The supplied rejection reason may indicate that "
-            "the application required verification by the "
-            "implementing authority or another reviewing body."
+            "The application required manual field verification or physical committee review "
+            "which was either not completed or returned an adverse finding."
         )
-
         next_steps = [
-            "Review the official rejection message carefully.",
-            "Check whether the authority requested additional information or supporting proof.",
-            "Provide the requested clarification or documents through the official channel.",
-            "Contact the implementing authority to understand the verification status.",
-            "Do not assume approval until the authority confirms it."
+            "Contact your local District Social Welfare Office or Block Development Office (BDO).",
+            "Ascertain whether a field inspection report was filed and request a written copy.",
+            "Submit an administrative representation enclosing local residential corroboration.",
+            "Request a re-inspection through the official grievance desk."
         ]
 
     else:
-
         explanation = (
-            "The supplied rejection message does not contain "
-            "enough information to identify the exact issue. "
-            "The system cannot determine the rejection cause "
-            "without additional details from the authority."
+            "The rejection message requires further administrative clarification. "
+            "The system cannot isolate the exact clause without additional details from the issuing desk."
         )
-
         next_steps = [
-            "Review the complete rejection message for a specific reason.",
-            "Check whether the authority mentioned documents, eligibility, registration, or verification.",
-            "Compare the mentioned issue with the scheme's actual eligibility and required-document information.",
-            "Contact the implementing authority if the reason is unclear.",
-            "Reapply only after understanding and correcting the issue."
+            "Request a detailed speaking order citing the specific clause or rule violated.",
+            "Submit an administrative representation to the District Grievance Officer within 30 days.",
+            "Confirm current documentation guidelines directly through official portal links."
         ]
 
     # --------------------------------------------------
-    # Common guidance
+    # Generate Appeal Draft & Escalation Channels
     # --------------------------------------------------
+    primary_action = next_steps[0] if next_steps else "Submit authenticated rectification documents."
+
+    appeal_draft = generate_appeal_representation(
+        applicant_name=applicant_name,
+        application_id=application_id,
+        phone_number=phone_number,
+        state=state,
+        scheme_name=scheme_name,
+        ministry=ministry,
+        rejection_reason=rejection_sentence,
+        corrective_action=primary_action
+    )
+
+    state_portal_url = (
+        "https://edistrict.delhigovt.nic.in"
+        if normalize_text(state) == "delhi"
+        else "https://pgportal.gov.in"
+    )
+
+    escalation_channels = {
+        "ministry": ministry,
+        "online_portal": {
+            "title": "Central Public Grievance Portal (CPGRAMS)",
+            "url": "https://pgportal.gov.in",
+            "instructions": f"Log in to CPGRAMS, select '{ministry}', and paste the appeal draft into the grievance description."
+        },
+        "state_desk": {
+            "title": f"{state} Public Grievance / e-District Redressal",
+            "url": state_portal_url,
+            "instructions": "Submit a formal grievance ticket attaching the appeal draft and certified proofs."
+        },
+        "physical_desk": {
+            "title": "District Social Welfare / SDM Office",
+            "instructions": "Print this representation letter, sign it, attach photocopies of your proofs, and obtain a stamped acknowledgement slip."
+        },
+        "helpline": helpline
+    }
 
     reapply_guidance = (
-        "Reapply only after correcting the identified issue "
-        "and confirming the current requirements through the "
-        "official application channel."
+        "Reapply or submit your appeal representation within the statutory appeal window "
+        "(typically 15 to 30 days from the rejection date) with rectified documentation."
     )
 
     return {
         "scheme_id": scheme.get("scheme_id"),
         "scheme_name": scheme_name,
-
+        "applicant_name": applicant_name,
+        "application_id": application_id,
         "rejection_message": rejection_message,
-
         "extracted_rejection_statement": rejection_sentence,
-
         "rejection_category": category,
-
         "rejection_explanation": explanation,
-
         "related_documents": related_documents,
-
         "relevant_eligibility_conditions": relevant_conditions,
-
         "next_steps": next_steps,
-
+        "appeal_draft": appeal_draft,
+        "escalation_channels": escalation_channels,
         "reapply_guidance": reapply_guidance,
-
-        "manual_verification_required": (
-            manual_verification_required
-        ),
-
-        "manual_verification_reason": (
-            manual_verification_reason
-        ),
-
+        "manual_verification_required": manual_verification_required,
+        "manual_verification_reason": manual_verification_reason,
         "application_steps": application_steps,
-
         "official_portal": official_portal,
-
         "source_url": source_url
     }
